@@ -14,9 +14,9 @@ class SubPanelViewController: UIViewController {
     weak var invDelegate: InventoryViewControllerDelegate?
     weak var keyDelegate: KeypadViewControllerDelegate?
     
-    let MINWIDTH: CGFloat = 116.0
-    let MINHEIGHT: CGFloat = 150.0
-
+    let MINWIDTH: (lt: CGFloat, rb: CGFloat) = (300.0, 116.0)
+    let MINHEIGHT: (lt: CGFloat, rb: CGFloat)? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

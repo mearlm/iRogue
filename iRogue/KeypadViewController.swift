@@ -9,7 +9,8 @@
 import UIKit
 
 protocol KeypadViewControllerDelegate: class {
-    func update(number: String)
+    func update(number: String, sender: KeypadViewController)
+    func updateComplete(sender: KeypadViewController)
 }
 
 class KeypadViewController : UIViewController {
@@ -68,7 +69,8 @@ class KeypadViewController : UIViewController {
                 break
             case "E":
                 // enter: dismiss keyboard
-                break
+                delegate?.updateComplete(sender: self)
+                number = ""
             default:
                 // 0-9: append
                 self.number = self.number + value
@@ -76,7 +78,9 @@ class KeypadViewController : UIViewController {
             }
             setState()
 
-            delegate?.update(number: self.number)
+            if ("E" != value) {
+                delegate?.update(number: self.number, sender: self)
+            }
         }
     }
 }

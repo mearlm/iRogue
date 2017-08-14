@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
     @IBOutlet weak var btnRepeat: UIButton!
     @IBOutlet weak var btnSetRepeatCount: UITabBarItem!
     @IBOutlet weak var btnInventory: UITabBarItem!
+    @IBOutlet weak var btnHome: UITabBarItem!
     @IBOutlet weak var topStackView: SubPanelView!
     weak var subPanelStackView: SubPanelView?
     @IBOutlet weak var tabBar: UITabBar!
@@ -30,9 +31,14 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        guard let subPanelViewController = childViewControllers.last as? SubPanelViewController else {
+            fatalError("Check storyboard for missing SubPanelViewController")
+        }        
+        self.subPanelStackView = subPanelViewController.subPanelStackView
 
-        self.topStackView.setup(minWidth: -1.0, minHeight: 150.0)
-        self.configureViewForSize(size: view.bounds.size)
+        self.topStackView.setup(minWidth: nil, minHeight: (0.0, 150.0))
+        // self.topStackView.axis = axisForSize(view.bounds.size)
         self.hideSubPanel()
         //self.addDoneButton()
     }
@@ -72,9 +78,18 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
     }
     
     //MARK: Keyboard Management
-    func update(number: String) {
+    func update(number: String, sender: KeypadViewController) {
         btnRepeat.setTitle(number, for: .normal)
         btnSetRepeatCount.badgeValue = number
+        btnInventory.isEnabled = (number == "")
+    }
+    
+    func updateComplete(sender: KeypadViewController) {
+        if (!subPanelStackView!.isShowLeftTop()) {
+            self.hideSubPanel()
+        }
+        btnSetRepeatCount.isEnabled = true
+        btnInventory.isEnabled = true
     }
     
     //MARK: Inventory Management
@@ -82,98 +97,44 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
         btnInventory.badgeValue = String(number)
     }
     
-//    func addDoneButton() {
-//        let keyboardToolbar = UIToolbar()
-//        keyboardToolbar.sizeToFit()
-//        
-//        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
-//                                              target: self, action: #selector(cancelButtonTapped(_:)))
-//        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-//                                            target: nil, action: nil)
-//        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done,
-//                                            target: self, action: #selector(doneRepeatEdit(_:)))
-//        keyboardToolbar.items = [cancelBarButton, flexBarButton, doneBarButton]
-//        
-//        self.txtKeyboard.inputAccessoryView = keyboardToolbar
-//    }
-//    
-//    func cancelButtonTapped(_ sender: UIBarButtonItem) {
-//        updateRepeatCount(oldRepeatCount)           // restore original value
-//        doneRepeatEdit(sender)
-//    }
-//    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("in touchesBegan");
-//        doneRepeatEdit(self)
-//    }
-//    
-//    //MARK: UITextFieldDelegate
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        // Hide the keyboard.
-//        doneRepeatEdit(textField)
-//        return true
-//    }
-//    
-//    func doneRepeatEdit(_ sender: AnyObject) {
-//        print("hiding keyboard")
-//
-//        self.txtKeyboard.text = ""
-//        self.txtKeyboard.resignFirstResponder()
-//    }
-//
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let textFieldText: NSString = (textField.text ?? "") as NSString
-//        let txtAfterUpdate = textFieldText.replacingCharacters(in: range, with: string)
-//        let length = txtAfterUpdate.characters.count
-//
-//        if (txtAfterUpdate != "0" && length <= 2) {
-//            self.updateRepeatCount(txtAfterUpdate)          // 1-99
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    // handles clear button on text field
-//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-//        self.updateRepeatCount("")
-//        return true
-//    }
-//    
-//    private func updateRepeatCount(_ toString: String) {
-//        btnRepeat.setTitle(toString, for: .normal)
-//        btnSetRepeatCount.badgeValue = toString
-//    }
-    
     //MARK: SubPanel View Management
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        configureViewForSize(size: size)
+        // topStackView.axis = axisForSize(size)
     }
     
-    private func configureViewForSize(size: CGSize) {
-        if size.width > size.height {
-            topStackView.axis = .horizontal
-        } else {
-            topStackView.axis = .vertical
+    private func axisForSize(_ size: CGSize) -> UILayoutConstraintAxis {
+        return size.width > size.height ? .horizontal : .vertical
+    }
+    
+    private func isShowSubPanel(forSide: SubPanelView.PanelEnum) -> Bool {
+        if (topStackView.isShowRightBottom()) {
+            if (forSide == .RightBottom) {
+                return subPanelStackView!.isShowRightBottom()
+            }
+            else if (forSide == .LeftTop) {
+                return subPanelStackView!.isShowLeftTop()
+            }
+            return true
         }
-    }
-    
-    private func isShowSubPanel() -> Bool {
-        return topStackView.isShowRightBottom()
+        return false
     }
     
     private func showInventory() {
-        topStackView.showBoth(favored: .Both)
-        subPanelStackView?.showBoth(favored: .LeftTop)
+        _ = topStackView.showBoth(favored: .RightBottom)
+        btnSetRepeatCount.isEnabled = !subPanelStackView!.showBoth(favored: .LeftTop)
     }
     
     private func showKeyboard() {
-        topStackView.showBoth(favored: .Both)
-        subPanelStackView?.showBoth(favored: .RightBottom)
+        _ = topStackView.showBoth(favored: .RightBottom)
+        _ = subPanelStackView!.showBoth(favored: .RightBottom)
+        btnSetRepeatCount.isEnabled = false
     }
     
     func hideSubPanel() {
         topStackView.showLeftTopOnly()
+        btnInventory.isEnabled = true
+        btnSetRepeatCount.isEnabled = true
     }
     
     //MARK: UITabBarDelegate
@@ -181,13 +142,13 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
         switch(item.tag) {
         case 0:
             // home
-            if (isShowSubPanel()) {
+            if (isShowSubPanel(forSide: .Both) && (btnSetRepeatCount.isEnabled || btnInventory.isEnabled)) {
                 hideSubPanel()
             }
             break;
         case 1:
             // inventory (toggle)
-            if (isShowSubPanel()) {
+            if (isShowSubPanel(forSide: .LeftTop)) {
                 hideSubPanel()
             }
             else {
@@ -196,7 +157,7 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
             break;
         case 2:
             // set repeat count
-            if (isShowSubPanel()) {
+            if (isShowSubPanel(forSide: .RightBottom)) {
                 hideSubPanel()
             }
             else {
@@ -205,7 +166,8 @@ class ViewController: UIViewController, UITabBarDelegate, KeypadViewControllerDe
             break
         case 3:
             // help
-//            topStackView.axis = (topStackView.axis == .horizontal) ? .vertical : .horizontal
+            // segue to Help screen
+            // self.btnHome.isEnabled = true
             break
         default:
             print("toolbar didSelect unknown button: \(item.tag)")

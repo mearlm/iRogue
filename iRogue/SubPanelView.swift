@@ -15,8 +15,8 @@ class SubPanelView: UIStackView {
         case Both
     }
     
-    private var minWidth: CGFloat?
-    private var minHeight: CGFloat?
+    private var minWidth: (lt: CGFloat, rb: CGFloat)?
+    private var minHeight: (lt: CGFloat, rb: CGFloat)?
     
     private lazy var leftTopView: UIView = { [unowned self] in
         return self.arrangedSubviews[0]
@@ -26,7 +26,7 @@ class SubPanelView: UIStackView {
         return self.arrangedSubviews[1]
     }()
     
-    public func setup(minWidth: CGFloat, minHeight: CGFloat) {
+    public func setup(minWidth: (CGFloat, CGFloat)?, minHeight: (CGFloat, CGFloat)?) {
         self.minWidth = minWidth
         self.minHeight = minHeight
     }
@@ -41,6 +41,10 @@ class SubPanelView: UIStackView {
     
     public func isShowBoth() -> Bool {
         return isShowRightBottom() && isShowLeftTop()
+    }
+    
+    public func isShowEither() -> Bool {
+        return isShowRightBottom() || isShowLeftTop()
     }
 
     public func showLeftTopOnly() {
@@ -58,26 +62,33 @@ class SubPanelView: UIStackView {
     }
     
     private func canFitBoth() -> Bool {
-        return (self.axis == .horizontal && (self.minWidth! < 0.0
-            || self.frame.width >= 2.0 * self.minWidth!))
-        || (self.axis == .vertical && (self.minHeight! < 0.0
-            || self.frame.height >= 2.0 * self.minHeight!))
+        if (self.axis == .horizontal) {
+            if let mwidth = self.minWidth {
+                return self.frame.width >= mwidth.lt + mwidth.rb
+            }
+            return true
+        }
+        if let mheight = self.minHeight {
+            return self.frame.height >= mheight.lt + mheight.rb
+        }
+        return true
     }
     
-    public func showBoth(favored: PanelEnum) {
+    public func showBoth(favored: PanelEnum) -> Bool {
         if (!self.canFitBoth()) {
             if (favored == .LeftTop) {
                 showLeftTopOnly()
-                return
+                return false
             }
             if (favored == .RightBottom) {
                 showRightBottomOnly()
-                return
+                return false
             }
         }
         UIView.animate(withDuration: 0.25, animations: { () -> Void in
             self.rightBottomView.isHidden = false
             self.leftTopView.isHidden = false
         })
+        return true
     }
 }
