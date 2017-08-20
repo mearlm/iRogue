@@ -69,10 +69,12 @@ class SubPanelView: UIStackView {
         
 //        if ((!rbHidden || !ltHidden) && !isShowEither()) {
 //        }
-
+        self.setNeedsLayout()
+        
         UIView.animate(withDuration: 0.25, animations: { () -> Void in
             self.rightBottomView.isHidden = rbHidden
             self.leftTopView.isHidden = ltHidden
+            self.layoutIfNeeded()
         })
     }
     

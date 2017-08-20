@@ -333,6 +333,15 @@
                                         </connections>
                                     </containerView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="40q-w9-9ZV" secondAttribute="trailing" identifier="SubPanelRB-Trailing" id="IND-X8-v19"/>
+                                    <constraint firstItem="40q-w9-9ZV" firstAttribute="top" secondItem="YYD-cP-h14" secondAttribute="top" identifier="SubPanelRB-Top" id="LZB-53-vJp"/>
+                                    <constraint firstItem="MAj-Kw-goZ" firstAttribute="top" secondItem="YYD-cP-h14" secondAttribute="top" identifier="SubPalenLT-Top" id="LmB-V9-o2v"/>
+                                    <constraint firstAttribute="bottom" secondItem="MAj-Kw-goZ" secondAttribute="bottom" identifier="SubPanelLT-Bottom" id="Ugx-M9-YQ2"/>
+                                    <constraint firstItem="40q-w9-9ZV" firstAttribute="leading" secondItem="MAj-Kw-goZ" secondAttribute="trailing" constant="5" identifier="SubPanelLT-Trailing-SubpanelRB" id="XBn-KU-MCg"/>
+                                    <constraint firstAttribute="bottom" secondItem="40q-w9-9ZV" secondAttribute="bottom" identifier="SubPanelRB-Bottom" id="iRB-C9-vwl"/>
+                                    <constraint firstItem="MAj-Kw-goZ" firstAttribute="leading" secondItem="YYD-cP-h14" secondAttribute="leading" identifier="SubPanelLT-Leading" id="wTa-Zo-r3H"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -388,7 +397,7 @@
                                         <rect key="frame" x="0.0" y="28" width="291" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wmL-2g-l2B" id="WC2-Hb-JOU">
-                                            <rect key="frame" x="0.0" y="0.0" width="291" height="24.666666666666668"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="291" height="25"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -538,13 +547,15 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="230-ZK-WLL"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mtT-rF-6Ru" firstAttribute="leading" secondItem="hkQ-u0-rwb" secondAttribute="leading" id="7Lf-r4-q8d"/>
                             <constraint firstAttribute="trailing" secondItem="mtT-rF-6Ru" secondAttribute="trailing" id="9IP-Y2-SN8"/>
-                            <constraint firstItem="mtT-rF-6Ru" firstAttribute="top" secondItem="hkQ-u0-rwb" secondAttribute="top" id="nHj-MQ-zDf"/>
                             <constraint firstAttribute="bottom" secondItem="mtT-rF-6Ru" secondAttribute="bottom" id="nk6-0T-1bS"/>
                         </constraints>
                     </view>

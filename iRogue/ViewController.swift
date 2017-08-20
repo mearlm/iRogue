@@ -88,16 +88,17 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
             let vc = segue.destination as! DungeonViewController
             let view = vc.collectionView!
             
-            var cellFont = UIFont.init(name: "Menlo-Regular", size: 15.0)
+            let pointSize = CGFloat(25.0)
+            var cellFont = UIFont.init(name: "Menlo-Regular", size: pointSize)
             if (nil == cellFont) {
-                cellFont = UIFont.init(name: "Courier", size: 15.0)
+                cellFont = UIFont.init(name: "Courier", size: pointSize)
             }
             guard let font = cellFont else {
                 fatalError("Monospaced font not installed!")
             }
-            vc.cellFont = font
+            vc.cellFont = font.fontWithBold()
             
-            let layout = DungeonCollectionViewLayout(font: font.fontWithBold())
+            let layout = DungeonCollectionViewLayout(font: vc.cellFont!)
             view.setCollectionViewLayout(layout, animated: false)
             view.reloadData()
         }
@@ -148,12 +149,10 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
             self.stackFrameHeight = self.topStackView.frame.height
             let excess = self.stackFrameHeight! - MINHEIGHT - maxHeight - SPACING
 
-            if (excess > 0.0) {
-                let height = MINHEIGHT + excess
-                
-                subPanelHeight.constant = height
-                print("subpanel resized to \(height) height [excess = \(excess); frame = \(self.stackFrameHeight!)] with constraint: \(subPanelHeight.debugDescription)")
-            }
+            let height = MINHEIGHT + ((excess > 0.0) ? excess : 0.0)
+            
+            subPanelHeight.constant = height
+            print("subpanel resized to \(height) height [excess = \(excess); frame = \(self.stackFrameHeight!)] with constraint: \(subPanelHeight.debugDescription)")
         }
     }
     
