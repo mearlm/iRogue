@@ -17,6 +17,9 @@ class KeypadViewController : UIViewController {
     //MARK: Properties
     let MAXLENGTH = 2   // numbers from 1 to 99
     
+    let ENTER = -2
+    let ERASE = -1
+    
     @IBOutlet weak var btnZero: UIButton!
     @IBOutlet weak var btnOne: UIButton!
     @IBOutlet weak var btnTwo: UIButton!
@@ -40,6 +43,7 @@ class KeypadViewController : UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         setState()
+        print("KeypadViewController did load")
     }
     
     private func setState() {
@@ -61,26 +65,26 @@ class KeypadViewController : UIViewController {
     }
     
     @IBAction func KeyboardHandler(_ sender: UIButton) {
-        if let value = sender.title(for: .normal) {
-            switch (value) {
-            case "B":
-                // backspace
-                self.number = String(self.number.characters.dropLast())
-                break
-            case "E":
-                // enter: dismiss keyboard
-                delegate?.updateComplete(sender: self)
-                number = ""
-            default:
-                // 0-9: append
-                self.number = self.number + value
-                break
-            }
-            setState()
+        let value = sender.tag
+        
+        switch (value) {
+        case ERASE:
+            // backspace
+            self.number = String(self.number.characters.dropLast())
+            break
+        case ENTER:
+            // enter: dismiss keyboard
+            delegate?.updateComplete(sender: self)
+            number = ""
+        default:
+            // 0-9: append
+            self.number = self.number + String(value)
+            break
+        }
+        setState()
 
-            if ("E" != value) {
-                delegate?.update(number: self.number, sender: self)
-            }
+        if (ENTER != value) {
+            delegate?.update(number: self.number, sender: self)
         }
     }
 }

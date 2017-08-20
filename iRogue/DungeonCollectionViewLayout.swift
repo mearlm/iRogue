@@ -11,12 +11,15 @@ import UIKit
 // from: MultiDirectionViewLayout (https://github.com/kwandrews7/MultiDirectionCollectionView/tree/adding-sticky-headers)
 // with additional concepts from: GridLayout (https://gist.github.com/smswz/393b2d6237b7837234015805c600ada2)
 class DungeonCollectionViewLayout: UICollectionViewLayout {
-    let CELL_HEIGHT: Double
-    let CELL_WIDTH: Double
+    private var cellFont: UIFont
+    private var cellHeight: CGFloat
+    private var cellWidth: CGFloat
     
-    init(cellWidth: Double, cellHeight: Double) {
-        self.CELL_WIDTH = cellWidth
-        self.CELL_HEIGHT = cellHeight
+    init(font: UIFont) {
+        self.cellFont = font
+        
+        self.cellWidth = String(UnicodeScalar(UInt8(32))).size(attributes: [NSFontAttributeName: font]).width
+        self.cellHeight = font.lineHeight
         
         super.init()
     }
@@ -105,11 +108,11 @@ class DungeonCollectionViewLayout: UICollectionViewLayout {
 
                             // Build the UICollectionViewLayoutAttributes for the cell.
                             let cellIndex = IndexPath(item: item, section: section)
-                            let xPos = Double(item) * CELL_WIDTH
-                            let yPos = Double(section) * CELL_HEIGHT
+                            let xPos = CGFloat(item) * cellWidth
+                            let yPos = CGFloat(section) * cellHeight
                             
                             let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex)
-                            cellAttributes.frame = CGRect(x: xPos, y: yPos, width: CELL_WIDTH, height: CELL_HEIGHT)
+                            cellAttributes.frame = CGRect(x: xPos, y: yPos, width: cellWidth, height: cellHeight)
                             
                             // Determine zIndex based on cell type.
                             if section == 0 && item == 0 {
@@ -130,8 +133,8 @@ class DungeonCollectionViewLayout: UICollectionViewLayout {
             }
 
             // Update content size.
-            let contentWidth = Double(collectionView!.numberOfItems(inSection: 0)) * CELL_WIDTH
-            let contentHeight = Double(collectionView!.numberOfSections) * CELL_HEIGHT
+            let contentWidth = CGFloat(collectionView!.numberOfItems(inSection: 0)) * cellWidth
+            let contentHeight = CGFloat(collectionView!.numberOfSections) * cellHeight
             self.contentSize = CGSize(width: contentWidth, height: contentHeight)
             
             dataSourceDidUpdate = false

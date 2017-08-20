@@ -14,7 +14,7 @@ class SubPanelViewController: UIViewController {
     weak var invDelegate: InventoryViewControllerDelegate?
     weak var keyDelegate: KeypadViewControllerDelegate?
     
-    let MINWIDTH: (lt: CGFloat, rb: CGFloat) = (300.0, 116.0)
+    let MINWIDTH: (lt: CGFloat, rb: CGFloat) = (300.0, 118.0)
     let MINHEIGHT: (lt: CGFloat, rb: CGFloat)? = nil
     
     override func viewDidLoad() {
@@ -22,8 +22,9 @@ class SubPanelViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.subPanelStackView.setup(minWidth: self.MINWIDTH, minHeight: self.MINHEIGHT)
+        print("SubPanelViewController did load")
     }
-    
+
     func setup(invDelegate: InventoryViewControllerDelegate, keyDelegate: KeypadViewControllerDelegate) {
         self.invDelegate = invDelegate
         self.keyDelegate = keyDelegate

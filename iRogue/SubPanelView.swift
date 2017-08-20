@@ -13,6 +13,7 @@ class SubPanelView: UIStackView {
         case LeftTop
         case RightBottom
         case Both
+        case Either
     }
     
     private var minWidth: (lt: CGFloat, rb: CGFloat)?
@@ -46,32 +47,41 @@ class SubPanelView: UIStackView {
     public func isShowEither() -> Bool {
         return isShowRightBottom() || isShowLeftTop()
     }
-
-    public func showLeftTopOnly() {
-        UIView.animate(withDuration: 0.25, animations: { () -> Void in
-            self.rightBottomView.isHidden = true
-            self.leftTopView.isHidden = false
-        })
-    }
-    
-    public func showRightBottomOnly() {
-        UIView.animate(withDuration: 0.25, animations: { () -> Void in
-            self.rightBottomView.isHidden = false
-            self.leftTopView.isHidden = true
-        })
-    }
     
     private func canFitBoth() -> Bool {
         if (self.axis == .horizontal) {
             if let mwidth = self.minWidth {
-                return self.frame.width >= mwidth.lt + mwidth.rb
+                return self.frame.width >= (mwidth.lt + mwidth.rb)
             }
             return true
         }
         if let mheight = self.minHeight {
-            return self.frame.height >= mheight.lt + mheight.rb
+            return self.frame.height >= (mheight.lt + mheight.rb)
         }
         return true
+    }
+    
+    private func showPanels(ltHidden: Bool, rbHidden: Bool) {
+//        view.frame.size = CGSize(width: self.frame.width, height: height)
+//        view.heightAnchor.constraint(equalToConstant: height)
+//        view.frame.size = CGSize(width: width, height: frameSize.height)
+//        view.widthAnchor.constraint(equalToConstant: width)
+        
+//        if ((!rbHidden || !ltHidden) && !isShowEither()) {
+//        }
+
+        UIView.animate(withDuration: 0.25, animations: { () -> Void in
+            self.rightBottomView.isHidden = rbHidden
+            self.leftTopView.isHidden = ltHidden
+        })
+    }
+    
+    public func showLeftTopOnly() {
+        showPanels(ltHidden: false, rbHidden: true)
+    }
+    
+    public func showRightBottomOnly() {
+        showPanels(ltHidden: true, rbHidden: false)
     }
     
     public func showBoth(favored: PanelEnum) -> Bool {
@@ -85,10 +95,8 @@ class SubPanelView: UIStackView {
                 return false
             }
         }
-        UIView.animate(withDuration: 0.25, animations: { () -> Void in
-            self.rightBottomView.isHidden = false
-            self.leftTopView.isHidden = false
-        })
+        
+        showPanels(ltHidden: false, rbHidden: false)
         return true
     }
 }

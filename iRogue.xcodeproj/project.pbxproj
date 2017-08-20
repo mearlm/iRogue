@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB1A32C31F4A06C90097343B /* FontX.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A32C21F4A06C90097343B /* FontX.swift */; };
+		BB1A32C51F4A1DAE0097343B /* Junk.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A32C41F4A1DAE0097343B /* Junk.swift */; };
+		BB1A32C71F4A2C010097343B /* ButtonWithBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A32C61F4A2C010097343B /* ButtonWithBadge.swift */; };
 		BBFC3D661F26FA7E00573D28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC3D651F26FA7E00573D28 /* AppDelegate.swift */; };
 		BBFC3D681F26FA7E00573D28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC3D671F26FA7E00573D28 /* ViewController.swift */; };
 		BBFC3D6B1F26FA7E00573D28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBFC3D691F26FA7E00573D28 /* Main.storyboard */; };
@@ -43,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB1A32C21F4A06C90097343B /* FontX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontX.swift; sourceTree = "<group>"; };
+		BB1A32C41F4A1DAE0097343B /* Junk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Junk.swift; sourceTree = "<group>"; };
+		BB1A32C61F4A2C010097343B /* ButtonWithBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithBadge.swift; sourceTree = "<group>"; };
 		BBFC3D621F26FA7E00573D28 /* iRogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iRogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFC3D651F26FA7E00573D28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBFC3D671F26FA7E00573D28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +123,10 @@
 			children = (
 				BBFC3D651F26FA7E00573D28 /* AppDelegate.swift */,
 				BBFC3D671F26FA7E00573D28 /* ViewController.swift */,
+				BB1A32C41F4A1DAE0097343B /* Junk.swift */,
+				BB1A32C21F4A06C90097343B /* FontX.swift */,
 				BBFC3D691F26FA7E00573D28 /* Main.storyboard */,
+				BB1A32C61F4A2C010097343B /* ButtonWithBadge.swift */,
 				BBFC3DBB1F2D218100573D28 /* TextFieldNoCaret.swift */,
 				BBFC3D6C1F26FA7E00573D28 /* Assets.xcassets */,
 				BBFC3D6E1F26FA7E00573D28 /* LaunchScreen.storyboard */,
@@ -294,10 +303,13 @@
 				BBFC3DBA1F2D0C5F00573D28 /* DungeonViewController.swift in Sources */,
 				BBFC3DC21F3C123400573D28 /* KeypadViewController.swift in Sources */,
 				BBFC3DC01F2EAD9900573D28 /* DungeonCollectionViewLayout.swift in Sources */,
+				BB1A32C71F4A2C010097343B /* ButtonWithBadge.swift in Sources */,
+				BB1A32C31F4A06C90097343B /* FontX.swift in Sources */,
 				BBFC3DBC1F2D218100573D28 /* TextFieldNoCaret.swift in Sources */,
 				BBFC3DB81F2D047900573D28 /* InventoryViewController.swift in Sources */,
 				BBFC3DBE1F2EA1E400573D28 /* DungeonCell.swift in Sources */,
 				BBFC3DC41F3F7D8700573D28 /* SampleData.swift in Sources */,
+				BB1A32C51F4A1DAE0097343B /* Junk.swift in Sources */,
 				BBFC3DC61F4000E100573D28 /* SubPanelView.swift in Sources */,
 				BBFC3D661F26FA7E00573D28 /* AppDelegate.swift in Sources */,
 			);
@@ -552,6 +564,7 @@
 				BBFC3D8C1F26FA7F00573D28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBFC3D8D1F26FA7F00573D28 /* Build configuration list for PBXNativeTarget "iRogueTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +573,7 @@
 				BBFC3D8F1F26FA7F00573D28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBFC3D901F26FA7F00573D28 /* Build configuration list for PBXNativeTarget "iRogueUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +582,7 @@
 				BBFC3D921F26FA7F00573D28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

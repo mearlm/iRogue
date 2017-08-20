@@ -33,6 +33,7 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         self.loadData()
         
         viewInventoryList.reloadData();
+        print("InventoryViewController did load")
     }
 
     func loadData() {

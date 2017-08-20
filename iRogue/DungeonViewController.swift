@@ -10,6 +10,9 @@ import UIKit
 
 class DungeonViewController: UICollectionViewController {
     fileprivate let reuseIdentifier = "dungeonCell"
+    
+    var cellFont: UIFont?
+    
     let centerDot: Character = "." // "\u{00B7}"
     let passage: Character = "#"
     let topBottomWall: Character = "-"
@@ -33,6 +36,8 @@ class DungeonViewController: UICollectionViewController {
         singleTap.require(toFail: doubleTap)
         singleTap.delaysTouchesBegan = true
         doubleTap.delaysTouchesBegan = true
+        
+        print("DungeonViewController did load")
     }
     
     //MARK: UI CollectionViewDataSource
@@ -59,6 +64,7 @@ class DungeonViewController: UICollectionViewController {
         }
         cell.backgroundColor = UIColor.black
         cell.lblDungeonCell.textColor = UIColor.green
+        cell.lblDungeonCell.font = self.cellFont
         
         return cell
     }
