@@ -18,7 +18,8 @@ class DungeonCollectionViewLayout: UICollectionViewLayout {
     init(font: UIFont) {
         self.cellFont = font
         
-        self.cellWidth = String(UnicodeScalar(UInt8(32))).size(attributes: [NSFontAttributeName: font]).width
+        let leading = (font.leading == 0.0) ? (font.lineHeight - font.pointSize) : font.leading
+        self.cellWidth = String(UnicodeScalar(UInt8(32))).size(attributes: [NSFontAttributeName: font]).width + leading
         self.cellHeight = font.lineHeight
         
         super.init()

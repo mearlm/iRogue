@@ -26,10 +26,8 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     
     private let MINHEIGHT = CGFloat(150.0)                  // minimum height of SubPanelStackView
     private let SPACING = CGFloat(5.0)
-//    private var oldRepeatCount = "1"
-//    private var inventorySize = CGSize.zero
+
     // ToDo: make cellsize configurable
-    private let FACTOR = 0.75
     private let INVENTORY_EXTENT = 0.33     // 1/3 of total view space
 
     override func viewDidLoad() {
@@ -44,8 +42,15 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
         self.topStackView.setup(minWidth: nil,
                                 minHeight: (0.0, MINHEIGHT)
         )
-        self.hideSubPanel()
-
+        self.hideSubPanel()     // ToDo: determine if subpanel should hide or not based on screen size
+                                // Also, if not hidden, ensure that inventory/keyboard tools are disabled
+        
+        // BUG: if dungeon collection is scrolled and subpanel is shown, then dungeon cells move
+        // and row 0 shifts to within the grid (while some other row vanishes)
+        
+        self.update(number: "1", sender: nil)
+        self.updateComplete(sender: nil)
+        
         print("ViewController did load")
     }
     
@@ -58,7 +63,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
         // fix the missing badges
     }
     
-    // inhibit screen rotation when subpanel is showing
+    // inhibit screen rotation when subpanel (inventory or keyboard) is showing
     override var shouldAutorotate: Bool {
         return !isShowSubPanel(forSide: .Either);
     }
@@ -71,15 +76,6 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     func statusBarHeight() -> CGFloat {
         let statusBarSize = UIApplication.shared.statusBarFrame.size
         return Swift.min(statusBarSize.width, statusBarSize.height)
-    }
-    
-    private func cellSize() -> (wd: Double, ht: Double) {
-        // ToDo: Dungeon Cell Label is using courier 12 font (for now)
-        // 6 lines-per-inch (height); 10 characters-per-inch (width)
-        let height = pixelsPerInch() / 6.0 * FACTOR
-        let width = pixelsPerInch() / 10.0 * FACTOR
-
-        return (width, height)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -109,23 +105,28 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     }
     
     //MARK: Keyboard Management
-    func update(number: String, sender: KeypadViewController) {
+    func update(number: String, sender: KeypadViewController?) {
         btnRepeat.setTitle(number, for: .normal)
         // ToDo: should update the model, then load value from the model
         btnSetRepeatCount.setBadge(text: number)
         btnInventory.isEnabled = (number == "")
+        btnSetRepeatCount.isEnabled = btnInventory.isEnabled
     }
     
-    func updateComplete(sender: KeypadViewController) {
-        if (!subPanelStackView!.isShowLeftTop()) {
+    // NB: this will hide the keyboard if it is the only panel showing
+    // but not if both it and the inventory panel are displayed
+    func updateComplete(sender: KeypadViewController?) {
+        if (isShowSubPanel(forSide: .RightBottom) && !isShowSubPanel(forSide: .LeftTop)) {
             self.hideSubPanel()
         }
-        btnSetRepeatCount.isEnabled = true
-        btnInventory.isEnabled = true
+        else {
+            btnSetRepeatCount.isEnabled = true
+            btnInventory.isEnabled = true
+        }
     }
     
     //MARK: Inventory Management
-    func updateCount(number: Int) {
+    func updateCount(number: Int, sender: InventoryData?) {
         // ToDo: should update the model, then load value from the model
         btnInventory.setBadge(text: String(number))
     }
@@ -158,13 +159,16 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     
     private func isShowSubPanel(forSide: SubPanelView.PanelEnum) -> Bool {
         if (topStackView.isShowRightBottom()) {
-            if (forSide == .RightBottom) {
+            switch (forSide) {
+            case .Either:
+                return subPanelStackView!.isShowEither()
+            case .Both:
+                return subPanelStackView!.isShowBoth()
+            case .LeftTop:
+                return subPanelStackView!.isShowLeftTop()
+            case .RightBottom:
                 return subPanelStackView!.isShowRightBottom()
             }
-            else if (forSide == .LeftTop) {
-                return subPanelStackView!.isShowLeftTop()
-            }
-            return true
         }
         return false
     }
@@ -180,7 +184,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     
     private func showKeyboard() {
         _ = showSubPanel(favored: .RightBottom)
-        btnSetRepeatCount.isEnabled = false
+        // btnSetRepeatCount.isEnabled = false
     }
     
     private func showSubPanel(favored: SubPanelView.PanelEnum) -> Bool {
@@ -215,27 +219,44 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     }
 
     @IBAction func actTools(_ sender: Any) {
+        // select dungeon cell/character (point) size
+        // select font family?
+        // select dungeon cell background color and/or foreground color
+        // save game
+        // load game?
+        
     }
 
     //MARK: NOT USED
 
-    // e.g. called from viewDidAppear()
-    private func testFontsForDungeon() {
-        guard let dungeonViewController = childViewControllers.first as? DungeonViewController else {
-            fatalError("Check storyboard for missing DungeonViewController")
-        }
-        
-        let cellFont = dungeonViewController.cellFont!
-        Testing.testFonts(cellFont)
-    }
-    
-    // very inaccurate.  see: https://ivomynttinen.com/blog/ios-design-guidelines
-    private func pixelsPerInch() -> Double {
-        return 160.0
-        //        let ppi = 160.0
-        //        let scale = Double(UIScreen.main.scale)
-        //        let bounds = UIScreen.main.bounds
-        //        return ppi * scale
-    }
+//    // e.g. called from viewDidAppear()
+//    private func testFontsForDungeon() {
+//        guard let dungeonViewController = childViewControllers.first as? DungeonViewController else {
+//            fatalError("Check storyboard for missing DungeonViewController")
+//        }
+//        
+//        let cellFont = dungeonViewController.cellFont!
+//        Testing.testFonts(cellFont)
+//    }
+//    
+//    // very inaccurate.  see: https://ivomynttinen.com/blog/ios-design-guidelines
+//    private func pixelsPerInch() -> Double {
+//        return 160.0
+//        //        let ppi = 160.0
+//        //        let scale = Double(UIScreen.main.scale)
+//        //        let bounds = UIScreen.main.bounds
+//        //        return ppi * scale
+//    }
+//    
+//    private let FACTOR = 0.75
+//    
+//    private func cellSize_NOT_USED() -> (wd: Double, ht: Double) {
+//        // ToDo: Dungeon Cell Label is using courier 12 font (for now)
+//        // 6 lines-per-inch (height); 10 characters-per-inch (width)
+//        let height = pixelsPerInch() / 6.0 * FACTOR
+//        let width = pixelsPerInch() / 10.0 * FACTOR
+//        
+//        return (width, height)
+//    }
 }
 

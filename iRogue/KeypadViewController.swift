@@ -9,8 +9,8 @@
 import UIKit
 
 protocol KeypadViewControllerDelegate: class {
-    func update(number: String, sender: KeypadViewController)
-    func updateComplete(sender: KeypadViewController)
+    func update(number: String, sender: KeypadViewController?)
+    func updateComplete(sender: KeypadViewController?)
 }
 
 class KeypadViewController : UIViewController {

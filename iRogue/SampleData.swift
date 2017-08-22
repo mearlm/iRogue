@@ -10,10 +10,12 @@ import UIKit
 
 // ToDo: move to own class file
 protocol InventoryData {
-    init(ctrlFilterSelector: UISegmentedControl)
+    init(ctrlFilterSelector: UISegmentedControl, responder: InventoryViewControllerDelegate)
     
     func getItems(forTag: String) -> [String]?
     func getTypeName(forTag: String) -> String?
+    func getItemCount() -> Int
+    func getItemTypeCount() -> Int
 }
 
 class SampleData : InventoryData {
@@ -28,11 +30,15 @@ class SampleData : InventoryData {
         (",", "amulet", [])
     ]
     
+    weak var delegate: InventoryViewControllerDelegate?
+
     var itemListByItemType = [String: (type: String, values: Dictionary<String, Int>)]()
     
     //MARK: public interface
 
-    required init(ctrlFilterSelector: UISegmentedControl) {
+    required init(ctrlFilterSelector: UISegmentedControl, responder: InventoryViewControllerDelegate) {
+        delegate = responder
+        
         ctrlFilterSelector.removeAllSegments()
         ctrlFilterSelector.insertSegment(withTitle: "*", at: 0, animated: false)
         
@@ -58,6 +64,19 @@ class SampleData : InventoryData {
                 }
             }
         }
+        delegate?.updateCount(number: self.getItemCount(), sender: self)
+    }
+    
+    public func getItemCount() -> Int {
+        var total = 0
+        for tag in itemListByItemType.keys {
+            total += (itemListByItemType[tag]!.values.count)
+        }
+        return total
+    }
+    
+    public func getItemTypeCount() -> Int {
+        return itemListByItemType.keys.count
     }
     
     public func getItems(forTag: String) -> [String]? {

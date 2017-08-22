@@ -9,12 +9,10 @@
 import UIKit
 
 protocol InventoryViewControllerDelegate: class {
-    func updateCount(number: Int)
+    func updateCount(number: Int, sender: InventoryData?)
 }
 
 class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    let ROWHEIGHT = CGFloat(20.0)
     
     //MARK: Properties
     @IBOutlet weak var ctrlFilterSelector: UISegmentedControl!
@@ -30,6 +28,9 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let font = UIFont.systemFont(ofSize: 16)
+        ctrlFilterSelector.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
+        
         self.loadData()
         
         viewInventoryList.reloadData();
@@ -38,7 +39,7 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
 
     func loadData() {
         // ToDo: for now, show some random sample data
-        data = SampleData(ctrlFilterSelector: ctrlFilterSelector)
+        data = SampleData(ctrlFilterSelector: ctrlFilterSelector, responder: delegate!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +59,10 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         return 0
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return data?.getItemTypeCount() ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let myCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath)
@@ -72,12 +77,16 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         return self.data?.getTypeName(forTag: tagForSection(section))
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt: IndexPath) -> CGFloat {
-        return ROWHEIGHT
-    }
-    
     //MARK: Actions    
     @IBAction func filterChanged(_ sender: UISegmentedControl) {
         viewInventoryList.reloadData()
     }
+    
+    // ToDo:
+    // make the filter work
+    // indent the items below the headings
+    // color headings
+    // enable name change ("call")
+    // enable item-dependent actions: use(wear, quaff, read, zap, etc.), unuse?, throw?;
+    //    and item-independent actions: drop
 }
