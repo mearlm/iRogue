@@ -8,212 +8,243 @@
 
 import UIKit
 
-// ToDo: move to own class file
-protocol InventoryData {
-    init(ctrlFilterSelector: UISegmentedControl, responder: InventoryViewControllerDelegate)
-    
-    func getItems(forTag: String) -> [String]?
-    func getTypeName(forTag: String) -> String?
-    func getItemCount() -> Int
-    func getItemTypeCount() -> Int
-}
-
-class SampleData : InventoryData {
-    static let sampleItemsByTag: [(tag: String, type: String, data: Array<String>)] = [
-        (":", "food", ["slime-mold", "food"]),
-        ("]", "armor", ["plate mail", "chain mail", "leather armor", "studded leather armor", "scale mail", "split mail", "banded mail"]),
-        (")", "weapon", ["two handed sword", "long sword", "mace", "spear", "short bow", "dagger", "dart"]),
-        ("!", "potion", ["healing", "blindness", "see invisible", "gain strength"]),
-        ("?", "scroll", ["scare monster", "remove curse", "aggravate monsters", "enchant armor"]),
-        ("/", "stick", ["lightening", "haste monster", "nothing", "slow monster", "striking"]),
-        ("=", "ring", ["protection", "add strength", "see invisible", "adornment"]),
-        (",", "amulet", [])
+class SampleData : InventoryService {
+    static let FOOD     = InventoryItemType(name: "food", tag: ":",
+                                            actions: ["eat" : nil, "throw" : nil, "wield" : "unwield"]
+    )
+    static let ARMOR    = InventoryItemType(name: "armor", tag: "]",
+                                   actions: ["wear" : "remove"]
+    )
+    static let WEAPON   = InventoryItemType(name: "weapons", tag: ")",
+                                   actions: ["weild" : "unwield", "throw" : nil]
+    )
+    static let POTION   = InventoryItemType(name: "potions", tag: "!",
+                                   actions: ["quaff" : nil, "throw" : nil, "wield" : "unwield"]
+    )
+    static let SCROLL   = InventoryItemType(name: "scrolls", tag: "?",
+                                   actions: ["read" : nil, "throw" : nil, "wield" : "unwield"]
+    )
+    static let STICK    = InventoryItemType(name: "staffs and wands", tag: "/",
+                                   actions: ["zap" : nil, "throw" : nil, "wield" : "unwield"]
+    )
+    static let RING     = InventoryItemType(name: "rings", tag: "=",
+                                   actions: ["put on" : "take off", "throw" : nil, "wield" : "unwield"]
+    )
+    static let AMULET   = InventoryItemType(name: "aumlets", tag: ",",
+                                   actions: ["throw" : nil, "wield" : "unwield"]
+    )
+    static let ITEM_NAMES: [InventoryItemType: [(name: String, pattern: String)?]] = [
+//        SampleData.FOOD : [("food", "some %@"),
+//                               ("food", "2 rations of %@"),
+//                               ("slime mold", "a %@"),
+//                               ("slime mold", "3 %@s")
+//        ],
+        SampleData.ARMOR : [("ring mail", "+1 %@ [protection: 4]"),
+                                ("chain mail", "%@"),
+                                ("splint mail", "+0 %@ [protection: 6]"),
+                                ("leather armor", "%@"),
+                                ("studded leather armor", "%@"),
+                                ("plate mail", "%@"),
+                                ("plate mail", "+3 %@ [protection: 10]")
+        ],
+        SampleData.WEAPON : [("mace", "A +1,+1 %@"),
+                                 ("arrow", "13 %@s"),
+                                 ("two handed sword", "A %@"),
+                                 ("mace", "A %@"),
+                                 ("long sword", "A %@"),
+                                 ("dagger", "A %@"),
+                                 ("dart", "10 %@s")
+        ],
+        SampleData.POTION : [nil,
+                                 ("confusion", "A potion of %@"),
+                                 ("monster detection", "A potions called %@"),
+                                 ("healing", "2 potions of %@")
+        ],
+        SampleData.SCROLL : [nil,
+                                 ("scare monster", "A scroll of %@"),
+                                 ("enchant weapon", "A scroll of %@"),
+                                 ("identify ring, wand or staff", "3 scrolls of %@"),
+                                 ("teleportation", "A scroll called %@"),
+                                 ("protection", "A scroll called %@")
+        ],
+        SampleData.RING : [nil,
+                               ("see invisible", "A ring of %@"),
+                               ("some random ring", "A ring called %@"),
+                               ("adornment", "A ring of %@"),
+                               ("add damage", "A ring of %@ [-1]")
+        ],
+        SampleData.STICK : [nil,
+                                ("oak staff", "An %@"),
+                                ("striking", "A wand of %@ [3 charges]"),
+                                ("cold", "A staff of %@ [1 charges]")
+        ]
     ]
+    static var ALIASES: [InventoryItemType : [(aliases: [String], variant: String)]] = [
+        SampleData.POTION: [(["green", "aquamarine", "red", "black", "white", "brown", "blue"], "potion")],
+        SampleData.SCROLL: [(["xy zzy rah", "foo baar oof", "fas jfe laja", "ziv zav zue", "vou pej zav jfie", "fie fei foe"], "scroll")],
+        SampleData.STICK:  [(["gold", "bronze", "iron"], "wand"),
+                            (["oak", "teak", "walnut"], "staff")],
+        SampleData.RING: [(["onyx", "diamond", "amethyst", "opal", "ruby", "sapphire"], "ring")]
+    ]
+
+    private let inventoryTypes: [InventoryItemType] = [
+        SampleData.FOOD,
+        SampleData.ARMOR,
+        SampleData.WEAPON,
+        SampleData.POTION,
+        SampleData.SCROLL,
+        SampleData.RING,
+        SampleData.STICK,
+        SampleData.AMULET
+    ]
+    private var inventoryData: [InventoryItem] = [];
     
-    weak var delegate: InventoryViewControllerDelegate?
-
-    var itemListByItemType = [String: (type: String, values: Dictionary<String, Int>)]()
+    private weak var controller : InventoryController?
     
-    //MARK: public interface
-
-    required init(ctrlFilterSelector: UISegmentedControl, responder: InventoryViewControllerDelegate) {
-        delegate = responder
+    public init() {
+        let selected = (SampleData.random(100) < 20)
+            ? SampleData.randomItem(["a slime mold", "3 slime molds"])!
+            : SampleData.randomItem(["some food", "2 rations of food", "some food"])!
         
-        ctrlFilterSelector.removeAllSegments()
-        ctrlFilterSelector.insertSegment(withTitle: "*", at: 0, animated: false)
-        
-        for (tag, type, data) in SampleData.sampleItemsByTag {
-            let index = ctrlFilterSelector.numberOfSegments
-            ctrlFilterSelector.insertSegment(withTitle: tag, at: index, animated: false)
-            
-            if (!data.isEmpty) {
-                var count = random(3)
-                if (!isPSRS(type)) {
-                    count += 1
-                }
-                
-                var result: [String: Int] = [:]
-                for _ in 0..<count {
-                    if (getSampleItemsForSegment(ofType: type, data: data, result: &result)) {
-                        result["arrow"] = random(20) + 1
-                    }
-                }
+        addItem(type: SampleData.FOOD, name: "food", label: selected)
 
-                if (!result.isEmpty) {
-                    itemListByItemType[tag] = (type, result)
-                }
+        for type in SampleData.ITEM_NAMES.keys {
+            let items = SampleData.ITEM_NAMES[type]!
+            if let required = items[0] {
+                addItem(type: type, name: required.name,
+                        label: String(format: required.pattern, required.name)
+                )
             }
         }
-        delegate?.updateCount(number: self.getItemCount(), sender: self)
-    }
-    
-    public func getItemCount() -> Int {
-        var total = 0
-        for tag in itemListByItemType.keys {
-            total += (itemListByItemType[tag]!.values.count)
+        
+        addItem(type: SampleData.WEAPON, name: "short bow", label: "A +1,+0 short bow")
+        
+        let arrows = String(format: "%d +0,+0 arrows", SampleData.random(15) + 25)
+        addItem(type: SampleData.WEAPON, name: "arrow", label: arrows)
+        
+        for type in SampleData.ITEM_NAMES.keys {
+            var items = SampleData.ITEM_NAMES[type]!
+            items.remove(at: 0)
+
+            getSampleItemsForSegment(of: type, probability: SampleData.random(15) + 20, items: items as! [(name: String, pattern: String)])
         }
-        return total
+    }
+
+    //MARK: InventoryService
+    public func getPackItems() -> [InventoryItem] {
+        return inventoryData
     }
     
-    public func getItemTypeCount() -> Int {
-        return itemListByItemType.keys.count
+    // ordered!
+    public func getItemTypes() -> [InventoryItemType] {
+        return inventoryTypes
     }
     
-    public func getItems(forTag: String) -> [String]? {
-        if let (type, itemsForType) = itemListByItemType[forTag] {
-            var result: [String] = []
-            
-            for name in itemsForType.keys {
-                let count = itemsForType[name]
-                result.append(getValue(type: type, name: name, count: count!))
-            }
-            
-            return result
-        }
-        return nil
-    }
-    
-    public func getTypeName(forTag: String) -> String? {
-        if let (type, _) = itemListByItemType[forTag] {
-            return type;
-        }
-        return nil
+    public func registerController(controller: InventoryController) {
+        self.controller = controller
     }
     
     //MARK: private implementation
-    
-    private func isPSRS(_ type: String) -> Bool {
-        switch (type) {
-        case "potion", "scroll", "ring", "stick":
-            return true;
-        default:
-            return false;
+    private func getAliasForType(_ type: InventoryItemType) -> (alias: String, variant: String)? {
+        if let variants = SampleData.ALIASES[type] {
+            let index = SampleData.random(variants.count)
+            let variant = variants[index]
+            
+            if let next = SampleData.randomItem(variant.aliases) {
+                SampleData.ALIASES[type]![index].aliases = variant.aliases.filter( { $0 != next } )
+                return (next, variant.variant)
+            }
+            return ("fAkEnAmE", variant.variant)        // need more aliases!
         }
+        return nil
     }
     
-    private func getValue(type: String, name: String, count: Int) -> String {
-        let ispsrs = isPSRS(type)
+    private func nextID() -> String {
+        let choices = Array(UnicodeScalar("a").value...UnicodeScalar("z").value)
+        return String(UnicodeScalar(choices[self.inventoryData.count])!);
+    }
+    
+    private func addItem(type: InventoryItemType, name: String, label: String) {
+        let item = InventoryItem(id: nextID(), name: name, label: label, type: type);
+        self.inventoryData.append(item)
         
-        if (count > 1) {
-            if (ispsrs) {
-                if (name.hasPrefix("of ")) {
-                    // e.g. 3 potions of healing
-                    return String(count) + " " + asPlural(type) + " " + name
-                }
-                else {
-                    // e.g. 2 diamond rings
-                    return String(count) + " " + name + " " + asPlural(type)
-                }
-            }
-            else {
-                // 2 slime-molds
-                return String(count) + " " + asPlural(name)
-            }
-        }
-        else {
-            if (ispsrs) {
-                if (name.hasPrefix("of ")) {
-                    // a scroll of xyzzy
-                    return withArticle(type) + " " + name
-                }
-                else {
-                    // an oak staff
-                    return withArticle(name) + " " + type
-                }
-            }
-            else {
-                return withArticle(name)
-            }
-        }
+        controller?.add(id: item.id, item: item)
     }
 
-    private func getSampleItemsForSegment(ofType type: String, data: Array<String>, result: inout [String: Int]) -> Bool {
-        var name: String?
-        
-        if let selected = randomItem(data) {
-            switch (type) {
-            case "potion":
-                name = psrsName(selected, choices: ["green", "aquamarine", "red", "black", "white", "brown"])
-                break
-            case "ring":
-                name = psrsName(selected, choices: ["onyx", "diamond", "amethyst", "opal", "ruby", "sapphire"])
-                break
-            case "scroll":
-                name = psrsName(selected, choices: ["xyzzy", "foobar", "fasjfelja", "zjvzvdue", "uoupvjzvjfe"])
-                break
-            case "stick":
-                name = (1 == random(2))
-                    ? psrsName(selected, choices: ["gold", "bronze", "iron"])
-                    : psrsName(selected, choices: ["oak", "teak", "walnut"])
-                break
-            default:
-                name = selected
-                break
+    private func getSampleItemsForSegment(of type: InventoryItemType, probability: Int, items: [(name: String, pattern: String)]) {
+        var remainder = probability
+        while (remainder > 0) {
+            if (remainder > SampleData.random(100)) {
+                var selected : (name: String, pattern: String)
+                
+                if let alias = getAliasForType(type),
+                    (80 > SampleData.random(100)),
+                    let count = SampleData.randomFromDistribution([1,2,3], probabilities: [80,15,5]) {
+                    
+                    let prefix = ((count == 1) ? getArticle(for: alias.alias) : "\(count)") + " "
+                    
+                    let pattern = (type.name == SampleData.SCROLL.name)
+                        ? prefix + asPlural(of: alias.variant, count: count) + " titled '%@'"
+                        : prefix + "%@ " + asPlural(of: alias.variant, count: count)
+                    
+                    selected = (alias.alias, pattern)
+                }
+                else {
+                    selected = SampleData.randomItem(items)!
+                }
+                
+                addItem(type: type, name: selected.name,
+                        label: String(format: selected.pattern, selected.name)
+                )
             }
-        
-            let count = result[name!]
-            result[name!] = (count ?? 0) + 1
+            remainder -= 10
         }
-        return name == "short bow"
     }
     
-    private func psrsName(_ result: String, choices: [String]) -> String {
-        if (1 == random(2)) {
-            return "of " + result
+    private static let vowelCharacters : [Character] = ["a","e","i","o","u"]
+    
+    private func getArticle(for name: String) -> String {
+        if let startsWith = name.lowercased().characters.first {
+            if (SampleData.vowelCharacters.contains(startsWith)) {
+                return "An"
+            }
         }
-        else {
-            return randomItem(choices)!
+        return "A"
+    }
+    
+    private func asPlural(of name: String, count: Int) -> String {
+        return (count > 1) ? name + "s" : name
+    }
+    
+    // ToDo: move to common class (Game?)
+    public static func randomFromDistribution<T>(_ items: [T], probabilities: [Int]) -> T? {
+        guard (!items.isEmpty) else {
+            return nil
         }
+
+        let value = SampleData.random(100)  // equal probability
+        var total = probabilities[0]
+        var ix = 0
+        
+        while (value >= total && ix < items.count) {
+            ix += 1
+            total += probabilities[ix]
+        }
+        return items[ix]
     }
 
-    private func randomItem(_ items: Array<String>) -> String? {
-        if (items.isEmpty) {
+    public static func randomItem<T>(_ items: [T]) -> T? {
+        guard (!items.isEmpty) else {
             return nil;
         }
-        return items[random(items.count)]
+        
+        return items[SampleData.random(items.count)]
     }
     
     // return a value from 0 to limit-1
-    private func random(_ limit: Int) -> Int {
+    public static func random(_ limit: Int) -> Int {
         // encapsulate the foolishness...
         return Int(arc4random_uniform(UInt32(limit)))
-    }
-
-    // ToDo: String extensions
-    private func withArticle(_ forString: String) -> String {
-        let prefix = String(forString.lowercased().characters.prefix(1))
-        let vowels: Set<String> = ["a", "e", "i", "o", "u"]
-        if (vowels.contains(prefix)) {
-            return "an " + forString + " "
-        }
-        return "a " + forString + " "
-    }
-
-    private func asPlural(_ forString: String) -> String {
-        if (forString == "food") {
-            return forString
-        }
-        return forString + "s"
     }
 }
 

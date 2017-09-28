@@ -12,10 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    public private(set) var game: GameService?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        game = Game()
+        
+        // ToDo: identify the version to startup
+        let version = "SampleData"
+        
+        game?.loadData(for: version)
+        
         return true
     }
 

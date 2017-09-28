@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // ToDo: move InventoryControllerDelegate to separate class
-class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryViewControllerDelegate {
+class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryControllerDelegate {
     
     //MARK: Properties
     @IBOutlet weak var txtMessageOrCommand: UITextField!
@@ -20,6 +20,8 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     @IBOutlet weak var btnTools: UIBarButtonItem!
     @IBOutlet weak var topStackView: SubPanelView!
     @IBOutlet var subPanelHeight: NSLayoutConstraint!  // height constraint for SubPanelStackView
+    @IBOutlet weak var statsStackView: UIStackView!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     private weak var subPanelStackView: SubPanelView?
     private var stackFrameHeight: CGFloat?
@@ -29,6 +31,16 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
 
     // ToDo: make cellsize configurable
     private let INVENTORY_EXTENT = 0.33     // 1/3 of total view space
+    
+    private lazy var statsBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        _ = view.addBorder(edges: [.top, .bottom], color: UIColor.black, thickness: 1)
+//        view.layer.borderWidth = 2
+//        view.layer.borderColor = UIColor.black.cgColor
+        
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +59,8 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
         
         // BUG: if dungeon collection is scrolled and subpanel is shown, then dungeon cells move
         // and row 0 shifts to within the grid (while some other row vanishes)
+        
+        self.pinBackground(statsBackgroundView, to: statsStackView)
         
         self.update(number: "1", sender: nil)
         self.updateComplete(sender: nil)
@@ -100,7 +114,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
         }
         else if (segue.identifier == "subPanelSegue") {
             let vc = segue.destination as! SubPanelViewController
-            vc.setup(invDelegate: self, keyDelegate: self)
+            vc.setup(keyDelegate: self, invDelegate: self)
         }
     }
     
@@ -126,7 +140,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     }
     
     //MARK: Inventory Management
-    func updateCount(number: Int, sender: InventoryData?) {
+    func updateCount(number: Int) {
         // ToDo: should update the model, then load value from the model
         btnInventory.setBadge(text: String(number))
     }
@@ -174,7 +188,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
     }
     
     private func showInventory() {
-        btnSetRepeatCount.isEnabled = !showSubPanel(favored: .LeftTop)
+        btnSetRepeatCount.isEnabled = showSubPanel(favored: .LeftTop)
 //        
 //        print("top-stack-view-frame: \(self.topStackView.frame.size)")
 //        for view in topStackView.arrangedSubviews {
@@ -222,11 +236,80 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryV
         // select dungeon cell/character (point) size
         // select font family?
         // select dungeon cell background color and/or foreground color
-        // save game
-        // load game?
+        // save game (automatic!?)
+        // load game? (automatic!?)
+        // fight near death
+        // find/run (tab/double-tap??)
         
     }
-
+    
+    //MARK: Stats View
+    private func pinBackground(_ view: UIView, to stackView: UIStackView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        stackView.insertSubview(view, at: 0)
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: (stackView.superview?.leadingAnchor)!),
+            view.trailingAnchor.constraint(equalTo: (stackView.superview?.trailingAnchor)!),
+            view.topAnchor.constraint(equalTo: stackView.topAnchor),
+            view.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
+        ])
+    }
+    
+    //MARK: Tool Menu
+    var leftViewController: UIViewController? {
+        willSet{
+            self.leftViewController?.view?.removeFromSuperview()
+            self.leftViewController?.removeFromParentViewController()
+//            if self.leftViewController != nil {
+//                if self.leftViewController!.view != nil {
+//                    self.leftViewController!.view!.removeFromSuperview()
+//                }
+//                self.leftViewController!.removeFromParentViewController()
+//            }
+        }
+        
+        didSet{
+            self.view!.addSubview(self.leftViewController!.view)
+            self.addChildViewController(self.leftViewController!)
+        }
+    }
+    
+    var rightViewController: UIViewController? {
+        willSet {
+            self.rightViewController?.view?.removeFromSuperview()
+            self.rightViewController?.removeFromParentViewController()
+//            if self.rightViewController != nil {
+//                if self.rightViewController!.view != nil {
+//                    self.rightViewController!.view!.removeFromSuperview()
+//                }
+//                self.rightViewController!.removeFromParentViewController()
+//            }
+        }
+        
+        didSet{            
+            self.view!.addSubview(self.rightViewController!.view)
+            self.addChildViewController(self.rightViewController!)
+        }
+    }
+    
+    var menuShown: Bool = false
+    
+    func showMenu() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.rightViewController!.view.frame = CGRect(x: self.view.frame.origin.x + 235, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: { (Bool) -> Void in
+            self.menuShown = true
+        })
+    }
+    
+    func hideMenu() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.rightViewController!.view.frame = CGRect(x: 0, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: { (Bool) -> Void in
+            self.menuShown = false
+        })
+    }
+    
     //MARK: NOT USED
 
 //    // e.g. called from viewDidAppear()
