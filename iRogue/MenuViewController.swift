@@ -77,9 +77,9 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: GameEventHandler
     func update(sender: Any?, eventArgs: GameEventArgs) {
         if let args = eventArgs as? ToolMessageArgs {
-            let alert = UIAlertController(title: args.message, message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
+            let alertController = UIAlertController(title: "Message", message: args.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 
