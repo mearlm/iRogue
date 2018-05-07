@@ -257,11 +257,4 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
-    
-    // ToDo: use MessageController
-    public func messageBox(_ message: String) {
-        let alertController = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
 }
