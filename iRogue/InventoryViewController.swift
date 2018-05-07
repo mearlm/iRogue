@@ -8,18 +8,11 @@
 
 import UIKit
 
-public protocol InventoryViewControllerDelegate: class {
-    func updateRowInSection(for tag: String, row: Int)
-    func updateSection(for tag: String)
-    func setEnabled(for tag: String, state: Bool)
+public protocol InventoryCountDelegate: class {
+    func updateInventoryCount(number: String)       // update item count shown on button
 }
 
-public protocol InventoryControllerDelegate: class {
-    func updateCount(number: Int)
-}
-
-class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, InventoryViewControllerDelegate {
-
+class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GameEventHandler {
     //MARK: Properties
     @IBOutlet weak var ctrlFilterSelector: UISegmentedControl!
     @IBOutlet weak var viewInventoryList: UITableView!
@@ -27,47 +20,57 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     fileprivate let cellIdentifier = "inventoryCell"
     fileprivate let font = UIFont(name: "Courier", size: 18.0)
     
-    private var data: InventoryData?
-    weak var delegate: InventoryControllerDelegate?
+    private weak var inventory: InventoryControllerService?
+    weak var delegate: InventoryCountDelegate?          // set in segue
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         // let font = UIFont.systemFont(ofSize: 18)
-        ctrlFilterSelector.setTitleTextAttributes([NSFontAttributeName: self.font!], for: .normal)
+        ctrlFilterSelector.setTitleTextAttributes([NSAttributedStringKey.font: self.font!], for: .normal)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        inventory = appDelegate.getProtocolHandler(for: ServiceKey.InventoryService, delegate: self)
         
-        data = InventoryData(ctrlFilterSelector: ctrlFilterSelector, responder: self, service: appDelegate.game!.getInventoryService())
-        
-        delegate?.updateCount(number: data?.getItemCount(by: -1) ?? 0)
+        if let types = inventory?.getItemTypesNames() {
+            reset(types: types)
+        }
+        delegate?.updateInventoryCount(number: String(inventory!.getTotalItemCount()))
         
         viewInventoryList.reloadData();
         print("InventoryViewController did load")
     }
     
+    //MARK:  EventHandler
+    public func update(sender: Any?, eventArgs: GameEventArgs) {
+        if let args = eventArgs as? SetEnabledArgs {
+            setEnabled(for: args.tag, state: args.state)
+        }
+        else if let args = eventArgs as? UpdateRowInSectionArgs{
+            updateRowInSection(for: args.tag, row: args.row)
+        }
+        else if let args = eventArgs as? UpdateSectionArgs {
+            updateSection(for: args.tag, preexisting: args.preexisting)
+        }
+    }
+    
+    private func reset(types: [String]) {
+        ctrlFilterSelector.removeAllSegments()
+        if (types.count > 0) {
+            var ix = 0
+            for type in types {
+                ctrlFilterSelector.insertSegment(withTitle: type, at: ix, animated: false)
+                ix += 1
+            }
+            ctrlFilterSelector.selectedSegmentIndex = 0
+            ctrlFilterSelector.setEnabled(true, forSegmentAt: 0)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    private func tagForSection(_ section: Int) -> String {
-        return ctrlFilterSelector.titleForSegment(at: section + 1)!
-    }
-    
-    private func sectionForTag(_ tag: String) -> Int? {
-        for ix in 1..<ctrlFilterSelector.numberOfSegments {
-            if (tag == ctrlFilterSelector.titleForSegment(at: ix)) {
-                if (showAllSections()) {
-                    return ix - 1
-                }
-                else if (isFilteredSelection(ix-1)) {
-                    return 0
-                }
-            }
-        }
-        return nil
     }
     
     private func showAllSections() -> Bool {
@@ -95,43 +98,95 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (showAllSections()) {
-            return data?.getItemCount(by: section) ?? 0
-        }
-        return data?.getItemCount(for: selectedTag()) ?? 0
+        let tag = selectedTag()
+        let result = inventory?.getItemRowCount(for: tag, offset: section) ?? 0
+        print("showing showing \(result) rows for \(tag) [section \(section)]")
+        return result
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        var result = 0
         if (showAllSections()) {
-            return (data?.getItemTypeCount() ?? 0)
+            result = (inventory?.getItemTypeCount() ?? 0)
         }
-        return (0 < data?.getItemCount(for: selectedTag()) ?? 0) ? 1 : 0
+        else {
+            result = (inventory?.hasItems(for: selectedTag()) ?? false) ? 1 : 0
+        }
+        print("showing \(result) sections")
+        return result
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let myCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath)
-        myCell.textLabel?.font = self.font!
 
-        if (showAllSections()) {
-            myCell.textLabel!.text = data?.getItemLabel(by: indexPath.section, row: indexPath.row)
+        if let result = inventory?.getItemLabel(for: selectedTag(), offset: indexPath.section, row: indexPath.row) {
+
+            myCell.textLabel!.font = self.font!
+            myCell.textLabel!.text = "\(result.id)) " + result.label
+            myCell.textLabel!.adjustsFontSizeToFitWidth = true
+            myCell.textLabel!.minimumScaleFactor = 0.1
         }
-        else {
-            myCell.textLabel!.text = data?.getItemLabel(for: selectedTag(), row: indexPath.row)
-        }
-        myCell.accessoryType = UITableViewCellAccessoryType.detailButton
+
+        // myCell.accessoryType = UITableViewCellAccessoryType.detailButton
         
         return myCell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (showAllSections()) {
-            return self.data?.getItemTypeName(by: section)
-        }
-        else if let name = data?.getItemTypeName(for: selectedTag()) {
+        if let name = inventory?.getItemTypeName(for: selectedTag(), offset: section) {
             return name
         }
         return nil
+    }
+    
+    private func addCommandAction(controller: UIAlertController, command: String, option: String?, style: UIAlertActionStyle, indexPath: IndexPath) {
+        let title = (nil == option) ? command : (command + " " + option!)
+        let action = UIAlertAction(title: title.capitalized, style: style) { (result : UIAlertAction) -> Void in
+            // all commands process via a single (inventory) command processor interface
+            self.inventory?.doAction(for: self.selectedTag(),
+                             offset: indexPath.section,
+                             row: indexPath.row,
+                             command: command,
+                             option: option
+            )
+        }
+        controller.addAction(action)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let actionNames = inventory?.getActions(for: selectedTag(), offset: indexPath.section, row: indexPath.row),
+            let selectedCell = tableView.cellForRow(at: indexPath) {
+            
+            if let result = inventory?.getItemLabel(for: selectedTag(), offset: indexPath.section, row: indexPath.row) {
+                let alertController = UIAlertController(title: "Available Actions", message: result.label, preferredStyle: UIAlertControllerStyle.alert)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
+                    print("Cancelled")
+                }
+                alertController.addAction(cancelAction)
+
+                for pair: (name: String, options: [String]?) in actionNames {
+                    if let options = pair.options {
+                        for option in options {
+                            addCommandAction(controller: alertController, command: pair.name, option: option, style: UIAlertActionStyle.default, indexPath: indexPath)
+                        }
+                    }
+                    else {
+                        addCommandAction(controller: alertController, command: pair.name, option: nil, style: UIAlertActionStyle.default, indexPath: indexPath)
+                    }
+                }
+                addCommandAction(controller: alertController, command: "drop", option: nil, style: UIAlertActionStyle.destructive, indexPath: indexPath)
+
+                if let presenter = alertController.popoverPresentationController {
+                    presenter.sourceView = selectedCell
+                    presenter.sourceRect = selectedCell.bounds
+                }
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     // alternating list background colors...
@@ -167,27 +222,31 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // ToDo:
-    // make the filter work
-    // indent the items below the headings
-    // color headings
     // enable name change ("call")
-    // enable item-dependent actions: use(wear, quaff, read, zap, etc.), unuse?, throw?;
-    //    and item-independent actions: drop
     
     //MARK: InventoryViewControllerDelegate
     public func updateRowInSection(for tag: String, row: Int) {
-        if let section = sectionForTag(tag) {
-            let indexPath = IndexPath(row: row, section: section)
-            viewInventoryList.reloadRows(at: [indexPath], with: .top)
+        if (showAllSections() || selectedTag() == tag) {
+            if let section = (showAllSections()) ? inventory!.findSection(for: tag) : 0 {
+                let indexPath = IndexPath(row: row, section: section)
+                print("updating inventory row \(row) in section \(section) with tag \(tag)")
+                viewInventoryList.reloadRows(at: [indexPath], with: .middle)
+            }
         }
     }
     
-    public func updateSection(for tag: String) {
-        if let _ = sectionForTag(tag) {
+    public func updateSection(for tag: String, preexisting: Bool) {
+        if (!inventory!.hasItems(for: tag) || !preexisting) {
+            print("reloading inventory view [preexisting=\(preexisting)]")
             viewInventoryList.reloadData()
         }
-        setEnabled(for: tag, state: 0 < (data?.getItemCount(for: tag) ?? 0))
-        delegate?.updateCount(number: data?.getItemCount(by: 0) ?? 0)
+        else if let section = (showAllSections()) ? inventory!.findSection(for: tag) : 0 {
+            print("updating inventory section \(section) for tag \(tag)")
+            viewInventoryList.reloadSections(IndexSet(integer: section), with: .middle)
+        }
+        setEnabled(for: tag, state: inventory?.hasItems(for: tag) ?? false)
+        let count = inventory?.getTotalItemCount() ?? 0
+        delegate?.updateInventoryCount(number: String(count))
     }
     
     public func setEnabled(for tag: String, state: Bool) {
@@ -197,5 +256,12 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
                 break
             }
         }
+    }
+    
+    // ToDo: use MessageController
+    public func messageBox(_ message: String) {
+        let alertController = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 }

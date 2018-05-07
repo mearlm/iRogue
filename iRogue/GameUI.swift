@@ -8,48 +8,41 @@
 
 import UIKit
 
+public enum ServiceKey {
+    case DummyService, DungeonService, InventoryService, CommandService, ToolsService
+}
+
 public protocol GameService : class {
     func loadData(for version: String)
-    func getInventoryService() -> InventoryService
+    func registerDelegate<TService, TEventHandler : GameEventHandler>(protocolName: ServiceKey, protocolHandler: TEventHandler) -> TService?
 }
 
-public protocol InventoryController : class {
-    // update inventory when things happen in the model (item picked up, stolen, ...)
-    func add(id: String, item: InventoryItem)
-    func remove(id: String)
-    
-    func updateLabel(id: String, name: String)
-    func setState(id: String, action: String, state: Bool)  // wield, wear, ...
-
-//    func know(id: String)
-//    func identify(id: String)
-    
-//    func addType(tag: String, name: String)
-//    func getItemLabels(forTag: String) -> [String]?
-//    func getItemCount() -> Int
-//    
-//    func getTypeName(forTag: String) -> String?
-//    func getItemTypes() -> [InventoryItemType]
-//    func getItemTypeCount() -> Int
+public protocol GameUpdateService : class {
+    func sendUpdate(for protocolName: ServiceKey, args: GameEventArgs, sender: Any?)
 }
 
-public protocol InventoryService : class {
-    func getPackItems() -> [InventoryItem]
-    func getItemTypes() -> [InventoryItemType]      // ordered!
+// base protocol for passing event data
+public protocol GameEventArgs {
     
-    func registerController(controller : InventoryController)
 }
 
-public protocol CommandService : class {
+// protocol for sending events (data updates)
+public protocol GameEventHandler : class {
+    func update(sender: Any?, eventArgs: GameEventArgs)
+}
+
+public protocol InventoryCommandService : class {
     // send commands into the game
+    func inventoryAction(item: InventoryItem, command: String, option: String?) -> Bool
 }
 
-public struct Coordinates {
-    init(row: Int, col: Int) { }
-}
+//public struct Coordinates {
+//    let row: Int
+//    let col: Int
+//}
 
-public protocol DungeonController : class {
-    // update dungeon when things happen in the model
-    
-    func showAt(location: Coordinates, character: String, actions: [String]?)
-}
+//public protocol DungeonController : class {
+//    // update dungeon when things happen in the model
+//    
+//    func showAt(location: Coordinates, character: String, actions: [String]?)
+//}

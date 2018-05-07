@@ -222,6 +222,53 @@ public class ThingType {
 //        }
         return "UNDEFINED"
     }
+    
+//    let pattern: (known: String, guessed: String, unknown: String)
+//
+//    public func getLabel(for item: InventoryItem) -> String {
+//        var selected: String
+//        var pattern: String
+//        
+//        if let alias = item.alias {
+//            // type-name is plural
+//            if let name = item.fullname {
+//                // potion: "%2 of %1(%@)" => potion[s] of healing(green)
+//                // scroll: "%2 of %1" -- no alias-name replacement! => scroll[s] of monster confusion
+//                selected = name
+//                pattern = String(format: self.pattern.known, alias.name).replacingOccurrences(of: "%2", with: "%@")
+//            }
+//            else if let name = item.nickname {
+//                selected = name
+//                pattern = String(format: self.pattern.guessed, alias.name).replacingOccurrences(of: "%2", with: "%@")
+//            }
+//            else {
+//                // potion: "%1 %@" => green potion[s]
+//                // scroll: "%@ titled '%1'" => scroll[s] titled 'fie fei foe fum'
+//                selected = alias.name
+//                pattern = self.pattern.unknown
+//            }
+//            let revised = String(format: pattern, asPlural(of: alias.variant ?? self.name, count: item.count))
+//            pattern = revised.replacingOccurrences(of: "%1", with: "%@")
+//        }
+//        else {
+//            // item-name is plural, determines article
+//            if let name = item.fullname {
+//                pattern = self.pattern.known
+//                selected = asPlural(of: name, count: item.count)
+//            }
+//            else if let name = item.nickname {
+//                pattern = self.pattern.guessed
+//                selected = asPlural(of: name, count: item.count)
+//            }
+//            else {
+//                pattern = self.pattern.unknown
+//                selected = asPlural(of: item.name, count: item.count)
+//            }
+//        }
+//        let result = String(format: pattern, selected)
+//        
+//        return getPrefix(for: result, count: item.count) + " " + result
+//    }
 }
 
 public class ThingPrototype {

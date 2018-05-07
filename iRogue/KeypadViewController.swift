@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol KeypadViewControllerDelegate: class {
-    func update(number: String, sender: KeypadViewController?)
+protocol RepeatCountDelegate: class {
+    func updateRepeatCount(number: String, sender: KeypadViewController?)
     func updateComplete(sender: KeypadViewController?)
 }
 
@@ -34,7 +34,7 @@ class KeypadViewController : UIViewController {
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnEnter: UIButton!
     
-    weak var delegate: KeypadViewControllerDelegate?
+    weak var delegate: RepeatCountDelegate?
     
     private var number: String = ""
 
@@ -47,8 +47,8 @@ class KeypadViewController : UIViewController {
     }
     
     private func setState() {
-        let isEmpty = (self.number.characters.count == 0)
-        let isFull = (self.number.characters.count == MAXLENGTH)
+        let isEmpty = (self.number.count == 0)
+        let isFull = (self.number.count == MAXLENGTH)
     
         // btnEnter.isEnabled = !isEmpty;
         btnBack.isEnabled = !isEmpty;
@@ -70,7 +70,7 @@ class KeypadViewController : UIViewController {
         switch (value) {
         case ERASE:
             // backspace
-            self.number = String(self.number.characters.dropLast())
+            self.number = String(self.number.dropLast())
             break
         case ENTER:
             // enter: dismiss keyboard
@@ -84,7 +84,7 @@ class KeypadViewController : UIViewController {
         setState()
 
         if (ENTER != value) {
-            delegate?.update(number: self.number, sender: self)
+            delegate?.updateRepeatCount(number: self.number, sender: self)
         }
     }
 }

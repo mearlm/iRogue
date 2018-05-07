@@ -1,0 +1,6 @@
+framework module Pods_iRogueUITests {
+  umbrella header "Pods-iRogueUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

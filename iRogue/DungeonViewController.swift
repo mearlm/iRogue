@@ -33,11 +33,20 @@ class DungeonViewController: UICollectionViewController {
         doubleTap.numberOfTapsRequired = 2
         self.collectionView?.addGestureRecognizer(doubleTap)
         
+        // Long Press
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(sender:)))
+        self.collectionView?.addGestureRecognizer(longPress)
+
         singleTap.require(toFail: doubleTap)
         singleTap.delaysTouchesBegan = true
         doubleTap.delaysTouchesBegan = true
         
         print("DungeonViewController did load")
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.collectionViewLayout.invalidateLayout()
     }
     
     //MARK: UI CollectionViewDataSource
@@ -52,7 +61,7 @@ class DungeonViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DungeonCell
         
-        // Configure the cell
+        // fake up the dungeon -- replace with call to GameEngine to get cell text
         if ((indexPath.section - 6) % 9 == 0 && Int(indexPath.item / 10) % 2 == 0) {
             cell.lblDungeonCell.text = String(topBottomWall)
         }
@@ -62,6 +71,9 @@ class DungeonViewController: UICollectionViewController {
         else {
             cell.lblDungeonCell.text = String(centerDot);
         }
+        // end fake up
+        
+        // Configure the cell
         cell.backgroundColor = UIColor.black
         cell.lblDungeonCell.textColor = UIColor.green
         cell.lblDungeonCell.font = self.cellFont
@@ -69,20 +81,31 @@ class DungeonViewController: UICollectionViewController {
         return cell
     }
     
-    //MARK: Tap Handlers
-    func handleSingleTap(sender: UITapGestureRecognizer) {
+    //MARK: Gesture Handlers
+    @objc func handleSingleTap(sender: UITapGestureRecognizer) {
         let pointInCollectionView: CGPoint = sender.location(in: self.collectionView)
         let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView)
-        // let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
-
-        print("Single Tap at \(String(describing: selectedIndexPath))!")
+        let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
+        
+        let frame = selectedCell?.frame
+        print("Single Tap at \(String(describing: selectedIndexPath))! @ \(String(describing: frame))")
     }
     
-    func handleDoubleTap(sender: UITapGestureRecognizer) {
+    @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
         let pointInCollectionView: CGPoint = sender.location(in: self.collectionView)
         let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView)
         // let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
 
         print("Double Tap at \(String(describing: selectedIndexPath))!")
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
+        if (sender.state == UIGestureRecognizerState.began) {
+            let pointInCollectionView: CGPoint = sender.location(in: self.collectionView)
+            let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView)
+            // let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
+            
+            print("Long Press at \(String(describing: selectedIndexPath))!")
+        }
     }
 }

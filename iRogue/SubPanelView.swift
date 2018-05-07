@@ -75,6 +75,9 @@ class SubPanelView: UIStackView {
             self.rightBottomView.isHidden = rbHidden
             self.leftTopView.isHidden = ltHidden
             self.layoutIfNeeded()
+        },
+            completion: { [weak self] finished in
+                self?.layoutIfNeeded()
         })
     }
     

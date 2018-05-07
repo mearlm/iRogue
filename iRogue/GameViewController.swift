@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // ToDo: move InventoryControllerDelegate to separate class
-class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryControllerDelegate {
+class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountDelegate {
     
     //MARK: Properties
     @IBOutlet weak var txtMessageOrCommand: UITextField!
@@ -25,6 +25,10 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
     
     private weak var subPanelStackView: SubPanelView?
     private var stackFrameHeight: CGFloat?
+    weak var menuDelegate: MainMenuDelegate?
+    
+    private var repeatCount = ""
+    private var inventoryCount = ""
     
     private let MINHEIGHT = CGFloat(150.0)                  // minimum height of SubPanelStackView
     private let SPACING = CGFloat(5.0)
@@ -62,7 +66,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
         
         self.pinBackground(statsBackgroundView, to: statsStackView)
         
-        self.update(number: "1", sender: nil)
+        self.updateRepeatCount(number: "1", sender: nil)
         self.updateComplete(sender: nil)
         
         print("ViewController did load")
@@ -75,6 +79,8 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
     
     override func viewDidLayoutSubviews() {
         // fix the missing badges
+        updateRepeatCount(number: self.repeatCount, sender: nil)
+        updateInventoryCount(number: self.inventoryCount)
     }
     
     // inhibit screen rotation when subpanel (inventory or keyboard) is showing
@@ -98,18 +104,14 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
             let vc = segue.destination as! DungeonViewController
             let view = vc.collectionView!
             
-            let pointSize = CGFloat(25.0)
-            var cellFont = UIFont.init(name: "Menlo-Regular", size: pointSize)
-            if (nil == cellFont) {
-                cellFont = UIFont.init(name: "Courier", size: pointSize)
-            }
-            guard let font = cellFont else {
-                fatalError("Monospaced font not installed!")
-            }
-            vc.cellFont = font.fontWithBold()
-            
-            let layout = DungeonCollectionViewLayout(font: vc.cellFont!)
+            let layout = DungeonCollectionViewLayout(hasRowHeaders: false, hasColHeaders: false)
             view.setCollectionViewLayout(layout, animated: false)
+
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            guard let _ : DungeonControllerService = appDelegate.getProtocolHandler(for: ServiceKey.DungeonService, delegate: layout) else {
+                fatalError("Check storyboard for missing SubPanelViewController")
+            }
+            
             view.reloadData()
         }
         else if (segue.identifier == "subPanelSegue") {
@@ -118,13 +120,25 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
         }
     }
     
-    //MARK: Keyboard Management
-    func update(number: String, sender: KeypadViewController?) {
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
+    
+    private func changeEnabledState(button: UIBarButtonItem, state: Bool, text: String) {
+        if (state != button.isEnabled) {
+            button.isEnabled = state
+            button.setBadge(text: text)
+        }
+    }
+
+    //MARK: RepeatCountDelegate
+    func updateRepeatCount(number: String, sender: KeypadViewController?) {
         btnRepeat.setTitle(number, for: .normal)
         // ToDo: should update the model, then load value from the model
-        btnSetRepeatCount.setBadge(text: number)
-        btnInventory.isEnabled = (number == "")
+        self.repeatCount = number
+        changeEnabledState(button: btnInventory, state: (number != ""), text: self.inventoryCount)
         btnSetRepeatCount.isEnabled = btnInventory.isEnabled
+        btnSetRepeatCount.setBadge(text: self.repeatCount)
     }
     
     // NB: this will hide the keyboard if it is the only panel showing
@@ -134,15 +148,16 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
             self.hideSubPanel()
         }
         else {
-            btnSetRepeatCount.isEnabled = true
-            btnInventory.isEnabled = true
+            changeEnabledState(button: btnInventory, state: true, text: self.inventoryCount)
+            changeEnabledState(button: btnSetRepeatCount, state: true, text: self.repeatCount)
         }
     }
     
-    //MARK: Inventory Management
-    func updateCount(number: Int) {
+    //MARK: InventoryCountDelegate
+    func updateInventoryCount(number: String) {
         // ToDo: should update the model, then load value from the model
-        btnInventory.setBadge(text: String(number))
+        self.inventoryCount = String(number)
+        btnInventory.setBadge(text: self.inventoryCount)
     }
     
     //MARK: SubPanel View Management
@@ -188,7 +203,8 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
     }
     
     private func showInventory() {
-        btnSetRepeatCount.isEnabled = showSubPanel(favored: .LeftTop)
+        // btnSetRepeatCount.isEnabled =
+        _ = showSubPanel(favored: .LeftTop)
 //        
 //        print("top-stack-view-frame: \(self.topStackView.frame.size)")
 //        for view in topStackView.arrangedSubviews {
@@ -203,13 +219,14 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
     
     private func showSubPanel(favored: SubPanelView.PanelEnum) -> Bool {
         _ = topStackView.showBoth(favored: .RightBottom)
-        return !subPanelStackView!.showBoth(favored: favored)
+        let result = !subPanelStackView!.showBoth(favored: favored)
+        return result
     }
     
     private func hideSubPanel() {
         topStackView.showLeftTopOnly()
-        btnInventory.isEnabled = true
-        btnSetRepeatCount.isEnabled = true
+        changeEnabledState(button: btnInventory, state: true, text: self.inventoryCount)
+        changeEnabledState(button: btnSetRepeatCount, state: true, text: self.repeatCount)
     }
     
     //MARK: Tool Bar Actions
@@ -232,7 +249,7 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
         }
     }
 
-    @IBAction func actTools(_ sender: Any) {
+    @IBAction func actTools(_ sender: UIBarButtonItem) {
         // select dungeon cell/character (point) size
         // select font family?
         // select dungeon cell background color and/or foreground color
@@ -241,6 +258,10 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
         // fight near death
         // find/run (tab/double-tap??)
         
+        self.menuDelegate?.toggleMenu()
+    }
+    
+    @IBAction func actHelp(_ sender: UIBarButtonItem) {
     }
     
     //MARK: Stats View
@@ -253,61 +274,6 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
             view.topAnchor.constraint(equalTo: stackView.topAnchor),
             view.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
         ])
-    }
-    
-    //MARK: Tool Menu
-    var leftViewController: UIViewController? {
-        willSet{
-            self.leftViewController?.view?.removeFromSuperview()
-            self.leftViewController?.removeFromParentViewController()
-//            if self.leftViewController != nil {
-//                if self.leftViewController!.view != nil {
-//                    self.leftViewController!.view!.removeFromSuperview()
-//                }
-//                self.leftViewController!.removeFromParentViewController()
-//            }
-        }
-        
-        didSet{
-            self.view!.addSubview(self.leftViewController!.view)
-            self.addChildViewController(self.leftViewController!)
-        }
-    }
-    
-    var rightViewController: UIViewController? {
-        willSet {
-            self.rightViewController?.view?.removeFromSuperview()
-            self.rightViewController?.removeFromParentViewController()
-//            if self.rightViewController != nil {
-//                if self.rightViewController!.view != nil {
-//                    self.rightViewController!.view!.removeFromSuperview()
-//                }
-//                self.rightViewController!.removeFromParentViewController()
-//            }
-        }
-        
-        didSet{            
-            self.view!.addSubview(self.rightViewController!.view)
-            self.addChildViewController(self.rightViewController!)
-        }
-    }
-    
-    var menuShown: Bool = false
-    
-    func showMenu() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.rightViewController!.view.frame = CGRect(x: self.view.frame.origin.x + 235, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
-        }, completion: { (Bool) -> Void in
-            self.menuShown = true
-        })
-    }
-    
-    func hideMenu() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.rightViewController!.view.frame = CGRect(x: 0, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
-        }, completion: { (Bool) -> Void in
-            self.menuShown = false
-        })
     }
     
     //MARK: NOT USED
@@ -341,5 +307,12 @@ class ViewController: UIViewController, KeypadViewControllerDelegate, InventoryC
 //        
 //        return (width, height)
 //    }
+    
+//    let button = UIButton(type: .system)
+//    button.setImage(UIImage(named: "AlarmIcon"), for: .normal)
+//    button.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+//    button.addTarget(self, action: #selector(BaseTabBarController.activityViewsBarButtonItemPressed(_:)), for: .touchUpInside)
+//
+//    return UIBarButtonItem(customView: button)
 }
 

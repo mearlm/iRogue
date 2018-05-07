@@ -25,7 +25,7 @@ public class Calculator {
         stack.removeAll()       // clean up previous use, if any
         try self.process(tokens)
         
-        return stack.flatMap({String(describing: $0)}).joined(separator: " ");
+        return stack.compactMap({String(describing: $0)}).joined(separator: " ");
     }
     
     private func process(_ tokens: [String]) throws {
@@ -202,7 +202,7 @@ public class Calculator {
     
     private func withArticle(for count: Int, name: String) -> String {
         if (1 == count) {
-            let prefix = String(name.lowercased().characters.prefix(1))
+            let prefix = String(name.lowercased().prefix(1))
             let vowels: Set<String> = ["a", "e", "i", "o", "u"]
             if (vowels.contains(prefix)) {
                 return "an \(name) "

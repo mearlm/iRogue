@@ -11,8 +11,8 @@ import UIKit
 class SubPanelViewController: UIViewController {
     @IBOutlet weak var subPanelStackView: SubPanelView!
     
-    weak var keyDelegate: KeypadViewControllerDelegate?
-    weak var invDelegate: InventoryControllerDelegate?
+    weak var keyDelegate: RepeatCountDelegate?
+    weak var invDelegate: InventoryCountDelegate?
     
     let MINWIDTH: (lt: CGFloat, rb: CGFloat) = (300.0, 118.0)
     let MINHEIGHT: (lt: CGFloat, rb: CGFloat)? = nil
@@ -25,7 +25,7 @@ class SubPanelViewController: UIViewController {
         print("SubPanelViewController did load")
     }
 
-    func setup(keyDelegate: KeypadViewControllerDelegate, invDelegate: InventoryControllerDelegate) {
+    func setup(keyDelegate: RepeatCountDelegate, invDelegate: InventoryCountDelegate) {
         self.keyDelegate = keyDelegate
         self.invDelegate = invDelegate
     }

@@ -40,13 +40,13 @@ extension UIFont {
             return UIFont.monospacedDigitSystemFont(ofSize: pointSize, weight: 0)
         #else
             if #available(iOS 9.0, *) {
-                return UIFont.monospacedDigitSystemFont(ofSize: pointSize, weight: 0)
+                return UIFont.monospacedDigitSystemFont(ofSize: pointSize, weight: UIFont.Weight(rawValue: 0))
             } else {
                 return UIFont(descriptor: fontDescriptor.addingAttributes([
-                    UIFontDescriptorFeatureSettingsAttribute: [
+                    UIFontDescriptor.AttributeName.featureSettings: [
                         [
-                            UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
-                            UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector,
+                            UIFontDescriptor.FeatureKey.featureIdentifier: kNumberSpacingType,
+                            UIFontDescriptor.FeatureKey.typeIdentifier: kMonospacedNumbersSelector,
                             ],
                     ],
                     ]), size: pointSize)
@@ -69,10 +69,10 @@ extension UIFont {
     func fontWithSmallCaps() -> UIFont? {
         #if os(iOS)
             return UIFont(descriptor: fontDescriptor.addingAttributes([
-                UIFontDescriptorFeatureSettingsAttribute: [
+                UIFontDescriptor.AttributeName.featureSettings: [
                     [
-                        UIFontFeatureTypeIdentifierKey: kLowerCaseType,
-                        UIFontFeatureSelectorIdentifierKey: kLowerCaseSmallCapsSelector,
+                        UIFontDescriptor.FeatureKey.featureIdentifier: kLowerCaseType,
+                        UIFontDescriptor.FeatureKey.typeIdentifier: kLowerCaseSmallCapsSelector,
                         ],
                 ],
                 ]), size: pointSize)

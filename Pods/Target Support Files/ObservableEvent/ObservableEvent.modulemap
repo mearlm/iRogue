@@ -1,0 +1,6 @@
+framework module ObservableEvent {
+  umbrella header "ObservableEvent-umbrella.h"
+
+  export *
+  module * { export * }
+}

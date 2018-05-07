@@ -33,11 +33,11 @@ public class Testing {
         let str = "The quick red fox jumped over the lazy dog."
         let str2 = "THE QUICK RED FOX JUMPED OVER THE LAZY DOG."
         
-        var size: CGSize = str.size(attributes: [NSFontAttributeName: font])
-        print("\(str): size: \(size); avg: \(size.width / CGFloat(str.characters.count))")
+        var size: CGSize = str.size(withAttributes: [NSAttributedStringKey.font: font])
+        print("\(str): size: \(size); avg: \(size.width / CGFloat(str.count))")
         
-        size = str2.size(attributes: [NSFontAttributeName: font])
-        print("\(str2): size: \(size); avg: \(size.width / CGFloat(str2.characters.count))")
+        size = str2.size(withAttributes: [NSAttributedStringKey.font: font])
+        print("\(str2): size: \(size); avg: \(size.width / CGFloat(str2.count))")
         
         var min: CGFloat = 0.0
         var minCharacter: String?
@@ -48,7 +48,7 @@ public class Testing {
         
         for ix in 32..<127 {
             let s = String(UnicodeScalar(UInt8(ix)))
-            let sz: CGSize = s.size(attributes: [NSFontAttributeName: font])
+            let sz: CGSize = s.size(withAttributes: [NSAttributedStringKey.font: font])
             if (min == 0.0 || min > sz.width) {
                 min = sz.width
                 minCharacter = s
@@ -234,7 +234,7 @@ public class Testing {
     
     // ToDo: String extensions??
     private func withArticle(_ forString: String) -> String {
-        let prefix = String(forString.lowercased().characters.prefix(1))
+        let prefix = String(forString.lowercased().prefix(1))
         let vowels: Set<String> = ["a", "e", "i", "o", "u"]
         if (vowels.contains(prefix)) {
             return "an " + forString + " "

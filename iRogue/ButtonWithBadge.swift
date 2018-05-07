@@ -38,20 +38,21 @@ extension UIBarButtonItem {
             return
         }
         
-        addBadge(text: text!, withOffset: offset, andColor: color, andFilled: filled)
+        addBadge(text: text!, withOffset: offset, andColor: (self.isEnabled) ? color : UIColor.gray, andFilled: filled, andFontSize: fontSize)
     }
     
-    private func addBadge(text: String, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor = UIColor.red, andFilled filled: Bool = true, andFontSize fontSize: CGFloat = 11)
+    private func addBadge(text: String, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor, andFilled filled: Bool, andFontSize fontSize: CGFloat)
     {
+        // ToDo: use of Apple private implementation (illegal for AppStore?)
         guard let view = self.value(forKey: "view") as? UIView else { return }
         
         var font = UIFont.systemFont(ofSize: fontSize)
         
         if #available(iOS 9.0, *) {
-            font = UIFont.monospacedDigitSystemFont(ofSize: fontSize, weight: UIFontWeightRegular)
+            font = UIFont.monospacedDigitSystemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
         }
         
-        let badgeSize = text.size(attributes: [NSFontAttributeName: font])
+        let badgeSize = text.size(withAttributes: [NSAttributedStringKey.font: font])
         
         // Initialize Badge
         let badge = CAShapeLayer()

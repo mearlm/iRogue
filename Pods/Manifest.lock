@@ -1,0 +1,16 @@
+PODS:
+  - ObservableEvent (2.0.0)
+
+DEPENDENCIES:
+  - ObservableEvent (~> 2.0.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - ObservableEvent
+
+SPEC CHECKSUMS:
+  ObservableEvent: b5645be95f5855bc1a3d00ff13bf3a953f4fc876
+
+PODFILE CHECKSUM: 6ac724747da2d49379f768dd653057d6aa6747c6
+
+COCOAPODS: 1.5.0
