@@ -21,6 +21,12 @@
 		BB1A63A1209FAB5E00254FBF /* DungeonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63A0209FAB5E00254FBF /* DungeonManager.swift */; };
 		BB1A63A3209FB17D00254FBF /* ToolsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63A2209FB17D00254FBF /* ToolsController.swift */; };
 		BB1A63A5209FB1E100254FBF /* ToolsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63A4209FB1E100254FBF /* ToolsManager.swift */; };
+		BB1A63A820A2A55600254FBF /* ChangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63A720A2A55600254FBF /* ChangeHandler.swift */; };
+		BB1A63AB20AA0A5000254FBF /* FontChangeEventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63AA20AA0A5000254FBF /* FontChangeEventEmitter.swift */; };
+		BB1A63AD20AA12C900254FBF /* ToolsMessageEventEmitterr.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63AC20AA12C900254FBF /* ToolsMessageEventEmitterr.swift */; };
+		BB1A63AF20AA14B700254FBF /* InventoryRowInSectionUpdateEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63AE20AA14B700254FBF /* InventoryRowInSectionUpdateEmitter.swift */; };
+		BB1A63B120AA15DB00254FBF /* InventorySectionUpdateEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63B020AA15DB00254FBF /* InventorySectionUpdateEmitter.swift */; };
+		BB1A63B320AA174900254FBF /* InventoryEnabledUpdateEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A63B220AA174900254FBF /* InventoryEnabledUpdateEmitter.swift */; };
 		BB1CEEA01F7D96F6001DD8A3 /* StatsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1CEE9F1F7D96F6001DD8A3 /* StatsLabel.swift */; };
 		BB3D29EB1F56764800E614EA /* ItemPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D29EA1F56764800E614EA /* ItemPrototype.swift */; };
 		BB3D29ED1F56765B00E614EA /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D29EC1F56765B00E614EA /* ItemType.swift */; };
@@ -87,6 +93,12 @@
 		BB1A63A0209FAB5E00254FBF /* DungeonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonManager.swift; sourceTree = "<group>"; };
 		BB1A63A2209FB17D00254FBF /* ToolsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsController.swift; sourceTree = "<group>"; };
 		BB1A63A4209FB1E100254FBF /* ToolsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsManager.swift; sourceTree = "<group>"; };
+		BB1A63A720A2A55600254FBF /* ChangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHandler.swift; sourceTree = "<group>"; };
+		BB1A63AA20AA0A5000254FBF /* FontChangeEventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontChangeEventEmitter.swift; sourceTree = "<group>"; };
+		BB1A63AC20AA12C900254FBF /* ToolsMessageEventEmitterr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsMessageEventEmitterr.swift; sourceTree = "<group>"; };
+		BB1A63AE20AA14B700254FBF /* InventoryRowInSectionUpdateEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryRowInSectionUpdateEmitter.swift; sourceTree = "<group>"; };
+		BB1A63B020AA15DB00254FBF /* InventorySectionUpdateEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventorySectionUpdateEmitter.swift; sourceTree = "<group>"; };
+		BB1A63B220AA174900254FBF /* InventoryEnabledUpdateEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryEnabledUpdateEmitter.swift; sourceTree = "<group>"; };
 		BB1CEE9F1F7D96F6001DD8A3 /* StatsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsLabel.swift; sourceTree = "<group>"; };
 		BB3D29EA1F56764800E614EA /* ItemPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPrototype.swift; sourceTree = "<group>"; };
 		BB3D29EC1F56765B00E614EA /* ItemType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
@@ -232,6 +244,18 @@
 			path = ToolsManagement;
 			sourceTree = "<group>";
 		};
+		BB1A63A920AA0A2C00254FBF /* EventEmitters */ = {
+			isa = PBXGroup;
+			children = (
+				BB1A63B020AA15DB00254FBF /* InventorySectionUpdateEmitter.swift */,
+				BB1A63AA20AA0A5000254FBF /* FontChangeEventEmitter.swift */,
+				BB1A63AC20AA12C900254FBF /* ToolsMessageEventEmitterr.swift */,
+				BB1A63AE20AA14B700254FBF /* InventoryRowInSectionUpdateEmitter.swift */,
+				BB1A63B220AA174900254FBF /* InventoryEnabledUpdateEmitter.swift */,
+			);
+			path = EventEmitters;
+			sourceTree = "<group>";
+		};
 		BB1CEE9E1F7D96D8001DD8A3 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,11 +267,13 @@
 		BB3D29E71F5510A800E614EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				BB1A63A920AA0A2C00254FBF /* EventEmitters */,
 				BBBABCB720962A8300FDD9A1 /* Protocols */,
 				BB3D29EA1F56764800E614EA /* ItemPrototype.swift */,
 				BB3D29EC1F56765B00E614EA /* ItemType.swift */,
 				BB1A32CD1F4FD0C00097343B /* GameUI.swift */,
 				BBBABCBA20962B7200FDD9A1 /* Location.swift */,
+				BB1A63A720A2A55600254FBF /* ChangeHandler.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -570,7 +596,11 @@
 			files = (
 				BB1A63A5209FB1E100254FBF /* ToolsManager.swift in Sources */,
 				BB1A32C91F4E83060097343B /* InventoryManager.swift in Sources */,
+				BB1A63A820A2A55600254FBF /* ChangeHandler.swift in Sources */,
+				BB1A63AF20AA14B700254FBF /* InventoryRowInSectionUpdateEmitter.swift in Sources */,
+				BB1A63B320AA174900254FBF /* InventoryEnabledUpdateEmitter.swift in Sources */,
 				BB3D29F51F6DE9FF00E614EA /* InventoryItemModel.swift in Sources */,
+				BB1A63AD20AA12C900254FBF /* ToolsMessageEventEmitterr.swift in Sources */,
 				BBFC3DC81F401AB700573D28 /* SubPanelViewController.swift in Sources */,
 				BB3D29F31F5BAF0200E614EA /* Calculator.swift in Sources */,
 				BB3D29ED1F56765B00E614EA /* ItemType.swift in Sources */,
@@ -581,6 +611,7 @@
 				BBBABCBE209F6DE300FDD9A1 /* DungeonController.swift in Sources */,
 				BB1CEEA01F7D96F6001DD8A3 /* StatsLabel.swift in Sources */,
 				BB9661EF1F7DC5C800ECE8C7 /* DiscoveriesViewController.swift in Sources */,
+				BB1A63B120AA15DB00254FBF /* InventorySectionUpdateEmitter.swift in Sources */,
 				BB3D29EB1F56764800E614EA /* ItemPrototype.swift in Sources */,
 				BBFC3DC21F3C123400573D28 /* KeypadViewController.swift in Sources */,
 				BBFC3DC01F2EAD9900573D28 /* DungeonCollectionViewLayout.swift in Sources */,
@@ -599,6 +630,7 @@
 				BB1A63A1209FAB5E00254FBF /* DungeonManager.swift in Sources */,
 				BB1A32C51F4A1DAE0097343B /* Junk.swift in Sources */,
 				BBFC3DC61F4000E100573D28 /* SubPanelView.swift in Sources */,
+				BB1A63AB20AA0A5000254FBF /* FontChangeEventEmitter.swift in Sources */,
 				BBFC3D661F26FA7E00573D28 /* AppDelegate.swift in Sources */,
 				BB9661F11F7DC5DF00ECE8C7 /* InstructionsViewController.swift in Sources */,
 				BB1A32CE1F4FD0C00097343B /* GameUI.swift in Sources */,
