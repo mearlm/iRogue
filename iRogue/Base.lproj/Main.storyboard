@@ -242,6 +242,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="1Nr-se-tUA"/>
+                                    <barButtonItem enabled="NO" title="Item" image="if_at-sign_2561335" id="BCN-Rv-8wv" userLabel="btnHero">
+                                        <connections>
+                                            <action selector="actHero:" destination="BYZ-38-t0r" id="HUs-1y-IYc"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="C1C-eE-yi6"/>
                                     <barButtonItem image="if_f0cb_213113_list" id="GDP-7v-RnP" userLabel="btnInventory">
                                         <connections>
                                             <action selector="toggleInventory:" destination="BYZ-38-t0r" id="yki-If-ran"/>
@@ -256,7 +262,6 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CUL-1z-AXS"/>
                                     <barButtonItem image="if_f128_213198_question" width="16" id="1DR-VN-LQh" userLabel="btnHelp">
                                         <connections>
-                                            <action selector="actHelp:" destination="BYZ-38-t0r" id="got-Bw-zzo"/>
                                             <segue destination="c7x-j2-upL" kind="show" id="NaJ-XA-7Ln"/>
                                         </connections>
                                     </barButtonItem>
@@ -287,6 +292,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnHero" destination="BCN-Rv-8wv" id="omD-PB-4Ys"/>
                         <outlet property="btnInventory" destination="GDP-7v-RnP" id="QmC-0s-Lk2"/>
                         <outlet property="btnRepeat" destination="du2-aJ-2up" id="rsB-C3-veJ"/>
                         <outlet property="btnSetRepeatCount" destination="cwk-pU-fq7" id="Te7-Md-HhE"/>
@@ -324,7 +330,7 @@
         <scene sceneID="Ne6-Wp-xPO">
             <objects>
                 <collectionViewController id="1Ni-CF-Zc7" userLabel="Dungeon View Controller" customClass="DungeonViewController" customModule="iRogue" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" id="ucf-br-W7s">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ucf-br-W7s">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="451"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -477,12 +483,80 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Discoveries" id="NCL-GX-dWK">
-                        <barButtonItem key="backBarButtonItem" title="Instructions" id="YDx-fm-PHI"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="7yl-IX-1qv">
+                            <connections>
+                                <segue destination="ZWt-KM-Ugy" kind="show" id="oBY-N0-RFh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="He8-rO-mI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1887" y="1567"/>
+        </scene>
+        <!--AppSettings-->
+        <scene sceneID="OTX-d3-7P9">
+            <objects>
+                <tableViewController title="AppSettings" id="ZWt-KM-Ugy" customClass="IASKAppSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PpX-dS-Jnp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsCell" id="yE5-IK-QlW">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yE5-IK-QlW" id="cDI-4m-Hrp">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZWt-KM-Ugy" id="B2a-Vd-jd2"/>
+                            <outlet property="delegate" destination="ZWt-KM-Ugy" id="AI8-dr-3Cd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="Qvg-6l-goQ">
+                        <barButtonItem key="rightBarButtonItem" title="Credits" id="QLm-PF-UtL">
+                            <connections>
+                                <segue destination="hxH-zY-hZy" kind="show" id="ytN-s7-kEV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GIw-iD-Rwd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2723" y="1567"/>
+        </scene>
+        <!--Credits-->
+        <scene sceneID="O5i-X4-N1P">
+            <objects>
+                <tableViewController title="Credits" id="hxH-zY-hZy" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IYE-lb-XyX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="creditsCell" id="x96-WO-fu4">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x96-WO-fu4" id="Klp-kj-NMY">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hxH-zY-hZy" id="skT-JW-yjQ"/>
+                            <outlet property="delegate" destination="hxH-zY-hZy" id="h3P-i0-x8A"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Credits" id="VhF-Cg-i3o"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ieG-Uf-DcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3546" y="1565"/>
         </scene>
         <!--Inventory View Controller-->
         <scene sceneID="WVd-Da-pDH">
@@ -722,6 +796,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="if_at-sign_2561335" width="32" height="32"/>
         <image name="if_backspace_326534" width="32" height="24"/>
         <image name="if_checkround-24_103183" width="32" height="32"/>
         <image name="if_f0cb_213113_list" width="27" height="32"/>

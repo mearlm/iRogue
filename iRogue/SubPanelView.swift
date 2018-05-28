@@ -74,7 +74,7 @@ class SubPanelView: UIStackView {
         UIView.animate(withDuration: 0.25, animations: { () -> Void in
             self.rightBottomView.isHidden = rbHidden
             self.leftTopView.isHidden = ltHidden
-            self.layoutIfNeeded()
+            // self.layoutIfNeeded()
         },
             completion: { [weak self] finished in
                 self?.layoutIfNeeded()

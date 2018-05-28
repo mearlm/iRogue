@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SampleData : InventoryDataService, InventoryCommandService, ToolsControllerService {
+class SampleData : InventoryDataService, InventoryCommandService, ToolsControllerService, DungeonDataService {
 //    let pattern = (type.name == SampleData.SCROLL.name)
 //        ? prefix + asPlural(of: alias.variant, count: count) + " titled '%@'"
 //        : prefix + "%@ " + asPlural(of: alias.variant, count: count)
@@ -172,11 +172,8 @@ class SampleData : InventoryDataService, InventoryCommandService, ToolsControlle
     private var inventory: [InventoryItem] = [];
     
     private weak var controller : InventoryService?
-    private weak var updateService: GameUpdateService?
     
-    public init(updateService : GameUpdateService) {
-        self.updateService = updateService
-        
+    public init() {
         // add required items
         getSampleFood()
 
@@ -206,11 +203,6 @@ class SampleData : InventoryDataService, InventoryCommandService, ToolsControlle
 
             getSampleItemsForSegment(of: type, probability: SampleData.random(15) + 20, items: items as! [(name: String, pattern: String)])
         }
-    }
-    
-    // MARK: DataService implementation
-    func getInventoryDataService() -> InventoryDataService? {
-        return self
     }
     
     //MARK: InventoryDataService Implementation
@@ -243,7 +235,7 @@ class SampleData : InventoryDataService, InventoryCommandService, ToolsControlle
         return nil
     }
     
-    //MARK: ToolsControllerService
+    //MARK: ToolsControllerService Implementation
     public func processCreateObjectCommand(action: UIAlertAction) {
         let typename = action.title?.lowercased()
         if (SampleData.FOOD.name == typename ) {
@@ -296,7 +288,7 @@ class SampleData : InventoryDataService, InventoryCommandService, ToolsControlle
                 }
                 break
             case SampleData.ACTION_NAME.WIELD:
-                if let result = controller!.findItemState(named: command, state: option) {
+                if let result = controller!.findItemWithState(named: command, state: option) {
                     _ = controller!.clrState(item: result.item, name: command)
                 }
                 return controller!.setState(item: item, name: command, state: option)
@@ -331,8 +323,7 @@ class SampleData : InventoryDataService, InventoryCommandService, ToolsControlle
     }
     
     private func messageBox(_ message: String) {
-        let eventArgs = ToolMessageArgs(message: message)
-        updateService?.sendUpdate(for: ServiceKey.ToolsService, args: eventArgs, sender: self)
+        ToolsMessageEventEmitter(message: message).notifyHandlers(self)
     }
     
     //MARK: private implementation
@@ -462,5 +453,55 @@ class SampleData : InventoryDataService, InventoryCommandService, ToolsControlle
     public static func random(_ limit: Int) -> Int {
         // encapsulate the foolishness...
         return Int(arc4random_uniform(UInt32(limit)))
+    }
+    
+    //MARK: DungeonDataService
+    public func getDungeonFont() -> UIFont {
+        let pointSize = CGFloat(25.0)
+        var cellFont = UIFont.init(name: "Menlo-Regular", size: pointSize)
+        if (nil == cellFont) {
+            cellFont = UIFont.init(name: "Courier", size: pointSize)
+        }
+        guard let font = cellFont else {
+            fatalError("Monospaced font not installed!")
+        }
+        return font.fontWithBold()
+    }
+    
+    private static let MAX_ROWS = 24
+    private static let MAX_COLS = 80
+    
+    public func getDungeonSize() -> (rows: Int, cols: Int) {
+        return (SampleData.MAX_ROWS, SampleData.MAX_COLS)
+    }
+
+    private var heroPosition = (col: SampleData.MAX_COLS / 2, row: SampleData.MAX_ROWS / 2)
+    public func getHeroPosition() -> (col: Int, row: Int) {
+        return heroPosition
+    }
+    
+    public func setHeroPositon(col: Int, row: Int) {
+        heroPosition = (col, row)
+    }
+    
+    private static let centerDot: Character = "." // "\u{00B7}"
+    private static let passage: Character = "#"
+    private static let topBottomWall: Character = "-"
+    private static let leftRightWall: Character = "|"
+    private static let heroSymbol: Character = "@"
+    
+    public func getCharacterAt(row: Int, col: Int) -> String {
+        // fake up the dungeon
+        if (row == heroPosition.row && col == heroPosition.col) {
+            return String(SampleData.heroSymbol)
+        }
+        if ((row - 6) % 9 == 0 && Int(col / 10) % 2 == 0) {
+            return String(SampleData.topBottomWall)
+        }
+        if (col % 9 == 0 && Int((row + 4) / 10) % 2 == 1) {
+            return String(SampleData.leftRightWall)
+        }
+        return String(SampleData.centerDot);
+        // end fake up
     }
 }

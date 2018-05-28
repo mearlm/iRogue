@@ -8,39 +8,15 @@
 
 import UIKit
 
-// shared: UI <-> back-end
-//public protocol InventoryViewControllerDelegate: class {
-//    func updateRowInSection(for tag: String, row: Int)
-//    func updateSection(for tag: String, preexisting: Bool)
-//    func setEnabled(for tag: String, state: Bool)
-//}
-//
-public struct UpdateRowInSectionArgs : GameEventArgs {
-    public let tag: String
-    public let row: Int
-}
-
-public struct UpdateSectionArgs : GameEventArgs {
-    public let tag: String
-    public let preexisting: Bool
-}
-
-public struct SetEnabledArgs : GameEventArgs {
-    public let tag: String
-    public let state: Bool
-}
-
-public struct SetInventoryArgs : GameEventArgs {
-    public let items: [String : [String]]
-}
-
-public protocol InventoryControllerService: class {
+// support for InventoryViewController call-forward interfaces (see InventoryManager)
+public protocol InventoryControllerService: AnyObject {
     func getTotalItemCount() -> Int
     func getItemRowCount(for tag: String, offset: Int) -> Int
     func hasItems(for tag: String) -> Bool
     func getItemLabel(for tag: String, offset: Int, row: Int) -> (id: String, label: String)?
     func getItemTypeCount() -> Int
-    func getItemTypesNames() -> [String]?                   // ordered!
+    func getItemTypesNames() -> [String]                    // ordered
+    func getItemTypeTags() -> [String]                      // ordered
     func getItemTypeName(for tag: String, offset: Int) -> String?
     func findSection(for tag: String) -> Int?
     func getActions(for tag: String, offset: Int, row: Int) -> [(String, [String]?)]?
@@ -48,18 +24,26 @@ public protocol InventoryControllerService: class {
     func doAction(for tag: String, offset: Int, row: Int, command: String, option: String?)
 }
 
-// ToDo: back-end only!
-public protocol InventoryDataService : class {
+// support for user specified inventory-related actions (see SampleData)
+public protocol InventoryCommandService : AnyObject {
+    // send inventory-related commands into the game
+    func inventoryAction(item: InventoryItem, command: String, option: String?) -> Bool
+}
+
+// ToDo: back-end only! (see SampleData)
+public protocol InventoryDataService : AnyObject {
     func getPackItems() -> [InventoryItem]
-    func getItemTypes() -> [InventoryItemType]              // ordered!
+    func getItemTypes() -> [InventoryItemType]              // ordered
     func getAction(for: String) -> InventoryItemAction?
     
     func processCreateObjectCommand(action: UIAlertAction)
 
+    // ToDo: should this use callback events?
     func registerController(controller: InventoryService)   // make as weak reference
 }
 
-public protocol InventoryService: class {
+// support for model-based inventory updates (see InventoryManager)
+public protocol InventoryService: AnyObject {
     func add(item: InventoryItem) -> Bool
     func remove(item: InventoryItem) -> Bool
 
@@ -68,7 +52,5 @@ public protocol InventoryService: class {
 
     func setState(item: InventoryItem, name: String, state: String?) -> Bool
     func clrState(item: InventoryItem, name: String) -> Bool
-    func findItemState(named: String, state: String?) -> (item: InventoryItem, action: InventoryItemAction)?
-    
-//    func messageBox(_ message: String)
+    func findItemWithState(named: String, state: String?) -> (item: InventoryItem, action: InventoryItemAction)?
 }

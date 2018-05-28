@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol RepeatCountDelegate: class {
-    func updateRepeatCount(number: String, sender: KeypadViewController?)
-    func updateComplete(sender: KeypadViewController?)
-}
-
 class KeypadViewController : UIViewController {
     //MARK: Properties
     let MAXLENGTH = 2   // numbers from 1 to 99
@@ -33,8 +28,6 @@ class KeypadViewController : UIViewController {
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnEnter: UIButton!
-    
-    weak var delegate: RepeatCountDelegate?
     
     private var number: String = ""
 
@@ -74,7 +67,7 @@ class KeypadViewController : UIViewController {
             break
         case ENTER:
             // enter: dismiss keyboard
-            delegate?.updateComplete(sender: self)
+            RepeatCountUpdateEmitter(count: self.number, complete: true).notifyHandlers(self)
             number = ""
         default:
             // 0-9: append
@@ -84,7 +77,7 @@ class KeypadViewController : UIViewController {
         setState()
 
         if (ENTER != value) {
-            delegate?.updateRepeatCount(number: self.number, sender: self)
+            RepeatCountUpdateEmitter(count: self.number, complete: false).notifyHandlers(self)
         }
     }
 }

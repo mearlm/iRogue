@@ -10,11 +10,7 @@ import Foundation
 import UIKit
 
 // shared: UI <-> back-end
-public struct ToolMessageArgs : GameEventArgs {
-    public let message: String
-}
-
-public protocol ToolsControllerService: class {
+public protocol ToolsControllerService: AnyObject {
     func getItemTypesNames() -> [String]                   // ordered!
     func processCreateObjectCommand(action: UIAlertAction)
 }

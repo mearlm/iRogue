@@ -11,9 +11,6 @@ import UIKit
 class SubPanelViewController: UIViewController {
     @IBOutlet weak var subPanelStackView: SubPanelView!
     
-    weak var keyDelegate: RepeatCountDelegate?
-    weak var invDelegate: InventoryCountDelegate?
-    
     let MINWIDTH: (lt: CGFloat, rb: CGFloat) = (300.0, 118.0)
     let MINHEIGHT: (lt: CGFloat, rb: CGFloat)? = nil
     
@@ -25,20 +22,7 @@ class SubPanelViewController: UIViewController {
         print("SubPanelViewController did load")
     }
 
-    func setup(keyDelegate: RepeatCountDelegate, invDelegate: InventoryCountDelegate) {
-        self.keyDelegate = keyDelegate
-        self.invDelegate = invDelegate
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("subpanel segue to: \(String(describing: segue.identifier))")
-        if (segue.identifier == "keyboardSegue") {
-            let vc = segue.destination as! KeypadViewController
-            vc.delegate = keyDelegate!
-        }
-        if (segue.identifier == "inventorySegue") {
-            let vc = segue.destination as! InventoryViewController
-            vc.delegate = invDelegate!
-        }
     }
 }

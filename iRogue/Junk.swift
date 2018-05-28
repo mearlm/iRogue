@@ -294,3 +294,29 @@ public class Testing {
 //    ]
     
 }
+
+//MARK: other interesting stuff
+
+//class Dice {
+//    let sides: Int
+//    let generator: RandomNumberGenerator
+//    init(sides: Int, generator: RandomNumberGenerator) {
+//        self.sides = sides
+//        self.generator = generator
+//    }
+//    func roll() -> Int {
+//        return Int(generator.random() * Double(sides)) + 1
+//    }
+//}
+// var d6 = Dice(sides: 6, generator: LinearCongruentialGenerator())
+
+
+// source:  https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html
+//
+//protocol Container {
+//    associatedtype Item
+//    mutating func append(_ item: Item)
+//    var count: Int { get }
+//    subscript(i: Int) -> Item { get }
+//}
+

@@ -10,24 +10,53 @@ import Foundation
 import UIKit
 
 public class DungeonManager : DungeonControllerService {
-    private weak var updateService: GameUpdateService?
-    
-    public init(updateService: GameUpdateService) {
-        self.updateService = updateService
-        
-        let args = FontUpdateArgs(font: getFont())
-        self.updateService?.sendUpdate(for: ServiceKey.DungeonService, args: args, sender: self)
+    private weak var options: OptionsDataService?
+    private weak var data: DungeonDataService?
+
+    public init(data: DungeonDataService, options: OptionsDataService) {
+        self.data = data
+        self.options = options
     }
     
-    private func getFont() -> UIFont {
-        let pointSize = CGFloat(25.0)
-        var cellFont = UIFont.init(name: "Menlo-Regular", size: pointSize)
-        if (nil == cellFont) {
-            cellFont = UIFont.init(name: "Courier", size: pointSize)
-        }
-        guard let font = cellFont else {
-            fatalError("Monospaced font not installed!")
-        }
-        return font.fontWithBold()
+    public func getFont() -> UIFont {
+        return options!.getDungeonFont() ?? data!.getDungeonFont()
+    }
+    
+    public func getDungeonSize() -> (rows: Int, cols: Int) {
+        return data!.getDungeonSize()
+    }
+    
+    public func getCharacterForCell(at indexPath: IndexPath) -> String {
+        return data!.getCharacterAt(row: indexPath.section, col: indexPath.row)
+    }
+    
+    public func getHeroLocation() -> IndexPath {
+        let heroPosition = data!.getHeroPosition()
+        print("hero @: \(heroPosition.col), \(heroPosition.row)")       // consistent with IndexPath ordering
+        return IndexPath(item: heroPosition.col, section: heroPosition.row)
+    }
+    
+    private func toIndexPath(_ col: Int, _ row: Int) -> IndexPath {
+        return IndexPath(item: col, section: row)
+    }
+    
+    public func teleportHero() {
+        let dungeonSize = getDungeonSize()
+        let oldLocation = data!.getHeroPosition()
+        let newLocation = (col: SampleData.random(dungeonSize.cols), row: SampleData.random(dungeonSize.rows))
+        data!.setHeroPositon(col: newLocation.col, row: newLocation.row)
+        DungeonReloadEventEmitter(indexPaths: [toIndexPath(oldLocation.col, oldLocation.row), toIndexPath(newLocation.col, newLocation.row)]).notifyHandlers(self)
+    }
+    
+    public func handleSingleTap(_ selectedIndexPath: IndexPath) {
+        print("Single Tap at \(String(describing: selectedIndexPath))!")
+    }
+    
+    public func handleDoubleTap(_ selectedIndexPath: IndexPath) {
+        print("Double Tap at \(String(describing: selectedIndexPath))!")
+    }
+    
+    public func handleLongPress(_ selectedIndexPath: IndexPath) {
+        print("Long Press at \(String(describing: selectedIndexPath))!")
     }
 }

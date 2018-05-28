@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'iRogue' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -7,6 +7,7 @@ target 'iRogue' do
 
   # Pods for iRogue
   pod 'ObservableEvent', '~> 2.0.0'
+  pod 'InAppSettingsKit'  
 
   target 'iRogueTests' do
     inherit! :search_paths
@@ -17,5 +18,5 @@ target 'iRogue' do
     inherit! :search_paths
     # Pods for testing
   end
-
+  
 end

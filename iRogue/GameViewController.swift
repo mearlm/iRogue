@@ -10,22 +10,26 @@ import Foundation
 import UIKit
 
 // ToDo: move InventoryControllerDelegate to separate class
-class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountDelegate {
+class GameViewController: UIViewController {
     
     //MARK: Properties
     @IBOutlet weak var txtMessageOrCommand: UITextField!
     @IBOutlet weak var btnRepeat: UIButton!
     @IBOutlet weak var btnSetRepeatCount: UIBarButtonItem!
     @IBOutlet weak var btnInventory: UIBarButtonItem!
+    @IBOutlet weak var btnHero: UIBarButtonItem!
     @IBOutlet weak var btnTools: UIBarButtonItem!
     @IBOutlet weak var topStackView: SubPanelView!
-    @IBOutlet var subPanelHeight: NSLayoutConstraint!  // height constraint for SubPanelStackView
+    @IBOutlet weak var subPanelHeight: NSLayoutConstraint!  // height constraint for SubPanelStackView
     @IBOutlet weak var statsStackView: UIStackView!
     @IBOutlet weak var toolBar: UIToolbar!
     
+    private weak var dungeonViewController: DungeonViewController?
     private weak var subPanelStackView: SubPanelView?
     private var stackFrameHeight: CGFloat?
     weak var menuDelegate: MainMenuDelegate?
+    
+    private var handlers = [ChangeEventHandler]()
     
     private var repeatCount = ""
     private var inventoryCount = ""
@@ -50,6 +54,18 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        handlers.append(EventHandler<InventoryCountUpdateEmitter>(onChange: {[unowned self] (_ args: InventoryCountUpdateEmitter,_ sender: Any?) in
+            self.updateInventoryCount(number: String(args.count))
+        }))
+        handlers.append(EventHandler<RepeatCountUpdateEmitter>(onChange: {[unowned self] (_ args: RepeatCountUpdateEmitter,_ sender: Any?) in
+            if (args.complete) {
+                self.updateComplete()
+            }
+            else {
+                self.updateRepeatCount(number: args.count)
+            }
+        }))
+
         guard let subPanelViewController = childViewControllers.last as? SubPanelViewController else {
             fatalError("Check storyboard for missing SubPanelViewController")
         }        
@@ -61,13 +77,16 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
         self.hideSubPanel()     // ToDo: determine if subpanel should hide or not based on screen size
                                 // Also, if not hidden, ensure that inventory/keyboard tools are disabled
         
-        // BUG: if dungeon collection is scrolled and subpanel is shown, then dungeon cells move
-        // and row 0 shifts to within the grid (while some other row vanishes)
-        
         self.pinBackground(statsBackgroundView, to: statsStackView)
         
-        self.updateRepeatCount(number: "1", sender: nil)
-        self.updateComplete(sender: nil)
+        self.updateRepeatCount(number: "1")
+        self.updateComplete()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        guard let inventoryManager = appDelegate.game?.getInventoryManager() else {
+            fatalError("Inventory Manager Service Unavailable.")
+        }
+        self.updateInventoryCount(number: String(inventoryManager.getTotalItemCount()))
         
         print("ViewController did load")
     }
@@ -79,8 +98,9 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
     
     override func viewDidLayoutSubviews() {
         // fix the missing badges
-        updateRepeatCount(number: self.repeatCount, sender: nil)
+        updateRepeatCount(number: self.repeatCount)
         updateInventoryCount(number: self.inventoryCount)
+        btnHero.isEnabled = true
     }
     
     // inhibit screen rotation when subpanel (inventory or keyboard) is showing
@@ -101,22 +121,23 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("main segue to: \(String(describing: segue.identifier))")
         if (segue.identifier == "dungeonSegue") {
-            let vc = segue.destination as! DungeonViewController
-            let view = vc.collectionView!
+            self.dungeonViewController = (segue.destination as! DungeonViewController)
             
-            let layout = DungeonCollectionViewLayout(hasRowHeaders: false, hasColHeaders: false)
-            view.setCollectionViewLayout(layout, animated: false)
-
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            guard let _ : DungeonControllerService = appDelegate.getProtocolHandler(for: ServiceKey.DungeonService, delegate: layout) else {
-                fatalError("Check storyboard for missing SubPanelViewController")
+            guard let dungeonManager = appDelegate.game!.getDungeonManager() else {
+                fatalError("Dungeon Manager Service Unavailable.")
             }
+            self.dungeonViewController!.setDungeonManager(dungeonManager)
+
+            let view = self.dungeonViewController!.collectionView!
+
+            // NB: the view controller's collectionViewLayout property is NOT updated
+            let layout = DungeonCollectionViewLayout(font: self.dungeonViewController!.cellFont!, hasRowHeaders: false, hasColHeaders: false)
+            view.setCollectionViewLayout(layout, animated: false)
+            
+            print(String(describing: self.dungeonViewController!.collectionViewLayout))
             
             view.reloadData()
-        }
-        else if (segue.identifier == "subPanelSegue") {
-            let vc = segue.destination as! SubPanelViewController
-            vc.setup(keyDelegate: self, invDelegate: self)
         }
     }
     
@@ -131,8 +152,8 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
         }
     }
 
-    //MARK: RepeatCountDelegate
-    func updateRepeatCount(number: String, sender: KeypadViewController?) {
+    //MARK: RepeatCountUpdateEmitter
+    func updateRepeatCount(number: String) {
         btnRepeat.setTitle(number, for: .normal)
         // ToDo: should update the model, then load value from the model
         self.repeatCount = number
@@ -143,7 +164,7 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
     
     // NB: this will hide the keyboard if it is the only panel showing
     // but not if both it and the inventory panel are displayed
-    func updateComplete(sender: KeypadViewController?) {
+    func updateComplete() {
         if (isShowSubPanel(forSide: .RightBottom) && !isShowSubPanel(forSide: .LeftTop)) {
             self.hideSubPanel()
         }
@@ -153,10 +174,9 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
         }
     }
     
-    //MARK: InventoryCountDelegate
+    //MARK: InventoryCountUpdateEmitter
     func updateInventoryCount(number: String) {
-        // ToDo: should update the model, then load value from the model
-        self.inventoryCount = String(number)
+        self.inventoryCount = number
         btnInventory.setBadge(text: self.inventoryCount)
     }
     
@@ -262,6 +282,8 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
     }
     
     @IBAction func actHelp(_ sender: UIBarButtonItem) {
+        // ToDo: implement help
+        self.dungeonViewController?.teleportHero()
     }
     
     //MARK: Stats View
@@ -274,6 +296,10 @@ class GameViewController: UIViewController, RepeatCountDelegate, InventoryCountD
             view.topAnchor.constraint(equalTo: stackView.topAnchor),
             view.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
         ])
+    }
+    
+    @IBAction func actHero(_ sender: Any) {
+        self.dungeonViewController?.centerHero()
     }
     
     //MARK: NOT USED

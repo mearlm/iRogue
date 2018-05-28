@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>Title</key>
+	<string>Basic Settings</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Version - iRogue 0.1</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Rogue Version</string>
+			<key>Key</key>
+			<string>version_preference</string>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>Titles</key>
+			<array>
+				<string>SampleData</string>
+				<string>5.4.4</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>SampleData</string>
+				<string>5.4.4</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>User Info</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>User ID</string>
+			<key>Key</key>
+			<string>user_name</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Dungeon</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Font</string>
+			<key>Key</key>
+			<string>font_preference</string>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>Titles</key>
+			<array>
+				<string>Menlo</string>
+				<string>Courier</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>Menlo</string>
+				<string>Courier</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>font_size_preference</string>
+			<key>DefaultValue</key>
+			<integer>2</integer>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<integer>4</integer>
+			<key>MinimumValueImage</key>
+			<string>if_ic_format_size_48px_352393.png</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Advanced Settings</string>
+			<key>File</key>
+			<string>AdvancedSettings</string>
+			<key>Key</key>
+			<string>advanced_settings_preference_key</string>
+		</dict>
+	</array>
+</dict>
+</plist>

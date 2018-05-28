@@ -9,25 +9,45 @@
 import Foundation
 import UIKit
 
-class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, GameEventHandler {
+class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var viewMainMenu: UITableView!
     fileprivate let cellIdentifier = "mainMenuCell"
     
     typealias Func = (UIAlertAction) -> Void
     
+    // ToDo: get commands from GameEngine/model?
     private let COMMANDS = [
-        "create object"
+        "create object",
+        "teleport"
     ]
     
     // ToDo: refactor to use command interface of InventoryControllerService
     private weak var toolsService: ToolsControllerService?
+    private weak var dungeonService: DungeonControllerService?
+    
+    private var handlers = [ChangeEventHandler]()
 
-    //MARK: UIViewController lifecycle    
+    //MARK: UIViewController lifecycle
+    // ToDo: convert to a slide-OVER menu; disable all? other game controls when open
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // register callbacks for message-event handlers (observers)
+        handlers.append(EventHandler<ToolsMessageEventEmitter>(onChange: {(_ args: ToolsMessageEventEmitter,_ sender: Any?) in
+            let alertController = UIAlertController(title: "Message", message: args.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }))
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        toolsService = appDelegate.getProtocolHandler(for: ServiceKey.ToolsService, delegate: self)
+        guard let toolsService = appDelegate.game?.getToolsManager() else {
+            fatalError("Tools Service Unavailable.")
+        }
+        self.toolsService = toolsService
+        guard let dungeonService = appDelegate.game?.getDungeonManager() else {
+            fatalError("Dungeon Service Unavailable.")
+        }
+        self.dungeonService = dungeonService
         
 //        viewMainMenu.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
 //        viewMainMenu.delegate = self
@@ -47,14 +67,16 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let selectedCell = tableView.cellForRow(at: indexPath) {
             switch selectedCell.textLabel!.text!.lowercased() {
             case COMMANDS[0]:
-                if let types = toolsService?.getItemTypesNames() {
-                    chooseCommand(commands: types,
-                                  selectedCell: selectedCell,
-                                  processor: (self.toolsService?.processCreateObjectCommand(action:))!)
-                }
+                let types = self.toolsService!.getItemTypesNames()
+                chooseCommand(commands: types,
+                              selectedCell: selectedCell,
+                              processor: (self.toolsService!.processCreateObjectCommand(action:)))
                 break;
+            case COMMANDS[1]:
+                dungeonService!.teleportHero()
+                break
             default:
-                break;
+                break
             }
         }
     }
@@ -72,15 +94,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.textLabel!.text = COMMANDS[indexPath.row].capitalized
         return cell
-    }
-    
-    // MARK: GameEventHandler
-    func update(sender: Any?, eventArgs: GameEventArgs) {
-        if let args = eventArgs as? ToolMessageArgs {
-            let alertController = UIAlertController(title: "Message", message: args.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-        }
     }
 
     // private implementation

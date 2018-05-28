@@ -10,22 +10,35 @@ import UIKit
 
 // from: MultiDirectionViewLayout (https://github.com/kwandrews7/MultiDirectionCollectionView/tree/adding-sticky-headers)
 // with additional concepts from: GridLayout (https://gist.github.com/smswz/393b2d6237b7837234015805c600ada2)
-class DungeonCollectionViewLayout: UICollectionViewLayout, GameEventHandler {
+class DungeonCollectionViewLayout: UICollectionViewLayout {
     private var cellAttributes : CellAttributes
     
     private let hasRowHeaders: Bool     // enable or disable sticky headings
     private let hasColHeaders: Bool
     
-    init(hasRowHeaders: Bool, hasColHeaders: Bool) {
-        self.cellAttributes = CellAttributes(font: UIFont(name: "Courier", size: 25)!.fontWithBold())
+    private var handlers = [ChangeEventHandler]()
+    
+    init(font: UIFont, hasRowHeaders: Bool, hasColHeaders: Bool) {
+        self.cellAttributes = CellAttributes(font: font)
         self.hasRowHeaders = hasRowHeaders
         self.hasColHeaders = hasColHeaders
-
+        
         super.init()
+        
+        // register callbacks for dungeon-event handlers (observers)
+        self.handlers.append(EventHandler<FontChangeEventEmitter>(onChange: {(_ args: FontChangeEventEmitter,_ sender: Any?) in
+            self.cellAttributes = CellAttributes(font: args.font)
+            self.dataSourceDidUpdate = true
+            self.invalidateLayout()
+        }))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func getCellSize() -> (width: CGFloat, height: CGFloat) {
+        return (cellAttributes.cellWidth, cellAttributes.cellHeight)
     }
     
     // performance cache
@@ -44,18 +57,9 @@ class DungeonCollectionViewLayout: UICollectionViewLayout, GameEventHandler {
     override var collectionViewContentSize: CGSize {
         return self.contentSize
     }
-    
-    // GameEventHandler
-    public func update(sender: Any?, eventArgs args: GameEventArgs) {
-        if let eventArgs = args as? FontUpdateArgs {
-            self.cellAttributes = CellAttributes(font: eventArgs.font)
-            dataSourceDidUpdate = true
-            self.invalidateLayout()
-        }
-    }
-    
+
     override func prepare() {
-        print("DungeonCollectionViewLayout.prepare: \(self.dataSourceDidUpdate)")
+        // print("DungeonCollectionViewLayout.prepare: \(self.dataSourceDidUpdate)")
         if (!self.dataSourceDidUpdate) {
             // stick first row (column headers) and/or first column (row headers)
             // by adjusting their cell frame's origin x and/or y to match the contentOffset's
@@ -63,7 +67,7 @@ class DungeonCollectionViewLayout: UICollectionViewLayout, GameEventHandler {
             // Determine current content offsets.
             let xOffset = collectionView!.contentOffset.x
             let yOffset = collectionView!.contentOffset.y
-            print("Origin: xoffset=\(xOffset), yoffset=\(yOffset)")
+            // print("Origin: xoffset=\(xOffset), yoffset=\(yOffset)")
             
             guard(xOffset >= 0 && yOffset >= 0) else {
                 return
@@ -161,7 +165,7 @@ class DungeonCollectionViewLayout: UICollectionViewLayout, GameEventHandler {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        print("rect: \(rect)")
+        // print("rect: \(rect)")
         return itemAttributesCache.values.filter { $0.frame.intersects(rect) }
     }
     
@@ -255,18 +259,24 @@ class DungeonCollectionViewLayout: UICollectionViewLayout, GameEventHandler {
 //            }
 //        }
 //    }
-}
+//    
+//    private func fontChangeHandler(_ args: FontChangeEventEmitter, _ sender: Any?) {
+//        self.cellAttributes = CellAttributes(font: args.font)
+//        self.dataSourceDidUpdate = true
+//        self.invalidateLayout()
+//    }
 
-private class CellAttributes {
-    public let cellFont : UIFont
-    public let cellWidth : CGFloat
-    public let cellHeight : CGFloat
-    
-    init(font: UIFont) {
-        self.cellFont = font
+    private class CellAttributes {
+        public let cellFont : UIFont
+        public let cellWidth : CGFloat
+        public let cellHeight : CGFloat
         
-        let leading = (self.cellFont.leading == 0.0) ? (self.cellFont.lineHeight - self.cellFont.pointSize) : self.cellFont.leading
-        self.cellWidth = String(UnicodeScalar(UInt8(32))).size(withAttributes: [NSAttributedStringKey.font: self.cellFont]).width + leading
-        self.cellHeight = self.cellFont.lineHeight
+        init(font: UIFont) {
+            self.cellFont = font
+            
+            let leading = (self.cellFont.leading == 0.0) ? (self.cellFont.lineHeight - self.cellFont.pointSize) : self.cellFont.leading
+            self.cellWidth = String(UnicodeScalar(UInt8(32))).size(withAttributes: [NSAttributedStringKey.font: self.cellFont]).width + leading
+            self.cellHeight = self.cellFont.lineHeight
+        }
     }
 }

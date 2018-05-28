@@ -8,27 +8,97 @@
 
 /* Begin PBXBuildFile section */
 		0946695126D61448A6005A3DAF2FA096 /* Pods-iRogueTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FACBAB227AB7D6C0962FB34CABFAD02 /* Pods-iRogueTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C45F782A6E293609D95C7DC22F00CBA /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 29226CDDB65162A47101EEC662E64329 /* de.lproj */; };
+		1640FC74A0ACE1D703B9A7738860A064 /* InAppSettingsKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D930D21F674905DA748A4901F03CF7C /* InAppSettingsKit-dummy.m */; };
+		16F437159F45F56E5CE4B9911233EBEB /* IASKTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E255D9EA18096317DCB0380522F7F3D /* IASKTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		19114041CF8ECD43256DCC3C6147C7E6 /* uk.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 220BD3FAC8DE0F3CABE3D20E94769BF0 /* uk.lproj */; };
+		196F3D13D4D043AAE6283E01BA979302 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7DC5A0DFA6D78F9F38FE5BA0047670DB /* it.lproj */; };
+		1CB81AD37AB2E792F45CAE99851F8177 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F72253D2A3FDB09139D36003455A320F /* fr.lproj */; };
+		2367272FB729F671F3842C6FA7C390ED /* IASKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECA8912B5ED560E00FC05A9E700FE44 /* IASKTextView.m */; };
+		23FEB16522F93813A30DEE2C3EC45612 /* th.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7A60AAB38C1BFAF2C2FC8159713A0BD1 /* th.lproj */; };
+		24337B11FE4ED1EB684AA97F860C6F12 /* IASKSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D54747CC2730E91740C0A9F56D60652 /* IASKSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27FA7FA4E8677A01DEF6DFDF4E2B898D /* zh-Hant.lproj in Resources */ = {isa = PBXBuildFile; fileRef = DB723D50EB8C79FCB40373C31111780C /* zh-Hant.lproj */; };
+		29A2F94D69005A5C6318956163E41233 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 17C68AB14B683FC9B947D0C4938E5BE7 /* es.lproj */; };
+		2D7D03048DBFF4379F7D011925B2FEF4 /* IASKTextViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D3B12CF59B70B0A1A52D78CD3DA3FFA /* IASKTextViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35D22778E56A71B58A6394380F2401CE /* Pods-iRogueTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC778892309307D2DE48850436B912C /* Pods-iRogueTests-dummy.m */; };
-		6CC4FDA7C35B4A512964FAEABEFD510C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		6EA45FD2F2122F9852E4F9912399B978 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E6E91D9E261DC5BFBCE3D5927A54DE /* DisposeBag.swift */; };
-		79472D092AF3B797F87DF8C1A465C1A9 /* Pods-iRogue-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9711661D6B44F62DD62DB6970E83AEA3 /* Pods-iRogue-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E4B6E656D03C947703B707BF7644EEC /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89B1A5F9EA44263AAECE7C08623587 /* Disposable.swift */; };
+		381A429E9CC6979A1CDF662742C62475 /* IASKMultipleValueSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 54483E68622E206271A409169F166B01 /* IASKMultipleValueSelection.m */; };
+		397B98BBE6D9E009655859FD587B8D72 /* nb.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2AC8B4CD9C92DEEED791A3683324E705 /* nb.lproj */; };
+		3D7EE39703B8EE5FA931D9B200724AC2 /* pt-PT.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 3C2BC9F09CA6D4E493EC180763A06492 /* pt-PT.lproj */; };
+		419CAA9405DD3DE29BD3278A9B54DB99 /* IASKViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CFF434D9D11F29F0DC92890BFAE0754 /* IASKViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42FE84DA02ED5089A5126BEF584B4CB1 /* IASKTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B493E77D4E6C2FDC3AACC72EC34EB11F /* IASKTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		538E3D762166B71A00202E68057991DA /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C9DCD25B38752BED702FC5718C6029 /* IASKAppSettingsWebViewController.m */; };
+		551267314E4B8236E9166BB48BE68B36 /* IASKPSSliderSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B390DA032EBE562DF877ACC2CB13D432 /* IASKPSSliderSpecifierViewCell.m */; };
+		560DB175B5ACCB1A2C0AFCDF7AF0734E /* pt.lproj in Resources */ = {isa = PBXBuildFile; fileRef = E16C1CE94CA609F8C085CB62DA28B561 /* pt.lproj */; };
+		57CF04BAB33DBF7DF186F0CDAA9F7B48 /* sv.lproj in Resources */ = {isa = PBXBuildFile; fileRef = A21376222FF4119D56C671CBFA54FC22 /* sv.lproj */; };
+		6230B53DE2EB89B37528BA994B7ADE39 /* es-MX.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CD2DBBFCBD468427E7D608E97B30D966 /* es-MX.lproj */; };
+		6315ADF2F7932752D872413E2C38603D /* IASKSettingsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DF12298542AA553A4F5FA734A3FAA0 /* IASKSettingsStore.m */; };
+		661D7B9E41755FE4FB983FE783A7F881 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */; };
+		6622595A38D22163D16FB5015136080D /* InAppSettingsKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B96D921A48D031B4951EDF087AC69A99 /* InAppSettingsKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66CC8DB497CFF35475C0BD0A0C6268B2 /* IASKSettingsStoreFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3085122C081164050FC7FC3A32EF6D9F /* IASKSettingsStoreFile.m */; };
+		6BE3ACBCC4160CA4AE1448CA1089DF32 /* IASKPSTextFieldSpecifierViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = DC550800881F2C71A0444687EB49F71F /* IASKPSTextFieldSpecifierViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CC4FDA7C35B4A512964FAEABEFD510C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */; };
+		6DFA183CD1FFCFABEDE86006238C03BC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC9DFE70A35B1C9D56C07C8E27586F5 /* MessageUI.framework */; };
+		6E86A53D9E226CD6427ED079F66E6915 /* IASKPSSliderSpecifierViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B628808DB39D0FE27507FF6DD09B607 /* IASKPSSliderSpecifierViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6EA45FD2F2122F9852E4F9912399B978 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37FBE6F58FC86F7904924DD2EE36BB /* DisposeBag.swift */; };
+		703A72D55C393C7FFEE4744F46A9C144 /* IASKSettingsStoreUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AE69C1932D01824E121985B1E50F1E8 /* IASKSettingsStoreUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72109CC4E319106450B8B2E62A7023E3 /* IASKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E766ADD605046D7F6EC943BBEE06EBF /* IASKSwitch.m */; };
+		72A0AAEF5DFC21535D630C3185726ABD /* IASKSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 584203124CBAF2A785D61A14B98648B1 /* IASKSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7759DC675069D0C34D7FE19363862600 /* hr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4B862161313D21CE74FE943D57006A5C /* hr.lproj */; };
+		7E4B6E656D03C947703B707BF7644EEC /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF5CCE3A6701D1C1A249521DB7231B /* Disposable.swift */; };
+		84CF25B1937F8F0419B1648EE39227A5 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B22E767578B87D60DF93C4833449C5 /* IASKSpecifierValuesViewController.m */; };
+		85D5E83636E34C1BB55B9D1CB35227DD /* tr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 95ABE5998C3FD3E2A8DC07AC11F874D0 /* tr.lproj */; };
 		87479FB0EBFE103BE2CEFBBD48E3E386 /* Pods-iRogueUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C13B800C6931DC2084936E4408A3C959 /* Pods-iRogueUITests-dummy.m */; };
-		8A4660D90DE2BB6AC9BC15EAB5E22289 /* ObservableEvent-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E15545A68670D8FA1B60E9F5278E68 /* ObservableEvent-dummy.m */; };
-		8BCFCDDABF36978F5C79BF1250CC6714 /* ObservableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256CAFE0D6AADF0362FEC3EF03FA29B8 /* ObservableEvent.swift */; };
-		9AE36360BF60E6C00868B96ADA901DDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		9E2AB8224EEFB6D8642B99328EA91DC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		9FB24D1E9307C8BCA7A4B2AFA0C82CDF /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54C21FCDD2382F2F30B493CD8E7D429 /* Property.swift */; };
-		A7148895C2378DAB1F94257B25285EE9 /* ObservableEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 25C98596ED0DED98C4B4EA841B075F4B /* ObservableEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5462C4A1462677D6ABCC9BE93484980 /* Pods-iRogue-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 55033E00B69073A9C927C63F35032C38 /* Pods-iRogue-dummy.m */; };
-		BCEC8D90A05C5BA5A68699DFB826D788 /* EventDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2954842A3677379F1B142ABA26A31 /* EventDisposable.swift */; };
+		8A4660D90DE2BB6AC9BC15EAB5E22289 /* ObservableEvent-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C128695F77FE466C969447F9F5AE /* ObservableEvent-dummy.m */; };
+		8A9A154CDFD92383DBAA209089904450 /* ca.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 78E0160468C140F07D031AE4CC4039D3 /* ca.lproj */; };
+		8BCFCDDABF36978F5C79BF1250CC6714 /* ObservableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E8057B9F5C8CF86B335ADBB625F09F /* ObservableEvent.swift */; };
+		8DDF49E2AC6603769380FBF6F9DE1804 /* IASKAppSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C76AEF6BE2F79DFDDFA0213528E6ECB /* IASKAppSettingsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E1280CE142EAE5FCCA8A68326F43F8E /* IASKSettingsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B14D28AC7A41ECDEAE1D244269B16C /* IASKSettingsReader.m */; };
+		9D7F39346A3C2653BAEBE7F329B00484 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 59697A2CD201E4EAEC344AD014402F3B /* Base.lproj */; };
+		9E2AB8224EEFB6D8642B99328EA91DC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */; };
+		9F76E28C973A31CBC3855AA11AC2EA98 /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 46532B58DE9926F13EC89025D4CA6F07 /* IASKSlider.m */; };
+		9FB24D1E9307C8BCA7A4B2AFA0C82CDF /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA04F0BA5F226953B5FEE96CE09CD0F /* Property.swift */; };
+		A4997FCCC3FC89E2E0F28BB3DC08FB79 /* hu.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CAEB7F2D0BB66D7184199827CA43AF85 /* hu.lproj */; };
+		A5DFBD02A5DE4E71F7F9D06680F29C1C /* IASKAppSettingsWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A0E26A64F2FA55235B3C526619D02C0C /* IASKAppSettingsWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7148895C2378DAB1F94257B25285EE9 /* ObservableEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = CAC92AD7C490CA7474D2DCB0BBAF4E79 /* ObservableEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4D389F9DF59B2058CD421320F20A541 /* el.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7D95A4C0101775A50B9F19B944A5419E /* el.lproj */; };
+		B91EF6DD819A0F6D10D6A0390A990C9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */; };
+		BB06A279BF8EF15106312E8889E1B627 /* IASKSettingsReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 83F607E523440D345C80D81313AEDCDE /* IASKSettingsReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCE0812BD1D62FD8B086B8F6CF6B9091 /* IASKSettingsStoreFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 9597D0DFFB998127E8F8BCDCA5867326 /* IASKSettingsStoreFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCEC8D90A05C5BA5A68699DFB826D788 /* EventDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A992075DD1358CE2EF63B5CBD08F538 /* EventDisposable.swift */; };
 		BD88A9C1D73D853D92BD25F53261FEFB /* Pods-iRogueUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF57DC2347EBFF2681DAF0C799B7578 /* Pods-iRogueUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CCAA0194FF363B500827D670008CD8C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		FBAF36873C6D31D3E6987330BB076646 /* ObservableEvent-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B9D5D1DB00C41D449D7C4236C070F30E /* ObservableEvent-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3E8E695815614A495618DE5DE02D09C /* Pods-iRogue-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 55033E00B69073A9C927C63F35032C38 /* Pods-iRogue-dummy.m */; };
+		C5D2F3EA4E550E8DCA2BCF8474D0B424 /* IASKMultipleValueSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A08D800D2E6800E4799F6FB2AF94F47 /* IASKMultipleValueSelection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9BF447D01F1EFE26399EE6319604B61 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DAB9050886F757F389FA354F76CB51 /* IASKAppSettingsViewController.m */; };
+		CCAA0194FF363B500827D670008CD8C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */; };
+		D208254AB2EE61EFEC90085EFEB36C1E /* pl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 45FCBCB999993937034D2289A93D69D5 /* pl.lproj */; };
+		D841B67FE0336A0E2C642C0CB85CC420 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0952F9B52A5DA37449AF14A1EA391B /* UIKit.framework */; };
+		DB6257CDA73706A0690D2C15AB82ACA1 /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DF7CAACF94FDA3E454065B84B18D5B /* IASKSpecifier.m */; };
+		DEB1D2289E0A66A58EC10EA16CDC864D /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = D9C6B3CE60353E081B1DF75460A09AD6 /* ru.lproj */; };
+		E1F006B57A522AEFC0F9692442DCD9BC /* Pods-iRogue-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9711661D6B44F62DD62DB6970E83AEA3 /* Pods-iRogue-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2E183F7263EA29AA54C817F7309C4BD /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = E799126880318927830DB8BCE5A857D3 /* nl.lproj */; };
+		E4371D53EDA985C4444672B66103D835 /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = B8EFE661AA304BA0794FDA15E1AADF20 /* zh-Hans.lproj */; };
+		E8363ECFD7FCEA98C9959E8EB61D3AE7 /* InAppSettingsKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1DD1B03B08FEAC78DF9E3D1478F802DA /* InAppSettingsKit.bundle */; };
+		E902BA7E78980241CB2349B329BDCCEC /* IASKSettingsStoreUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CD7B5E01CEAC80356209D215F92736 /* IASKSettingsStoreUserDefaults.m */; };
+		EA2493BAE7EE4A904BC093415719DD76 /* IASKSettingsStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 412A879CC18EB6FC23A4CD4BA630C427 /* IASKSettingsStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4061D80566952A4FD3E087EC0E27713 /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DEC4274215502DDDF890AFFB8D3B7C /* IASKPSTextFieldSpecifierViewCell.m */; };
+		F4483B0BB3A0B826532F1B1DCD122374 /* IASKSpecifierValuesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F9AD99E1844E5C25B1742FB82B1A37 /* IASKSpecifierValuesViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4DE15FF1336171363D8808DF3FABE72 /* IASKTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BABAFC0E32E4B3D8E74D83C717D5B189 /* IASKTextViewCell.m */; };
+		FB1497C1A61DFBBA7A789712DD3EC8DF /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 96EB86FECF9F793CEED345FDA0C593D7 /* en.lproj */; };
+		FBAF36873C6D31D3E6987330BB076646 /* ObservableEvent-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AEDDC0CB2DCB901D79603E200B456C06 /* ObservableEvent-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCC4E4649FD3B25F953561FE9A77FA02 /* IASKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1A9339F6C591274206DC7E91373051 /* IASKTextField.m */; };
+		FD8118550EE928F3613FF589D8CB039C /* IASKSpecifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 622E75E6BCE83EDEDFC5F00455A41160 /* IASKSpecifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE7069877BB557FC49518941CF443C7C /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2C140F4D3A2CABD537819C211ECFA /* ja.lproj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4D16B7C4879E69774A74B713D831A382 /* PBXContainerItemProxy */ = {
+		0BD4E7612EDE4FB93D5C0645E5C5C97F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CB67190F0A60F7A033A3E515965C86F;
+			remoteInfo = InAppSettingsKit;
+		};
+		143DA04305944A3DB5F3D9C3F7B490D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -39,83 +109,175 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EAF7F96D7F8A92736B73975DE2EFF4BE;
+			remoteGlobalIDString = F2A70134B80172158FC63395AF803655;
 			remoteInfo = "Pods-iRogue";
 		};
 		D7D28A0602B18D5F74B42AE81DFA6AE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EAF7F96D7F8A92736B73975DE2EFF4BE;
+			remoteGlobalIDString = F2A70134B80172158FC63395AF803655;
 			remoteInfo = "Pods-iRogue";
+		};
+		FBE0D4BA15D301BB7ADD8451BC93EAA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA416ED70FC7E091F479F65D981FE8FC;
+			remoteInfo = "InAppSettingsKit-InAppSettingsKit";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00A99A1DAEB11A9B22F06694E45117A0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02203D0D43B95C97B59EB08D6860B274 /* ObservableEvent.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ObservableEvent.modulemap; sourceTree = "<group>"; };
+		03DF12298542AA553A4F5FA734A3FAA0 /* IASKSettingsStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsStore.m; path = InAppSettingsKit/Models/IASKSettingsStore.m; sourceTree = "<group>"; };
+		0C76AEF6BE2F79DFDDFA0213528E6ECB /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.h; sourceTree = "<group>"; };
+		0E255D9EA18096317DCB0380522F7F3D /* IASKTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKTextView.h; path = InAppSettingsKit/Views/IASKTextView.h; sourceTree = "<group>"; };
 		143EC0DBBC0FD3C7DF65DDB700D715E7 /* Pods-iRogue-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iRogue-acknowledgements.markdown"; sourceTree = "<group>"; };
-		16E15545A68670D8FA1B60E9F5278E68 /* ObservableEvent-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ObservableEvent-dummy.m"; sourceTree = "<group>"; };
+		17C68AB14B683FC9B947D0C4938E5BE7 /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = es.lproj; path = InAppSettingsKit/Resources/es.lproj; sourceTree = "<group>"; };
 		19BB3A70D122D9440ABD5357A6982A75 /* Pods-iRogueUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iRogueUITests-resources.sh"; sourceTree = "<group>"; };
+		1CFF434D9D11F29F0DC92890BFAE0754 /* IASKViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKViewController.h; path = InAppSettingsKit/Controllers/IASKViewController.h; sourceTree = "<group>"; };
 		1D0FD8FB155A0AC0E0FDBE74743E5523 /* Pods-iRogueTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iRogueTests.modulemap"; sourceTree = "<group>"; };
+		1D3B12CF59B70B0A1A52D78CD3DA3FFA /* IASKTextViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKTextViewCell.h; path = InAppSettingsKit/Views/IASKTextViewCell.h; sourceTree = "<group>"; };
+		1DD1B03B08FEAC78DF9E3D1478F802DA /* InAppSettingsKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = InAppSettingsKit.bundle; path = "InAppSettingsKit-InAppSettingsKit.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FA04F0BA5F226953B5FEE96CE09CD0F /* Property.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Property.swift; path = ObservableEvent/Property.swift; sourceTree = "<group>"; };
 		1FF57DC2347EBFF2681DAF0C799B7578 /* Pods-iRogueUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iRogueUITests-umbrella.h"; sourceTree = "<group>"; };
-		256CAFE0D6AADF0362FEC3EF03FA29B8 /* ObservableEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObservableEvent.swift; path = ObservableEvent/ObservableEvent.swift; sourceTree = "<group>"; };
-		25C98596ED0DED98C4B4EA841B075F4B /* ObservableEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ObservableEvent.h; path = ObservableEvent/ObservableEvent.h; sourceTree = "<group>"; };
+		214F67EDCBBA69B11E83E528214E340C /* Pods_iRogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iRogueTests.framework; path = "Pods-iRogueTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		220BD3FAC8DE0F3CABE3D20E94769BF0 /* uk.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = uk.lproj; path = InAppSettingsKit/Resources/uk.lproj; sourceTree = "<group>"; };
+		29226CDDB65162A47101EEC662E64329 /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = de.lproj; path = InAppSettingsKit/Resources/de.lproj; sourceTree = "<group>"; };
+		2AC8B4CD9C92DEEED791A3683324E705 /* nb.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = nb.lproj; path = InAppSettingsKit/Resources/nb.lproj; sourceTree = "<group>"; };
 		2C2538CA2083D3FB5165B34897BF49A8 /* Pods-iRogueUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iRogueUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		2D3BE6192AF50CCDE7D6731A99AB23BA /* Pods_iRogueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iRogueUITests.framework; path = "Pods-iRogueUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DC778892309307D2DE48850436B912C /* Pods-iRogueTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iRogueTests-dummy.m"; sourceTree = "<group>"; };
+		3085122C081164050FC7FC3A32EF6D9F /* IASKSettingsStoreFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsStoreFile.m; path = InAppSettingsKit/Models/IASKSettingsStoreFile.m; sourceTree = "<group>"; };
 		31CED5CA7575827AFD5453E6A40EAF52 /* Pods-iRogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iRogue.release.xcconfig"; sourceTree = "<group>"; };
 		37089545833EEE8AD639C8D2DB1AA87C /* Pods-iRogueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iRogueTests.release.xcconfig"; sourceTree = "<group>"; };
+		3C2BC9F09CA6D4E493EC180763A06492 /* pt-PT.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "pt-PT.lproj"; path = "InAppSettingsKit/Resources/pt-PT.lproj"; sourceTree = "<group>"; };
 		3D27AD08738CD40FC1BB99A187636B99 /* Pods-iRogueTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iRogueTests-frameworks.sh"; sourceTree = "<group>"; };
+		3D930D21F674905DA748A4901F03CF7C /* InAppSettingsKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "InAppSettingsKit-dummy.m"; sourceTree = "<group>"; };
+		3E766ADD605046D7F6EC943BBEE06EBF /* IASKSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSwitch.m; path = InAppSettingsKit/Views/IASKSwitch.m; sourceTree = "<group>"; };
+		412A879CC18EB6FC23A4CD4BA630C427 /* IASKSettingsStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSettingsStore.h; path = InAppSettingsKit/Models/IASKSettingsStore.h; sourceTree = "<group>"; };
 		42AB0D1902DE606B23E288D2BE5E2C27 /* Pods-iRogueUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iRogueUITests.release.xcconfig"; sourceTree = "<group>"; };
 		430EC117285FF5E7571216142EFD9650 /* Pods-iRogueUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iRogueUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		48F654A4614D0B41DFBB103305D88E09 /* ObservableEvent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ObservableEvent.framework; path = ObservableEvent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		458AD7AA28FA8AE82047970C5FCAD383 /* Pods_iRogueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iRogueUITests.framework; path = "Pods-iRogueUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45CAC9662D2D4FC0BCACD19978AD70FD /* Pods_iRogue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iRogue.framework; path = "Pods-iRogue.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45FCBCB999993937034D2289A93D69D5 /* pl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = pl.lproj; path = InAppSettingsKit/Resources/pl.lproj; sourceTree = "<group>"; };
+		46532B58DE9926F13EC89025D4CA6F07 /* IASKSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSlider.m; path = InAppSettingsKit/Views/IASKSlider.m; sourceTree = "<group>"; };
+		488F3E023326EF695D2A58241D973F54 /* ObservableEvent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ObservableEvent.framework; path = ObservableEvent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A992075DD1358CE2EF63B5CBD08F538 /* EventDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventDisposable.swift; path = ObservableEvent/EventDisposable.swift; sourceTree = "<group>"; };
+		4B862161313D21CE74FE943D57006A5C /* hr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = hr.lproj; path = InAppSettingsKit/Resources/hr.lproj; sourceTree = "<group>"; };
+		51B22E767578B87D60DF93C4833449C5 /* IASKSpecifierValuesViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSpecifierValuesViewController.m; path = InAppSettingsKit/Controllers/IASKSpecifierValuesViewController.m; sourceTree = "<group>"; };
+		54483E68622E206271A409169F166B01 /* IASKMultipleValueSelection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKMultipleValueSelection.m; path = InAppSettingsKit/Controllers/IASKMultipleValueSelection.m; sourceTree = "<group>"; };
 		55033E00B69073A9C927C63F35032C38 /* Pods-iRogue-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iRogue-dummy.m"; sourceTree = "<group>"; };
 		574DCD153165E19DC13EA7030FF18F40 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57DCD6B11543CF1B578D952467D97853 /* Pods-iRogue.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iRogue.modulemap"; sourceTree = "<group>"; };
+		584203124CBAF2A785D61A14B98648B1 /* IASKSwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSwitch.h; path = InAppSettingsKit/Views/IASKSwitch.h; sourceTree = "<group>"; };
+		59697A2CD201E4EAEC344AD014402F3B /* Base.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = Base.lproj; path = InAppSettingsKit/Resources/Base.lproj; sourceTree = "<group>"; };
+		5A08D800D2E6800E4799F6FB2AF94F47 /* IASKMultipleValueSelection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKMultipleValueSelection.h; path = InAppSettingsKit/Controllers/IASKMultipleValueSelection.h; sourceTree = "<group>"; };
+		5AE69C1932D01824E121985B1E50F1E8 /* IASKSettingsStoreUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSettingsStoreUserDefaults.h; path = InAppSettingsKit/Models/IASKSettingsStoreUserDefaults.h; sourceTree = "<group>"; };
 		5E031C1569B010CE876FD44C3FD81A86 /* Pods-iRogue-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iRogue-acknowledgements.plist"; sourceTree = "<group>"; };
+		5FD52531E226A8C328FDF342D8BB2033 /* InAppSettingsKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = InAppSettingsKit.modulemap; sourceTree = "<group>"; };
 		611FE5A9AFBD15B0FC6933A5C115E76E /* Pods-iRogue-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iRogue-resources.sh"; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6B89B1A5F9EA44263AAECE7C08623587 /* Disposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Disposable.swift; path = ObservableEvent/Disposable.swift; sourceTree = "<group>"; };
+		622E75E6BCE83EDEDFC5F00455A41160 /* IASKSpecifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSpecifier.h; path = InAppSettingsKit/Models/IASKSpecifier.h; sourceTree = "<group>"; };
+		65DEC4274215502DDDF890AFFB8D3B7C /* IASKPSTextFieldSpecifierViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKPSTextFieldSpecifierViewCell.m; path = InAppSettingsKit/Views/IASKPSTextFieldSpecifierViewCell.m; sourceTree = "<group>"; };
+		6D54747CC2730E91740C0A9F56D60652 /* IASKSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSlider.h; path = InAppSettingsKit/Views/IASKSlider.h; sourceTree = "<group>"; };
 		6FACBAB227AB7D6C0962FB34CABFAD02 /* Pods-iRogueTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iRogueTests-umbrella.h"; sourceTree = "<group>"; };
 		70CC01D6D6F7B973B21D14495507D40F /* Pods-iRogueTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iRogueTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		7C9DC2FB25406CB66069095B6F4ECC67 /* ObservableEvent.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ObservableEvent.modulemap; sourceTree = "<group>"; };
-		7CC14BB09311DDB7C650B1D9ECC76365 /* Pods_iRogue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iRogue.framework; path = "Pods-iRogue.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		897CCC720EF0EC0ABC517A5215C02316 /* ObservableEvent.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ObservableEvent.xcconfig; sourceTree = "<group>"; };
+		72F453F74597C2C7E3F4191720FD78A0 /* ObservableEvent.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ObservableEvent.xcconfig; sourceTree = "<group>"; };
+		78E0160468C140F07D031AE4CC4039D3 /* ca.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ca.lproj; path = InAppSettingsKit/Resources/ca.lproj; sourceTree = "<group>"; };
+		7A60AAB38C1BFAF2C2FC8159713A0BD1 /* th.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = th.lproj; path = InAppSettingsKit/Resources/th.lproj; sourceTree = "<group>"; };
+		7D95A4C0101775A50B9F19B944A5419E /* el.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = el.lproj; path = InAppSettingsKit/Resources/el.lproj; sourceTree = "<group>"; };
+		7DC5A0DFA6D78F9F38FE5BA0047670DB /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = it.lproj; path = InAppSettingsKit/Resources/it.lproj; sourceTree = "<group>"; };
+		7EC2C140F4D3A2CABD537819C211ECFA /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ja.lproj; path = InAppSettingsKit/Resources/ja.lproj; sourceTree = "<group>"; };
+		80B14D28AC7A41ECDEAE1D244269B16C /* IASKSettingsReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsReader.m; path = InAppSettingsKit/Models/IASKSettingsReader.m; sourceTree = "<group>"; };
+		83F607E523440D345C80D81313AEDCDE /* IASKSettingsReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSettingsReader.h; path = InAppSettingsKit/Models/IASKSettingsReader.h; sourceTree = "<group>"; };
+		88E8057B9F5C8CF86B335ADBB625F09F /* ObservableEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObservableEvent.swift; path = ObservableEvent/ObservableEvent.swift; sourceTree = "<group>"; };
+		8A37FBE6F58FC86F7904924DD2EE36BB /* DisposeBag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisposeBag.swift; path = ObservableEvent/DisposeBag.swift; sourceTree = "<group>"; };
+		8B628808DB39D0FE27507FF6DD09B607 /* IASKPSSliderSpecifierViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKPSSliderSpecifierViewCell.h; path = InAppSettingsKit/Views/IASKPSSliderSpecifierViewCell.h; sourceTree = "<group>"; };
 		8DE6D2E22D1309E5B96FE55E8734DB49 /* Pods-iRogueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iRogueTests.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		963B5DBC0E5EDC705DE16F424986C54F /* ObservableEvent-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObservableEvent-prefix.pch"; sourceTree = "<group>"; };
+		94CD7B5E01CEAC80356209D215F92736 /* IASKSettingsStoreUserDefaults.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsStoreUserDefaults.m; path = InAppSettingsKit/Models/IASKSettingsStoreUserDefaults.m; sourceTree = "<group>"; };
+		94FF5CCE3A6701D1C1A249521DB7231B /* Disposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Disposable.swift; path = ObservableEvent/Disposable.swift; sourceTree = "<group>"; };
+		9597D0DFFB998127E8F8BCDCA5867326 /* IASKSettingsStoreFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSettingsStoreFile.h; path = InAppSettingsKit/Models/IASKSettingsStoreFile.h; sourceTree = "<group>"; };
+		95ABE5998C3FD3E2A8DC07AC11F874D0 /* tr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = tr.lproj; path = InAppSettingsKit/Resources/tr.lproj; sourceTree = "<group>"; };
+		96EB86FECF9F793CEED345FDA0C593D7 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = InAppSettingsKit/Resources/en.lproj; sourceTree = "<group>"; };
 		9711661D6B44F62DD62DB6970E83AEA3 /* Pods-iRogue-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iRogue-umbrella.h"; sourceTree = "<group>"; };
-		9DE2954842A3677379F1B142ABA26A31 /* EventDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventDisposable.swift; path = ObservableEvent/EventDisposable.swift; sourceTree = "<group>"; };
+		A0E26A64F2FA55235B3C526619D02C0C /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsWebViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
 		A1DE4AB853EE69F0A4D79E9429DC679D /* Pods-iRogueTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iRogueTests-resources.sh"; sourceTree = "<group>"; };
+		A21376222FF4119D56C671CBFA54FC22 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = sv.lproj; path = InAppSettingsKit/Resources/sv.lproj; sourceTree = "<group>"; };
 		A4532E6990B88112EF81F3EE9891315D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A604FDD22B0CD9A95578BC23F276AFCE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6CB03844FE9843DF17095199538F6CB /* Pods-iRogueUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iRogueUITests-frameworks.sh"; sourceTree = "<group>"; };
-		B9D5D1DB00C41D449D7C4236C070F30E /* ObservableEvent-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObservableEvent-umbrella.h"; sourceTree = "<group>"; };
+		A784A599D5A001BC3B8560E6767F8F48 /* ObservableEvent-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObservableEvent-prefix.pch"; sourceTree = "<group>"; };
+		A8DAB9050886F757F389FA354F76CB51 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKAppSettingsViewController.m; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.m; sourceTree = "<group>"; };
+		AB1A9339F6C591274206DC7E91373051 /* IASKTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKTextField.m; path = InAppSettingsKit/Views/IASKTextField.m; sourceTree = "<group>"; };
+		AEDDC0CB2DCB901D79603E200B456C06 /* ObservableEvent-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObservableEvent-umbrella.h"; sourceTree = "<group>"; };
+		B390DA032EBE562DF877ACC2CB13D432 /* IASKPSSliderSpecifierViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKPSSliderSpecifierViewCell.m; path = InAppSettingsKit/Views/IASKPSSliderSpecifierViewCell.m; sourceTree = "<group>"; };
+		B493E77D4E6C2FDC3AACC72EC34EB11F /* IASKTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKTextField.h; path = InAppSettingsKit/Views/IASKTextField.h; sourceTree = "<group>"; };
+		B7596A69FB513611D5FEE0420DD660B8 /* InAppSettingsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = InAppSettingsKit.framework; path = InAppSettingsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8EFE661AA304BA0794FDA15E1AADF20 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hans.lproj"; path = "InAppSettingsKit/Resources/zh-Hans.lproj"; sourceTree = "<group>"; };
+		B96D921A48D031B4951EDF087AC69A99 /* InAppSettingsKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "InAppSettingsKit-umbrella.h"; sourceTree = "<group>"; };
+		B9D695FA6176A17B9DECE15A99ED86A7 /* InAppSettingsKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "InAppSettingsKit-prefix.pch"; sourceTree = "<group>"; };
+		BABAFC0E32E4B3D8E74D83C717D5B189 /* IASKTextViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKTextViewCell.m; path = InAppSettingsKit/Views/IASKTextViewCell.m; sourceTree = "<group>"; };
 		C13B800C6931DC2084936E4408A3C959 /* Pods-iRogueUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iRogueUITests-dummy.m"; sourceTree = "<group>"; };
+		C2528755CA486D2189B12A78B521883A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6F9AD99E1844E5C25B1742FB82B1A37 /* IASKSpecifierValuesViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSpecifierValuesViewController.h; path = InAppSettingsKit/Controllers/IASKSpecifierValuesViewController.h; sourceTree = "<group>"; };
+		C9C9DCD25B38752BED702FC5718C6029 /* IASKAppSettingsWebViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKAppSettingsWebViewController.m; path = InAppSettingsKit/Controllers/IASKAppSettingsWebViewController.m; sourceTree = "<group>"; };
 		CA047D2B5B3D163C42D764B7047C4CD3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAC92AD7C490CA7474D2DCB0BBAF4E79 /* ObservableEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ObservableEvent.h; path = ObservableEvent/ObservableEvent.h; sourceTree = "<group>"; };
+		CAEB7F2D0BB66D7184199827CA43AF85 /* hu.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = hu.lproj; path = InAppSettingsKit/Resources/hu.lproj; sourceTree = "<group>"; };
 		CC1A732B5E6ECDB3E37FD64618CF1BCE /* Pods-iRogue-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iRogue-frameworks.sh"; sourceTree = "<group>"; };
+		CCC9DFE70A35B1C9D56C07C8E27586F5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		CD2DBBFCBD468427E7D608E97B30D966 /* es-MX.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "es-MX.lproj"; path = "InAppSettingsKit/Resources/es-MX.lproj"; sourceTree = "<group>"; };
+		CECA8912B5ED560E00FC05A9E700FE44 /* IASKTextView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKTextView.m; path = InAppSettingsKit/Views/IASKTextView.m; sourceTree = "<group>"; };
 		D43450DC93C9DC01032DA71FF065BA20 /* Pods-iRogue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iRogue.debug.xcconfig"; sourceTree = "<group>"; };
+		D7DF7CAACF94FDA3E454065B84B18D5B /* IASKSpecifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSpecifier.m; path = InAppSettingsKit/Models/IASKSpecifier.m; sourceTree = "<group>"; };
+		D975C7BF6AEADDDA348977C0B2DA2DD1 /* InAppSettingsKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = InAppSettingsKit.xcconfig; sourceTree = "<group>"; };
+		D9C6B3CE60353E081B1DF75460A09AD6 /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ru.lproj; path = InAppSettingsKit/Resources/ru.lproj; sourceTree = "<group>"; };
+		DB723D50EB8C79FCB40373C31111780C /* zh-Hant.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hant.lproj"; path = "InAppSettingsKit/Resources/zh-Hant.lproj"; sourceTree = "<group>"; };
+		DC550800881F2C71A0444687EB49F71F /* IASKPSTextFieldSpecifierViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKPSTextFieldSpecifierViewCell.h; path = InAppSettingsKit/Views/IASKPSTextFieldSpecifierViewCell.h; sourceTree = "<group>"; };
 		DCCC5A9008D6C1853AA1194F4A380609 /* Pods-iRogueTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iRogueTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E0E6E91D9E261DC5BFBCE3D5927A54DE /* DisposeBag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisposeBag.swift; path = ObservableEvent/DisposeBag.swift; sourceTree = "<group>"; };
-		E54C21FCDD2382F2F30B493CD8E7D429 /* Property.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Property.swift; path = ObservableEvent/Property.swift; sourceTree = "<group>"; };
-		ED47A732AF721B3CB31AD9A8D480A78E /* Pods_iRogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iRogueTests.framework; path = "Pods-iRogueTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E16C1CE94CA609F8C085CB62DA28B561 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = pt.lproj; path = InAppSettingsKit/Resources/pt.lproj; sourceTree = "<group>"; };
+		E1B4C128695F77FE466C969447F9F5AE /* ObservableEvent-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ObservableEvent-dummy.m"; sourceTree = "<group>"; };
+		E799126880318927830DB8BCE5A857D3 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = nl.lproj; path = InAppSettingsKit/Resources/nl.lproj; sourceTree = "<group>"; };
 		EE34C61C624A7A4AAF8F6BED7BC354E7 /* Pods-iRogueUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iRogueUITests.modulemap"; sourceTree = "<group>"; };
+		F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		F50BE4502EC569C9F70BE0CF59D1E5EA /* ResourceBundle-InAppSettingsKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-InAppSettingsKit-Info.plist"; sourceTree = "<group>"; };
+		F72253D2A3FDB09139D36003455A320F /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = fr.lproj; path = InAppSettingsKit/Resources/fr.lproj; sourceTree = "<group>"; };
 		FC3C40BA7A72FD119796EF87CF6AABF7 /* Pods-iRogueUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iRogueUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FD0952F9B52A5DA37449AF14A1EA391B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		10B66837F76EC84792931EA4786F4F61 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9AE36360BF60E6C00868B96ADA901DDB /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B2704F895AB0D6BC31D9AE244FAEC7D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6CC4FDA7C35B4A512964FAEABEFD510C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A1825A5BC16C40084D3609125C856E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B91EF6DD819A0F6D10D6A0390A990C9D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3735A807C728BE1017B3070E3C5BBFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC9AF7A9114E126D9244309549CB2D7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				661D7B9E41755FE4FB983FE783A7F881 /* Foundation.framework in Frameworks */,
+				6DFA183CD1FFCFABEDE86006238C03BC /* MessageUI.framework in Frameworks */,
+				D841B67FE0336A0E2C642C0CB85CC420 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,19 +300,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		241E22EA25A635315512D3B68D0932A1 /* ObservableEvent */ = {
+		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6B89B1A5F9EA44263AAECE7C08623587 /* Disposable.swift */,
-				E0E6E91D9E261DC5BFBCE3D5927A54DE /* DisposeBag.swift */,
-				9DE2954842A3677379F1B142ABA26A31 /* EventDisposable.swift */,
-				25C98596ED0DED98C4B4EA841B075F4B /* ObservableEvent.h */,
-				256CAFE0D6AADF0362FEC3EF03FA29B8 /* ObservableEvent.swift */,
-				E54C21FCDD2382F2F30B493CD8E7D429 /* Property.swift */,
-				B3A36BBF8905546FD2BBACEC1BB139BC /* Support Files */,
+				454CFBD41F93F89DA1E617E8CC8C9388 /* iOS */,
 			);
-			name = ObservableEvent;
-			path = ObservableEvent;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14AC718993AD3491B083FF129747884B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1DD1B03B08FEAC78DF9E3D1478F802DA /* InAppSettingsKit.bundle */,
+				B7596A69FB513611D5FEE0420DD660B8 /* InAppSettingsKit.framework */,
+				488F3E023326EF695D2A58241D973F54 /* ObservableEvent.framework */,
+				45CAC9662D2D4FC0BCACD19978AD70FD /* Pods_iRogue.framework */,
+				214F67EDCBBA69B11E83E528214E340C /* Pods_iRogueTests.framework */,
+				458AD7AA28FA8AE82047970C5FCAD383 /* Pods_iRogueUITests.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		309A1C2EF4AF5E99AE92AF017E725492 /* Targets Support Files */ = {
@@ -161,6 +329,15 @@
 				43B076C0416984201C198B05EB1EC348 /* Pods-iRogueUITests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		3AEBC3FFC67AC22B67C2EB889A6F58B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A493D3F6FF359B9D671BD3197C68CA86 /* InAppSettingsKit */,
+				912E32835BE4626B06A3B929E26C3E71 /* ObservableEvent */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		43B076C0416984201C198B05EB1EC348 /* Pods-iRogueUITests */ = {
@@ -181,12 +358,59 @@
 			path = "Target Support Files/Pods-iRogueUITests";
 			sourceTree = "<group>";
 		};
-		75C90E692F454B2012FD216F77BB9411 /* Pods */ = {
+		454CFBD41F93F89DA1E617E8CC8C9388 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				241E22EA25A635315512D3B68D0932A1 /* ObservableEvent */,
+				F3D8132F9DC617E978F59BF7226AC88A /* Foundation.framework */,
+				CCC9DFE70A35B1C9D56C07C8E27586F5 /* MessageUI.framework */,
+				FD0952F9B52A5DA37449AF14A1EA391B /* UIKit.framework */,
 			);
-			name = Pods;
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		4716A9BB2E444DF6D75295D49739D536 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				59697A2CD201E4EAEC344AD014402F3B /* Base.lproj */,
+				78E0160468C140F07D031AE4CC4039D3 /* ca.lproj */,
+				29226CDDB65162A47101EEC662E64329 /* de.lproj */,
+				7D95A4C0101775A50B9F19B944A5419E /* el.lproj */,
+				96EB86FECF9F793CEED345FDA0C593D7 /* en.lproj */,
+				17C68AB14B683FC9B947D0C4938E5BE7 /* es.lproj */,
+				CD2DBBFCBD468427E7D608E97B30D966 /* es-MX.lproj */,
+				F72253D2A3FDB09139D36003455A320F /* fr.lproj */,
+				4B862161313D21CE74FE943D57006A5C /* hr.lproj */,
+				CAEB7F2D0BB66D7184199827CA43AF85 /* hu.lproj */,
+				7DC5A0DFA6D78F9F38FE5BA0047670DB /* it.lproj */,
+				7EC2C140F4D3A2CABD537819C211ECFA /* ja.lproj */,
+				2AC8B4CD9C92DEEED791A3683324E705 /* nb.lproj */,
+				E799126880318927830DB8BCE5A857D3 /* nl.lproj */,
+				45FCBCB999993937034D2289A93D69D5 /* pl.lproj */,
+				E16C1CE94CA609F8C085CB62DA28B561 /* pt.lproj */,
+				3C2BC9F09CA6D4E493EC180763A06492 /* pt-PT.lproj */,
+				D9C6B3CE60353E081B1DF75460A09AD6 /* ru.lproj */,
+				A21376222FF4119D56C671CBFA54FC22 /* sv.lproj */,
+				7A60AAB38C1BFAF2C2FC8159713A0BD1 /* th.lproj */,
+				95ABE5998C3FD3E2A8DC07AC11F874D0 /* tr.lproj */,
+				220BD3FAC8DE0F3CABE3D20E94769BF0 /* uk.lproj */,
+				B8EFE661AA304BA0794FDA15E1AADF20 /* zh-Hans.lproj */,
+				DB723D50EB8C79FCB40373C31111780C /* zh-Hant.lproj */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6AFB80A7FF8AB1262A0B030D0D5A5F52 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2528755CA486D2189B12A78B521883A /* Info.plist */,
+				02203D0D43B95C97B59EB08D6860B274 /* ObservableEvent.modulemap */,
+				72F453F74597C2C7E3F4191720FD78A0 /* ObservableEvent.xcconfig */,
+				E1B4C128695F77FE466C969447F9F5AE /* ObservableEvent-dummy.m */,
+				A784A599D5A001BC3B8560E6767F8F48 /* ObservableEvent-prefix.pch */,
+				AEDDC0CB2DCB901D79603E200B456C06 /* ObservableEvent-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ObservableEvent";
 			sourceTree = "<group>";
 		};
 		7D5A3B785B5BF9D8B6497210825F4F0A /* Pods-iRogue */ = {
@@ -211,33 +435,69 @@
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				75C90E692F454B2012FD216F77BB9411 /* Pods */,
-				E00A6A59B8C4447A39C0F6DC20B9235B /* Products */,
+				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
+				3AEBC3FFC67AC22B67C2EB889A6F58B9 /* Pods */,
+				14AC718993AD3491B083FF129747884B /* Products */,
 				309A1C2EF4AF5E99AE92AF017E725492 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		B3A36BBF8905546FD2BBACEC1BB139BC /* Support Files */ = {
+		912E32835BE4626B06A3B929E26C3E71 /* ObservableEvent */ = {
 			isa = PBXGroup;
 			children = (
-				00A99A1DAEB11A9B22F06694E45117A0 /* Info.plist */,
-				7C9DC2FB25406CB66069095B6F4ECC67 /* ObservableEvent.modulemap */,
-				897CCC720EF0EC0ABC517A5215C02316 /* ObservableEvent.xcconfig */,
-				16E15545A68670D8FA1B60E9F5278E68 /* ObservableEvent-dummy.m */,
-				963B5DBC0E5EDC705DE16F424986C54F /* ObservableEvent-prefix.pch */,
-				B9D5D1DB00C41D449D7C4236C070F30E /* ObservableEvent-umbrella.h */,
+				94FF5CCE3A6701D1C1A249521DB7231B /* Disposable.swift */,
+				8A37FBE6F58FC86F7904924DD2EE36BB /* DisposeBag.swift */,
+				4A992075DD1358CE2EF63B5CBD08F538 /* EventDisposable.swift */,
+				CAC92AD7C490CA7474D2DCB0BBAF4E79 /* ObservableEvent.h */,
+				88E8057B9F5C8CF86B335ADBB625F09F /* ObservableEvent.swift */,
+				1FA04F0BA5F226953B5FEE96CE09CD0F /* Property.swift */,
+				6AFB80A7FF8AB1262A0B030D0D5A5F52 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/ObservableEvent";
+			name = ObservableEvent;
+			path = ObservableEvent;
 			sourceTree = "<group>";
 		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+		A493D3F6FF359B9D671BD3197C68CA86 /* InAppSettingsKit */ = {
 			isa = PBXGroup;
 			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+				0C76AEF6BE2F79DFDDFA0213528E6ECB /* IASKAppSettingsViewController.h */,
+				A8DAB9050886F757F389FA354F76CB51 /* IASKAppSettingsViewController.m */,
+				A0E26A64F2FA55235B3C526619D02C0C /* IASKAppSettingsWebViewController.h */,
+				C9C9DCD25B38752BED702FC5718C6029 /* IASKAppSettingsWebViewController.m */,
+				5A08D800D2E6800E4799F6FB2AF94F47 /* IASKMultipleValueSelection.h */,
+				54483E68622E206271A409169F166B01 /* IASKMultipleValueSelection.m */,
+				8B628808DB39D0FE27507FF6DD09B607 /* IASKPSSliderSpecifierViewCell.h */,
+				B390DA032EBE562DF877ACC2CB13D432 /* IASKPSSliderSpecifierViewCell.m */,
+				DC550800881F2C71A0444687EB49F71F /* IASKPSTextFieldSpecifierViewCell.h */,
+				65DEC4274215502DDDF890AFFB8D3B7C /* IASKPSTextFieldSpecifierViewCell.m */,
+				83F607E523440D345C80D81313AEDCDE /* IASKSettingsReader.h */,
+				80B14D28AC7A41ECDEAE1D244269B16C /* IASKSettingsReader.m */,
+				412A879CC18EB6FC23A4CD4BA630C427 /* IASKSettingsStore.h */,
+				03DF12298542AA553A4F5FA734A3FAA0 /* IASKSettingsStore.m */,
+				9597D0DFFB998127E8F8BCDCA5867326 /* IASKSettingsStoreFile.h */,
+				3085122C081164050FC7FC3A32EF6D9F /* IASKSettingsStoreFile.m */,
+				5AE69C1932D01824E121985B1E50F1E8 /* IASKSettingsStoreUserDefaults.h */,
+				94CD7B5E01CEAC80356209D215F92736 /* IASKSettingsStoreUserDefaults.m */,
+				6D54747CC2730E91740C0A9F56D60652 /* IASKSlider.h */,
+				46532B58DE9926F13EC89025D4CA6F07 /* IASKSlider.m */,
+				622E75E6BCE83EDEDFC5F00455A41160 /* IASKSpecifier.h */,
+				D7DF7CAACF94FDA3E454065B84B18D5B /* IASKSpecifier.m */,
+				C6F9AD99E1844E5C25B1742FB82B1A37 /* IASKSpecifierValuesViewController.h */,
+				51B22E767578B87D60DF93C4833449C5 /* IASKSpecifierValuesViewController.m */,
+				584203124CBAF2A785D61A14B98648B1 /* IASKSwitch.h */,
+				3E766ADD605046D7F6EC943BBEE06EBF /* IASKSwitch.m */,
+				B493E77D4E6C2FDC3AACC72EC34EB11F /* IASKTextField.h */,
+				AB1A9339F6C591274206DC7E91373051 /* IASKTextField.m */,
+				0E255D9EA18096317DCB0380522F7F3D /* IASKTextView.h */,
+				CECA8912B5ED560E00FC05A9E700FE44 /* IASKTextView.m */,
+				1D3B12CF59B70B0A1A52D78CD3DA3FFA /* IASKTextViewCell.h */,
+				BABAFC0E32E4B3D8E74D83C717D5B189 /* IASKTextViewCell.m */,
+				1CFF434D9D11F29F0DC92890BFAE0754 /* IASKViewController.h */,
+				4716A9BB2E444DF6D75295D49739D536 /* Resources */,
+				E38FDBDB030B36413B8D80B53314D6E3 /* Support Files */,
 			);
-			name = Frameworks;
+			name = InAppSettingsKit;
+			path = InAppSettingsKit;
 			sourceTree = "<group>";
 		};
 		C3B2A63FD10522D5D7359C578EFFE9B1 /* Pods-iRogueTests */ = {
@@ -258,41 +518,37 @@
 			path = "Target Support Files/Pods-iRogueTests";
 			sourceTree = "<group>";
 		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+		E38FDBDB030B36413B8D80B53314D6E3 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+				5FD52531E226A8C328FDF342D8BB2033 /* InAppSettingsKit.modulemap */,
+				D975C7BF6AEADDDA348977C0B2DA2DD1 /* InAppSettingsKit.xcconfig */,
+				3D930D21F674905DA748A4901F03CF7C /* InAppSettingsKit-dummy.m */,
+				B9D695FA6176A17B9DECE15A99ED86A7 /* InAppSettingsKit-prefix.pch */,
+				B96D921A48D031B4951EDF087AC69A99 /* InAppSettingsKit-umbrella.h */,
+				A604FDD22B0CD9A95578BC23F276AFCE /* Info.plist */,
+				F50BE4502EC569C9F70BE0CF59D1E5EA /* ResourceBundle-InAppSettingsKit-Info.plist */,
 			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		E00A6A59B8C4447A39C0F6DC20B9235B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				48F654A4614D0B41DFBB103305D88E09 /* ObservableEvent.framework */,
-				7CC14BB09311DDB7C650B1D9ECC76365 /* Pods_iRogue.framework */,
-				ED47A732AF721B3CB31AD9A8D480A78E /* Pods_iRogueTests.framework */,
-				2D3BE6192AF50CCDE7D6731A99AB23BA /* Pods_iRogueUITests.framework */,
-			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/InAppSettingsKit";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2AA4F85D3350A01F90079A919A2FC199 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79472D092AF3B797F87DF8C1A465C1A9 /* Pods-iRogue-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		45033AC68C2EAC743456E11DD3896C46 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0946695126D61448A6005A3DAF2FA096 /* Pods-iRogueTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80F58B35EFDBC5F5780D97AB1EAB1B22 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F006B57A522AEFC0F9692442DCD9BC /* Pods-iRogue-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +558,31 @@
 			files = (
 				FBAF36873C6D31D3E6987330BB076646 /* ObservableEvent-umbrella.h in Headers */,
 				A7148895C2378DAB1F94257B25285EE9 /* ObservableEvent.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EF2136EDF3C5A6DE23E8ECD1C4B31E7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDF49E2AC6603769380FBF6F9DE1804 /* IASKAppSettingsViewController.h in Headers */,
+				A5DFBD02A5DE4E71F7F9D06680F29C1C /* IASKAppSettingsWebViewController.h in Headers */,
+				C5D2F3EA4E550E8DCA2BCF8474D0B424 /* IASKMultipleValueSelection.h in Headers */,
+				6E86A53D9E226CD6427ED079F66E6915 /* IASKPSSliderSpecifierViewCell.h in Headers */,
+				6BE3ACBCC4160CA4AE1448CA1089DF32 /* IASKPSTextFieldSpecifierViewCell.h in Headers */,
+				BB06A279BF8EF15106312E8889E1B627 /* IASKSettingsReader.h in Headers */,
+				EA2493BAE7EE4A904BC093415719DD76 /* IASKSettingsStore.h in Headers */,
+				BCE0812BD1D62FD8B086B8F6CF6B9091 /* IASKSettingsStoreFile.h in Headers */,
+				703A72D55C393C7FFEE4744F46A9C144 /* IASKSettingsStoreUserDefaults.h in Headers */,
+				24337B11FE4ED1EB684AA97F860C6F12 /* IASKSlider.h in Headers */,
+				FD8118550EE928F3613FF589D8CB039C /* IASKSpecifier.h in Headers */,
+				F4483B0BB3A0B826532F1B1DCD122374 /* IASKSpecifierValuesViewController.h in Headers */,
+				72A0AAEF5DFC21535D630C3185726ABD /* IASKSwitch.h in Headers */,
+				42FE84DA02ED5089A5126BEF584B4CB1 /* IASKTextField.h in Headers */,
+				16F437159F45F56E5CE4B9911233EBEB /* IASKTextView.h in Headers */,
+				2D7D03048DBFF4379F7D011925B2FEF4 /* IASKTextViewCell.h in Headers */,
+				419CAA9405DD3DE29BD3278A9B54DB99 /* IASKViewController.h in Headers */,
+				6622595A38D22163D16FB5015136080D /* InAppSettingsKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +612,26 @@
 			);
 			name = "Pods-iRogueUITests";
 			productName = "Pods-iRogueUITests";
-			productReference = 2D3BE6192AF50CCDE7D6731A99AB23BA /* Pods_iRogueUITests.framework */;
+			productReference = 458AD7AA28FA8AE82047970C5FCAD383 /* Pods_iRogueUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB8ABE9ED4D3D80444381D9DFFA319CF /* Build configuration list for PBXNativeTarget "InAppSettingsKit" */;
+			buildPhases = (
+				3C87DD49BE80BCE80E4D54AB3FBA2800 /* Sources */,
+				DC9AF7A9114E126D9244309549CB2D7C /* Frameworks */,
+				65699E082BDC3BFD9A0D31D42D485749 /* Resources */,
+				9EF2136EDF3C5A6DE23E8ECD1C4B31E7 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B85A75C95D945DF6A59FFBD01F86445 /* PBXTargetDependency */,
+			);
+			name = InAppSettingsKit;
+			productName = InAppSettingsKit;
+			productReference = B7596A69FB513611D5FEE0420DD660B8 /* InAppSettingsKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		91297BE76BB6745E3FBDC8E899CAFC55 /* Pods-iRogueTests */ = {
@@ -349,7 +649,7 @@
 			);
 			name = "Pods-iRogueTests";
 			productName = "Pods-iRogueTests";
-			productReference = ED47A732AF721B3CB31AD9A8D480A78E /* Pods_iRogueTests.framework */;
+			productReference = 214F67EDCBBA69B11E83E528214E340C /* Pods_iRogueTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E5A11B31D70DE0470E2B2B1492FBA23C /* ObservableEvent */ = {
@@ -366,26 +666,44 @@
 			);
 			name = ObservableEvent;
 			productName = ObservableEvent;
-			productReference = 48F654A4614D0B41DFBB103305D88E09 /* ObservableEvent.framework */;
+			productReference = 488F3E023326EF695D2A58241D973F54 /* ObservableEvent.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		EAF7F96D7F8A92736B73975DE2EFF4BE /* Pods-iRogue */ = {
+		F2A70134B80172158FC63395AF803655 /* Pods-iRogue */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22BDED329794A63A76F4CEEA6FDD20BE /* Build configuration list for PBXNativeTarget "Pods-iRogue" */;
+			buildConfigurationList = 302C96749BE2FB9329093FE35B8B916F /* Build configuration list for PBXNativeTarget "Pods-iRogue" */;
 			buildPhases = (
-				52AA0860ADA35462B5823B78B739F161 /* Sources */,
-				10B66837F76EC84792931EA4786F4F61 /* Frameworks */,
-				2AA4F85D3350A01F90079A919A2FC199 /* Headers */,
+				00F323B26A8CAC0CA437FAC3D26D0FCE /* Sources */,
+				4A1825A5BC16C40084D3609125C856E3 /* Frameworks */,
+				80F58B35EFDBC5F5780D97AB1EAB1B22 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4DD711252268071070D202E05C6D028D /* PBXTargetDependency */,
+				407D549F42EF7A4A7D8B6274BCA377D5 /* PBXTargetDependency */,
+				A77E4F9BCBB2C5C54D2A929053BA108E /* PBXTargetDependency */,
 			);
 			name = "Pods-iRogue";
 			productName = "Pods-iRogue";
-			productReference = 7CC14BB09311DDB7C650B1D9ECC76365 /* Pods_iRogue.framework */;
+			productReference = 45CAC9662D2D4FC0BCACD19978AD70FD /* Pods_iRogue.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		FA416ED70FC7E091F479F65D981FE8FC /* InAppSettingsKit-InAppSettingsKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5C6AB672F1E8A23C8B317127FB1353C /* Build configuration list for PBXNativeTarget "InAppSettingsKit-InAppSettingsKit" */;
+			buildPhases = (
+				6F3A140CA594AED3FF647C3EA0FF4195 /* Sources */,
+				A3735A807C728BE1017B3070E3C5BBFB /* Frameworks */,
+				78EDF825A9D6BD17999BCAF1433F37FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "InAppSettingsKit-InAppSettingsKit";
+			productName = "InAppSettingsKit-InAppSettingsKit";
+			productReference = 1DD1B03B08FEAC78DF9E3D1478F802DA /* InAppSettingsKit.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -404,19 +722,71 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = E00A6A59B8C4447A39C0F6DC20B9235B /* Products */;
+			productRefGroup = 14AC718993AD3491B083FF129747884B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */,
+				FA416ED70FC7E091F479F65D981FE8FC /* InAppSettingsKit-InAppSettingsKit */,
 				E5A11B31D70DE0470E2B2B1492FBA23C /* ObservableEvent */,
-				EAF7F96D7F8A92736B73975DE2EFF4BE /* Pods-iRogue */,
+				F2A70134B80172158FC63395AF803655 /* Pods-iRogue */,
 				91297BE76BB6745E3FBDC8E899CAFC55 /* Pods-iRogueTests */,
 				7A9808BF1FFCE7D7B547BE8DFE57D85B /* Pods-iRogueUITests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		65699E082BDC3BFD9A0D31D42D485749 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8363ECFD7FCEA98C9959E8EB61D3AE7 /* InAppSettingsKit.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78EDF825A9D6BD17999BCAF1433F37FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D7F39346A3C2653BAEBE7F329B00484 /* Base.lproj in Resources */,
+				8A9A154CDFD92383DBAA209089904450 /* ca.lproj in Resources */,
+				0C45F782A6E293609D95C7DC22F00CBA /* de.lproj in Resources */,
+				B4D389F9DF59B2058CD421320F20A541 /* el.lproj in Resources */,
+				FB1497C1A61DFBBA7A789712DD3EC8DF /* en.lproj in Resources */,
+				6230B53DE2EB89B37528BA994B7ADE39 /* es-MX.lproj in Resources */,
+				29A2F94D69005A5C6318956163E41233 /* es.lproj in Resources */,
+				1CB81AD37AB2E792F45CAE99851F8177 /* fr.lproj in Resources */,
+				7759DC675069D0C34D7FE19363862600 /* hr.lproj in Resources */,
+				A4997FCCC3FC89E2E0F28BB3DC08FB79 /* hu.lproj in Resources */,
+				196F3D13D4D043AAE6283E01BA979302 /* it.lproj in Resources */,
+				FE7069877BB557FC49518941CF443C7C /* ja.lproj in Resources */,
+				397B98BBE6D9E009655859FD587B8D72 /* nb.lproj in Resources */,
+				E2E183F7263EA29AA54C817F7309C4BD /* nl.lproj in Resources */,
+				D208254AB2EE61EFEC90085EFEB36C1E /* pl.lproj in Resources */,
+				3D7EE39703B8EE5FA931D9B200724AC2 /* pt-PT.lproj in Resources */,
+				560DB175B5ACCB1A2C0AFCDF7AF0734E /* pt.lproj in Resources */,
+				DEB1D2289E0A66A58EC10EA16CDC864D /* ru.lproj in Resources */,
+				57CF04BAB33DBF7DF186F0CDAA9F7B48 /* sv.lproj in Resources */,
+				23FEB16522F93813A30DEE2C3EC45612 /* th.lproj in Resources */,
+				85D5E83636E34C1BB55B9D1CB35227DD /* tr.lproj in Resources */,
+				19114041CF8ECD43256DCC3C6147C7E6 /* uk.lproj in Resources */,
+				E4371D53EDA985C4444672B66103D835 /* zh-Hans.lproj in Resources */,
+				27FA7FA4E8677A01DEF6DFDF4E2B898D /* zh-Hant.lproj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		00F323B26A8CAC0CA437FAC3D26D0FCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3E8E695815614A495618DE5DE02D09C /* Pods-iRogue-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3918CEF94AB73168AD3620B2090FD524 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,6 +800,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C87DD49BE80BCE80E4D54AB3FBA2800 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9BF447D01F1EFE26399EE6319604B61 /* IASKAppSettingsViewController.m in Sources */,
+				538E3D762166B71A00202E68057991DA /* IASKAppSettingsWebViewController.m in Sources */,
+				381A429E9CC6979A1CDF662742C62475 /* IASKMultipleValueSelection.m in Sources */,
+				551267314E4B8236E9166BB48BE68B36 /* IASKPSSliderSpecifierViewCell.m in Sources */,
+				F4061D80566952A4FD3E087EC0E27713 /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
+				8E1280CE142EAE5FCCA8A68326F43F8E /* IASKSettingsReader.m in Sources */,
+				6315ADF2F7932752D872413E2C38603D /* IASKSettingsStore.m in Sources */,
+				66CC8DB497CFF35475C0BD0A0C6268B2 /* IASKSettingsStoreFile.m in Sources */,
+				E902BA7E78980241CB2349B329BDCCEC /* IASKSettingsStoreUserDefaults.m in Sources */,
+				9F76E28C973A31CBC3855AA11AC2EA98 /* IASKSlider.m in Sources */,
+				DB6257CDA73706A0690D2C15AB82ACA1 /* IASKSpecifier.m in Sources */,
+				84CF25B1937F8F0419B1648EE39227A5 /* IASKSpecifierValuesViewController.m in Sources */,
+				72109CC4E319106450B8B2E62A7023E3 /* IASKSwitch.m in Sources */,
+				FCC4E4649FD3B25F953561FE9A77FA02 /* IASKTextField.m in Sources */,
+				2367272FB729F671F3842C6FA7C390ED /* IASKTextView.m in Sources */,
+				F4DE15FF1336171363D8808DF3FABE72 /* IASKTextViewCell.m in Sources */,
+				1640FC74A0ACE1D703B9A7738860A064 /* InAppSettingsKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FD06CFB7CE4428B8CC9E20B22ADB782 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -438,11 +832,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52AA0860ADA35462B5823B78B739F161 /* Sources */ = {
+		6F3A140CA594AED3FF647C3EA0FF4195 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5462C4A1462677D6ABCC9BE93484980 /* Pods-iRogue-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,24 +853,68 @@
 		25244B2416CB043E2677AB08B42F4B0E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-iRogue";
-			target = EAF7F96D7F8A92736B73975DE2EFF4BE /* Pods-iRogue */;
+			target = F2A70134B80172158FC63395AF803655 /* Pods-iRogue */;
 			targetProxy = D7D28A0602B18D5F74B42AE81DFA6AE0 /* PBXContainerItemProxy */;
 		};
-		4DD711252268071070D202E05C6D028D /* PBXTargetDependency */ = {
+		407D549F42EF7A4A7D8B6274BCA377D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InAppSettingsKit;
+			target = 8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */;
+			targetProxy = 0BD4E7612EDE4FB93D5C0645E5C5C97F /* PBXContainerItemProxy */;
+		};
+		8B85A75C95D945DF6A59FFBD01F86445 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "InAppSettingsKit-InAppSettingsKit";
+			target = FA416ED70FC7E091F479F65D981FE8FC /* InAppSettingsKit-InAppSettingsKit */;
+			targetProxy = FBE0D4BA15D301BB7ADD8451BC93EAA7 /* PBXContainerItemProxy */;
+		};
+		A77E4F9BCBB2C5C54D2A929053BA108E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ObservableEvent;
 			target = E5A11B31D70DE0470E2B2B1492FBA23C /* ObservableEvent */;
-			targetProxy = 4D16B7C4879E69774A74B713D831A382 /* PBXContainerItemProxy */;
+			targetProxy = 143DA04305944A3DB5F3D9C3F7B490D2 /* PBXContainerItemProxy */;
 		};
 		DAC50AB4F948682B8DA0F1944787173E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-iRogue";
-			target = EAF7F96D7F8A92736B73975DE2EFF4BE /* Pods-iRogue */;
+			target = F2A70134B80172158FC63395AF803655 /* Pods-iRogue */;
 			targetProxy = D06C6B256AB6FB17C31A301A6F7E679E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		010146CF13430473472C3D6D701F8A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D975C7BF6AEADDDA348977C0B2DA2DD1 /* InAppSettingsKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/InAppSettingsKit";
+				INFOPLIST_FILE = "Target Support Files/InAppSettingsKit/ResourceBundle-InAppSettingsKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = InAppSettingsKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		01511D4C904DDFEC654E4C2409EF0BF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D975C7BF6AEADDDA348977C0B2DA2DD1 /* InAppSettingsKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/InAppSettingsKit";
+				INFOPLIST_FILE = "Target Support Files/InAppSettingsKit/ResourceBundle-InAppSettingsKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = InAppSettingsKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		199D972A13F2B4C56847F7A89CCA83BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -541,44 +978,9 @@
 			};
 			name = Debug;
 		};
-		1AE534E5D8EEE5A1187471134F174A05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31CED5CA7575827AFD5453E6A40EAF52 /* Pods-iRogue.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-iRogue/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-iRogue/Pods-iRogue.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		22A7EB2A0957634AA7956CAB0DF3BF36 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 897CCC720EF0EC0ABC517A5215C02316 /* ObservableEvent.xcconfig */;
+			baseConfigurationReference = 72F453F74597C2C7E3F4191720FD78A0 /* ObservableEvent.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -610,7 +1012,7 @@
 		};
 		262787460090A42D98F344AA040FACB5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 897CCC720EF0EC0ABC517A5215C02316 /* ObservableEvent.xcconfig */;
+			baseConfigurationReference = 72F453F74597C2C7E3F4191720FD78A0 /* ObservableEvent.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -634,6 +1036,41 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2EF565129DFC343A9361B307C3A4E152 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31CED5CA7575827AFD5453E6A40EAF52 /* Pods-iRogue.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-iRogue/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-iRogue/Pods-iRogue.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -709,11 +1146,10 @@
 			};
 			name = Release;
 		};
-		8489016D253C04CDF9047864CAB72C05 /* Debug */ = {
+		59E3B5486C19A3B4B2C83F45B651EE8B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8DE6D2E22D1309E5B96FE55E8734DB49 /* Pods-iRogueTests.debug.xcconfig */;
+			baseConfigurationReference = D975C7BF6AEADDDA348977C0B2DA2DD1 /* InAppSettingsKit.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -723,26 +1159,25 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-iRogueTests/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/InAppSettingsKit/InAppSettingsKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/InAppSettingsKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-iRogueTests/Pods-iRogueTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/InAppSettingsKit/InAppSettingsKit.modulemap";
+				PRODUCT_MODULE_NAME = InAppSettingsKit;
+				PRODUCT_NAME = InAppSettingsKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		9A912714572C56C0D816D91FED53A03F /* Debug */ = {
+		73D4E894D4969067FE947E581FE0D4B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D43450DC93C9DC01032DA71FF065BA20 /* Pods-iRogue.debug.xcconfig */;
 			buildSettings = {
@@ -776,6 +1211,71 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		8489016D253C04CDF9047864CAB72C05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DE6D2E22D1309E5B96FE55E8734DB49 /* Pods-iRogueTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-iRogueTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-iRogueTests/Pods-iRogueTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8F0742084D505AB47064B3D8E0569B6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D975C7BF6AEADDDA348977C0B2DA2DD1 /* InAppSettingsKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/InAppSettingsKit/InAppSettingsKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/InAppSettingsKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/InAppSettingsKit/InAppSettingsKit.modulemap";
+				PRODUCT_MODULE_NAME = InAppSettingsKit;
+				PRODUCT_NAME = InAppSettingsKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		BCDD367AF3897D445D88632D76640A3C /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -871,20 +1371,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22BDED329794A63A76F4CEEA6FDD20BE /* Build configuration list for PBXNativeTarget "Pods-iRogue" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9A912714572C56C0D816D91FED53A03F /* Debug */,
-				1AE534E5D8EEE5A1187471134F174A05 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				199D972A13F2B4C56847F7A89CCA83BC /* Debug */,
 				FDB2FC4A1E5891381CD9D922145497F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		302C96749BE2FB9329093FE35B8B916F /* Build configuration list for PBXNativeTarget "Pods-iRogue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73D4E894D4969067FE947E581FE0D4B0 /* Debug */,
+				2EF565129DFC343A9361B307C3A4E152 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -912,6 +1412,24 @@
 			buildConfigurations = (
 				8489016D253C04CDF9047864CAB72C05 /* Debug */,
 				355C2C7776FCCE4080E816D35393F015 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB8ABE9ED4D3D80444381D9DFFA319CF /* Build configuration list for PBXNativeTarget "InAppSettingsKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59E3B5486C19A3B4B2C83F45B651EE8B /* Debug */,
+				8F0742084D505AB47064B3D8E0569B6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C5C6AB672F1E8A23C8B317127FB1353C /* Build configuration list for PBXNativeTarget "InAppSettingsKit-InAppSettingsKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				010146CF13430473472C3D6D701F8A59 /* Debug */,
+				01511D4C904DDFEC654E4C2409EF0BF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

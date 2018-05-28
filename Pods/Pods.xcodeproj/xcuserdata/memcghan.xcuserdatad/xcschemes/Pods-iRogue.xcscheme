@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EAF7F96D7F8A92736B73975DE2EFF4BE"
+               BlueprintIdentifier = "F2A70134B80172158FC63395AF803655"
                BuildableName = "Pods_iRogue.framework"
                BlueprintName = "Pods-iRogue"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EAF7F96D7F8A92736B73975DE2EFF4BE"
+            BlueprintIdentifier = "F2A70134B80172158FC63395AF803655"
             BuildableName = "Pods_iRogue.framework"
             BlueprintName = "Pods-iRogue"
             ReferencedContainer = "container:Pods.xcodeproj">

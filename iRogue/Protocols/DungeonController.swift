@@ -8,10 +8,25 @@
 
 import UIKit
 
-// shared: UI <-> back-end
-public struct FontUpdateArgs : GameEventArgs {
-    public let font: UIFont
+// support for DungeonViewController call-forward interfaces (see DungeonManager)
+public protocol DungeonControllerService: AnyObject {
+    func getFont() -> UIFont
+    func getDungeonSize() -> (rows: Int, cols: Int)
+    func getCharacterForCell(at: IndexPath) -> String
+    func getHeroLocation() -> IndexPath
+    
+    // TESTING ONLY
+    func teleportHero()
+    
+    func handleSingleTap(_ selectedIndexPath: IndexPath)
+    func handleDoubleTap(_ selectedIndexPath: IndexPath)
+    func handleLongPress(_ selectedIndexPath: IndexPath)
 }
 
-public protocol DungeonControllerService: class {
+public protocol DungeonDataService: AnyObject {
+    func getDungeonSize() -> (rows: Int, cols: Int)
+    func getDungeonFont() -> UIFont
+    func getHeroPosition() -> (col: Int, row: Int)
+    func setHeroPositon(col: Int, row: Int)
+    func getCharacterAt(row: Int, col: Int) -> String
 }

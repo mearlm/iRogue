@@ -9,18 +9,45 @@
 import UIKit
 
 class DungeonViewController: UICollectionViewController {
-    fileprivate let reuseIdentifier = "dungeonCell"
+    private static let NUM_ROWS = 24       // sections (rows)
+    private static let NUM_COLS = 80       // items per section (columns per row)
     
-    var cellFont: UIFont?
+    private let reuseIdentifier = "dungeonCell"
     
-    let centerDot: Character = "." // "\u{00B7}"
-    let passage: Character = "#"
-    let topBottomWall: Character = "-"
-    let leftRightWall: Character = "|"
+    // call-forward dungeon services
+    private var dungeonManager: DungeonControllerService?
     
-    // ToDo: make these externally configurable
-    let NUM_ROWS = 24       // items per section
-    let NUM_COLS = 80       // sections
+    private var handlers = [ChangeEventHandler]()
+    
+    // ToDo: make private with public setter?  validate updates? ...
+    public var cellFont: UIFont?
+    private var numRows: Int = DungeonViewController.NUM_ROWS
+    private var numCols: Int = DungeonViewController.NUM_COLS
+    
+//    public override var collectionViewLayout: UICollectionViewLayout {
+//        get {
+//            return self.collectionView!.collectionViewLayout
+//        }
+//    }
+    
+    public func setDungeonManager(_ dungeonManager: DungeonControllerService) {
+        self.dungeonManager = dungeonManager
+        self.cellFont = dungeonManager.getFont()
+        (self.numRows, self.numCols) = dungeonManager.getDungeonSize()
+        
+        self.handlers.append(EventHandler<DungeonReloadEventEmitter>(onChange: {[unowned self] (_ args: DungeonReloadEventEmitter,_ sender: Any?) in
+            self.collectionView?.reloadItems(at: args.indexPaths)
+        }))
+        self.handlers.append(EventHandler<FontChangeEventEmitter>(onChange: {(_ args: FontChangeEventEmitter,_ sender: Any?) in
+            self.cellFont = args.font
+        }))
+    }
+    
+//    func synchronized<T>(_ lock: AnyObject, _ body: () throws -> T) rethrows -> T {
+//        objc_sync_enter(lock)
+//        defer { objc_sync_exit(lock) }
+//        return try body()
+//    }
     
     override func viewDidLoad() {
         // Single Tap
@@ -51,28 +78,18 @@ class DungeonViewController: UICollectionViewController {
     
     //MARK: UI CollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return NUM_ROWS
+        return self.numRows
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NUM_COLS
+        return self.numCols
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DungeonCell
         
-        // fake up the dungeon -- replace with call to GameEngine to get cell text
-        if ((indexPath.section - 6) % 9 == 0 && Int(indexPath.item / 10) % 2 == 0) {
-            cell.lblDungeonCell.text = String(topBottomWall)
-        }
-        else if (indexPath.item % 9 == 0 && Int((indexPath.section + 4) / 10) % 2 == 1) {
-            cell.lblDungeonCell.text = String(leftRightWall)
-        }
-        else {
-            cell.lblDungeonCell.text = String(centerDot);
-        }
-        // end fake up
-        
+        cell.lblDungeonCell.text = dungeonManager!.getCharacterForCell(at: indexPath)
+
         // Configure the cell
         cell.backgroundColor = UIColor.black
         cell.lblDungeonCell.textColor = UIColor.green
@@ -80,32 +97,70 @@ class DungeonViewController: UICollectionViewController {
         
         return cell
     }
+
+    // TEMP (Testing Only)
+    public func teleportHero() {
+        self.dungeonManager?.teleportHero()
+        // ToDo: there is a timing issue with the position update not completing before the centerHero call
+        // to move the view.  Need to coordinate the two calls somehow.  Similar to the issue with scrolling
+        // both horizontally and vertically with animation in centerHero.
+        centerHero()
+    }
     
+    public func centerHero() {
+        let indexPath = dungeonManager!.getHeroLocation()
+
+        let layout = self.collectionView!.collectionViewLayout as! DungeonCollectionViewLayout
+        let cellSize = layout.getCellSize()
+
+        let yOffset = collectionView!.contentOffset.y
+        let xOffset = collectionView!.contentOffset.x
+        let width = collectionView!.bounds.width
+        let height = collectionView!.bounds.height
+        
+        let limit = (xMin: width / 2, yMin: height / 2, xMax: CGFloat(self.numCols) * cellSize.width - width / 2, yMax: CGFloat(self.numRows) * cellSize.height - height / 2)
+        let heroPosition = (x: CGFloat(indexPath.row) * cellSize.width, y: CGFloat(indexPath.section) * cellSize.height)
+        let currentCenter = (x: xOffset + limit.xMin, y: yOffset + limit.yMin)
+        
+        let delta = (x: max(min(heroPosition.x, limit.xMax), limit.xMin) - currentCenter.x,
+                     y: max(min(heroPosition.y, limit.yMax), limit.yMin) - currentCenter.y)
+        
+        if (abs(delta.y) > abs(delta.x)) {
+            print("scrolling vertically: \(delta.x), \(delta.y)")
+            collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: false)
+            collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredVertically, animated: true)
+        }
+        else {
+            print("scrolling horizontally: \(delta.x), \(delta.y)")
+            collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredVertically, animated: false)
+            collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+        }
+    }
+
     //MARK: Gesture Handlers
     @objc func handleSingleTap(sender: UITapGestureRecognizer) {
         let pointInCollectionView: CGPoint = sender.location(in: self.collectionView)
-        let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView)
-        let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
-        
-        let frame = selectedCell?.frame
-        print("Single Tap at \(String(describing: selectedIndexPath))! @ \(String(describing: frame))")
+        if let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView) {
+            dungeonManager!.handleSingleTap(selectedIndexPath)
+
+            // let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath)
+            // let frame = selectedCell?.frame
+        }
     }
     
     @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
         let pointInCollectionView: CGPoint = sender.location(in: self.collectionView)
-        let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView)
-        // let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
-
-        print("Double Tap at \(String(describing: selectedIndexPath))!")
+        if let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView) {
+            dungeonManager!.handleDoubleTap(selectedIndexPath)
+        }
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.began) {
             let pointInCollectionView: CGPoint = sender.location(in: self.collectionView)
-            let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView)
-            // let selectedCell = self.collectionView!.cellForItem(at: selectedIndexPath!)
-            
-            print("Long Press at \(String(describing: selectedIndexPath))!")
+            if let selectedIndexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView) {
+                dungeonManager!.handleLongPress(selectedIndexPath)
+            }
         }
     }
 }

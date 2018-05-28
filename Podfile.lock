@@ -1,16 +1,20 @@
 PODS:
+  - InAppSettingsKit (2.9)
   - ObservableEvent (2.0.0)
 
 DEPENDENCIES:
+  - InAppSettingsKit
   - ObservableEvent (~> 2.0.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - InAppSettingsKit
     - ObservableEvent
 
 SPEC CHECKSUMS:
+  InAppSettingsKit: fc3dea21846535b76b8289b119dbfdbe2505b2b2
   ObservableEvent: b5645be95f5855bc1a3d00ff13bf3a953f4fc876
 
-PODFILE CHECKSUM: 6ac724747da2d49379f768dd653057d6aa6747c6
+PODFILE CHECKSUM: 4fdb0ed8277737fc4fe9392cf4b1e14067da6f49
 
 COCOAPODS: 1.5.0

@@ -16,21 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         self.game = GameEngine()
-        
-        // ToDo: identify the version to startup
-        let version = "SampleData"
-        
-        self.game!.loadData(for: version)
+        guard let options = self.game?.loadOptions() else {
+            fatalError("Cannot Load Options.")
+        }
+        guard let _ = self.game?.loadData(for: options.getVersion()) else {
+            fatalError("Cannot Load Game.")
+        }
         
         return true
     }
     
-    public func getProtocolHandler<T, D : GameEventHandler>(for protocolName: ServiceKey, delegate: D) -> T? {
-        return game!.registerDelegate(protocolName: protocolName, protocolHandler: delegate);
-    }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

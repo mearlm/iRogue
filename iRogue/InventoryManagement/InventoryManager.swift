@@ -11,7 +11,7 @@ import UIKit
 public class InventoryManager : InventoryControllerService, InventoryService {
     private weak var inventoryData: InventoryDataService?
     private weak var commandService: InventoryCommandService?
-    private weak var updateService: GameUpdateService?
+    private weak var options: OptionsDataService?
 
     public static let ALLTYPES_TAG = "*"
     
@@ -19,24 +19,26 @@ public class InventoryManager : InventoryControllerService, InventoryService {
     private var itemsByType: [InventoryItemType : [InventoryItem]] = [:]
     private var itemsWithStates: [InventoryItem] = []    // sticky actions
     
-    required public init(updateService: GameUpdateService, commands: InventoryCommandService, data: InventoryDataService) {
-        self.updateService = updateService
+    required public init(commands: InventoryCommandService, data: InventoryDataService, options: OptionsDataService) {
         self.commandService = commands
         self.inventoryData = data
+        self.options = options
+
         data.registerController(controller: self)       // weak back-reference
+        self.reset()
     }
     
+    // private implementation
     private func reset() {
         if let items = self.inventoryData?.getPackItems() {
             for item in items {
                 self.addItem(item: item)
-                let args = SetEnabledArgs(tag: item.type.tag, state: true)
-                updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+                InventoryEnabledUpdateEmitter(tag: item.type.tag, state: true).notifyHandlers(self)
             }
         }
     }
     
-    public func findTag(by offset: Int) -> String? {
+    private func findTag(by offset: Int) -> String? {
         var count = 0
         
         if let types = self.inventoryData?.getItemTypes() {        // ordered
@@ -61,8 +63,44 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         }
         return nil
     }
+
+    private func findRow(for item: InventoryItem) -> Int? {
+        if let row = itemsByType[item.type]?.index(of: item) {
+            return row
+        }
+        return nil
+    }
     
-    // when showing all sections!
+    private func addItem(item: InventoryItem) {
+        var list = itemsByType[item.type]
+        if (nil == list) {
+            list = [item]
+//            InventoryEnabledUpdateEmitter(tag: item.type.tag, state: true).notifyHandlers(self)
+        }
+        else {
+            // sort on append (only)
+            list = (list! + [item]).sorted(by: areInAscendingOrder(lhs:rhs:))
+        }
+        itemsByType[item.type] = list
+        
+        if (!itemsWithStates.contains(item) && !item.actionStates.isEmpty) {
+            itemsWithStates.append(item)
+        }
+    }
+
+    // NB: list is not changed!
+//    private func removeItem(from list: [InventoryItem], item: InventoryItem) -> [InventoryItem] {
+//        var result = list
+//        if let ix = result.index(of: item) {
+//            result.remove(at: ix)
+//            if (result.count == 0) {
+//                InventoryEnabledUpdateEmitter(tag: item.type.tag, state: false).notifyHandlers(self)
+//            }
+//        }
+//        return result
+//    }
+
+    //MARK: InventoryControllerService Implementation (see InventoryViewController)
     public func findSection(for tag: String) -> Int? {
         var count = 0
         
@@ -79,39 +117,6 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         return nil
     }
 
-    private func findRow(for item: InventoryItem) -> Int? {
-        if let row = itemsByType[item.type]?.index(of: item) {
-            return row
-        }
-        return nil
-    }
-    
-    private func addItem(item: InventoryItem) {
-        var list = itemsByType[item.type]
-        if (nil == list) {
-            list = [item]
-        }
-        else {
-            // sort on append (only)
-            list = (list! + [item]).sorted(by: areInAscendingOrder(lhs:rhs:))
-        }
-        itemsByType[item.type] = list
-        
-        if (!itemsWithStates.contains(item) && !item.actionStates.isEmpty) {
-            itemsWithStates.append(item)
-        }
-    }
-
-    // NB: list is not changed!
-    private func removeItem(from list: [InventoryItem], item: InventoryItem) -> [InventoryItem] {
-        var result = list
-        if let ix = result.index(of: item) {
-            result.remove(at: ix)
-        }
-        return result
-    }
-
-    //MARK: InventoryData
     public func getTotalItemCount() -> Int {
         var total = 0
         for (type, items) in itemsByType {
@@ -156,13 +161,19 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         return itemsByType.keys.count
     }
     
-    public func getItemTypesNames() -> [String]? {
+    public func getItemTypesNames() -> [String] {
         if let types = inventoryData?.getItemTypes() {
             return types.map( { $0.name } )
         }
-        return nil
+        return [String]()
     }
     
+    public func getItemTypeTags() -> [String] {
+        if let types = inventoryData?.getItemTypes() {
+            return types.map( { $0.tag } )
+        }
+        return [String]()
+    }
 
     public func getItemTypeName(for tag: String, offset: Int) -> String? {
         if let type = findType(for: tag, offset: offset) {
@@ -192,7 +203,7 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         }
     }
 
-    //MARK: InventoryDataService delegate (utilized by Command Service)
+    //MARK: InventoryService Implementation (see InventoryCommandService)
     public func add(item: InventoryItem) -> Bool {
         if let _ = findRow(for: item) {
             print("ERROR: unexpected add: items with \(item.id) is already in the inventory list")
@@ -202,11 +213,11 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         let preexisting = hasItems(for: item.type.tag)
         
         addItem(item: item)
-        let args = UpdateSectionArgs(tag: item.type.tag, preexisting: preexisting)
-        updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+        InventorySectionUpdateEmitter(tag: item.type.tag, preexisting: preexisting).notifyHandlers(self)
         return true
     }
     
+    // ToDo: is itemsByType accessible?  see addItem, removeItem, above
     public func remove(item: InventoryItem) -> Bool {
         if let row = findRow(for: item) {
             if (item.type.isMulti) {
@@ -219,14 +230,14 @@ public class InventoryManager : InventoryControllerService, InventoryService {
                 if (itemsByType[item.type]!.count == 0) {
                     // also remove section, if empty
                     itemsByType.removeValue(forKey: item.type)
+//                    InventoryEnabledUpdateEmitter(tag: item.type.tag, state: false).notifyHandlers(self)
                 }
                 
                 if let ix = itemsWithStates.index(of: item) {
                     itemsWithStates.remove(at: ix)
                 }
             }
-            let args = UpdateSectionArgs(tag: item.type.tag, preexisting: true)
-            updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+            InventorySectionUpdateEmitter(tag: item.type.tag, preexisting: true).notifyHandlers(self)
             return true
         }
         print("ERROR: unexpected remove: no item with \(item.id) is in the inventory list")
@@ -237,8 +248,7 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         if let row = findRow(for: item) {
             if (count != item.count) {          // optimized
                 item.count = count
-                let args = UpdateRowInSectionArgs(tag: item.type.tag, row: row)
-                updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+                InventoryRowInSectionUpdateEmitter(tag: item.type.tag, row: row).notifyHandlers(self)
             }
             return true
         }
@@ -249,8 +259,7 @@ public class InventoryManager : InventoryControllerService, InventoryService {
     public func updateLabel(item: InventoryItem, name: String) -> Bool {
         if let row = findRow(for: item) {
             item.setPattern(name)
-            let args = UpdateRowInSectionArgs(tag: item.type.tag, row: row)
-            updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+            InventoryRowInSectionUpdateEmitter(tag: item.type.tag, row: row).notifyHandlers(self)
             return true
         }
         print("ERROR: unexpected update-label: missing item \(item.id)")
@@ -265,8 +274,7 @@ public class InventoryManager : InventoryControllerService, InventoryService {
                     itemsWithStates.append(item)
                     
                     // change in sticky-action state => refresh (e.g. weapon in hand)
-                    let args = UpdateRowInSectionArgs(tag: item.type.tag, row: row)
-                    updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+                    InventoryRowInSectionUpdateEmitter(tag: item.type.tag, row: row).notifyHandlers(self)
                 }
                 // else: no visual change; affects available commands list only
                 return true
@@ -286,8 +294,7 @@ public class InventoryManager : InventoryControllerService, InventoryService {
                     }
 
                     // change in sticky-action state => refresh (e.g. weapon in hand)
-                    let args = UpdateRowInSectionArgs(tag: item.type.tag, row: row)
-                    updateService?.sendUpdate(for: ServiceKey.InventoryService, args: args, sender: self)
+                    InventoryRowInSectionUpdateEmitter(tag: item.type.tag, row: row).notifyHandlers(self)
                 }
                 // else: no visual change; affects available commands list only
                 return true
@@ -297,7 +304,7 @@ public class InventoryManager : InventoryControllerService, InventoryService {
         return false
     }
     
-    public func findItemState(named: String, state: String?) -> (item: InventoryItem, action: InventoryItemAction)? {
+    public func findItemWithState(named: String, state: String?) -> (item: InventoryItem, action: InventoryItemAction)? {
         if let action = inventoryData?.getAction(for: named) {
             for item in itemsWithStates {
                 let match = item.actionStates.keys.filter(
