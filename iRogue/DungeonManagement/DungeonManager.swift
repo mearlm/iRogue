@@ -40,6 +40,7 @@ public class DungeonManager : DungeonControllerService {
         return IndexPath(item: col, section: row)
     }
     
+    // ToDo: change to use external instructions
     public func teleportHero() {
         let dungeonSize = getDungeonSize()
         let oldLocation = data!.getHeroPosition()

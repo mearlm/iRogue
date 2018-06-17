@@ -12,5 +12,5 @@ public protocol CreditsControllerService : AnyObject {
     func getItemCount(for section: Int) -> Int
     func getSectionCount() -> Int
     func getTitle(for section: Int) -> String?
-    func getLabel(for section: Int, row: Int) -> String?
+    func getAcknowledgement(for section: Int, row: Int) -> CreditsManager.Acknowledgement?
 }

@@ -129,10 +129,8 @@ public class OptionsManager : OptionsControllerService, OptionsDataService {
     
     //MARK: OptionsDataService Implementation
     public func getVersion() -> String {
-        if let version = UserDefaults.standard.string(forKey: "version_preference") {
-            return version
-        }
-        return "SampleData"
+        let version = UserDefaults.standard.value(forKey: "version_preference") as? String ?? "SampleData"
+        return version
     }
     
     public func getDungeonFont() -> UIFont? {

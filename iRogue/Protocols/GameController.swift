@@ -19,14 +19,3 @@ public protocol GameService : AnyObject {
     func getDungeonManager() -> DungeonControllerService?
     func getCreditsManager() -> CreditsControllerService?
 }
-
-//public struct Coordinates {
-//    let row: Int
-//    let col: Int
-//}
-
-//public protocol DungeonController : class {
-//    // update dungeon when things happen in the model
-//    
-//    func showAt(location: Coordinates, character: String, actions: [String]?)
-//}

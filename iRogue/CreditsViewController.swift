@@ -8,8 +8,9 @@
 
 import UIKit
 
-class CreditsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    fileprivate let cellIdentifier = "creditsCell"
+class CreditsViewController: UITableViewController { // UIViewController, UITableViewDataSource, UITableViewDelegate {
+    fileprivate let cellIdentifier = "creditCell"
+    fileprivate let creditSegueIdentifier = "creditPopover"
     fileprivate let font = UIFont(name: "Courier", size: 18.0)
     
     private weak var creditsManager: CreditsControllerService?
@@ -30,33 +31,50 @@ class CreditsViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == creditSegueIdentifier,
+            let destination = segue.destination as? CreditPopoverViewController,
+            let indexPath = self.tableView.indexPathForSelectedRow
+        {
+            if let credit = self.creditsManager!.getAcknowledgement(for: indexPath.section, row: indexPath.row) {
+                destination.toValue = credit.creditTo
+                destination.title = credit.creditTo
+                destination.titleValue = credit.title
+                destination.linkValue = credit.link?.absoluteString
+            }
+        }
+    }
+    
     //MARK: UITableViewDelegate
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return creditsManager!.getItemCount(for: section)
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return creditsManager!.getSectionCount()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let myCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath)
         
-        if let label = self.creditsManager!.getLabel(for: indexPath.section, row: indexPath.row) {
-            
+        if let credit = self.creditsManager!.getAcknowledgement(for: indexPath.section, row: indexPath.row) {
             myCell.textLabel!.font = self.font!
-            myCell.textLabel!.text = label
+            myCell.textLabel!.text = credit.creditTo
+            myCell.detailTextLabel!.text = credit.title
             myCell.textLabel!.adjustsFontSizeToFitWidth = true
             myCell.textLabel!.minimumScaleFactor = 0.1
         }
         
-        // myCell.accessoryType = UITableViewCellAccessoryType.detailButton
-        
         return myCell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.creditsManager!.getTitle(for: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        
     }
 }

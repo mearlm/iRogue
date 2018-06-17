@@ -10,7 +10,7 @@ import Foundation
 
 // calculate a String, Numeric (Int), or Boolean result
 // using a sequence of instructions and object attributes
-public class Calculator {
+public class OriginalCalculator {
     private let attributes: AttributesCollection
     private let breakOnMissing: Bool
     
@@ -176,7 +176,7 @@ public class Calculator {
         var updated = AttributesCollection(from: attributes)
         updated.add(key: "name", value: name)
         
-        let calc = Calculator(using: updated, breakOnMissing: true)
+        let calc = OriginalCalculator(using: updated, breakOnMissing: true)
         
         // attribution may fail (e.g. for rings that don't protect)
         if let attributedName = try calc.calculateString(from: tokens) {
